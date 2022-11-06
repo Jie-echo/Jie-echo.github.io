@@ -4,8 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Echo">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="深浅拷贝方法总结, Echo">
+    <meta name="description" content="深拷贝与浅拷贝简介：
+深拷贝: 深拷贝是将一个对象从内存中完整的拷贝一份出来,从堆内存中开辟一个新的区域存放新对象,且修改新对象不会影响原对象。
+
+
+浅拷贝: 浅拷贝是创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Echo</title>
+    <title>深浅拷贝方法总结 | Echo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -334,12 +338,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">深浅拷贝方法总结</h1>
                 </div>
             </div>
         </div>
@@ -361,9 +365,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/js/">
+                                <span class="chip bg-color">js</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -375,7 +383,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-10-26
+                    2022-11-06
                 </div>
                 
 
@@ -396,19 +404,109 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h2 id="深拷贝与浅拷贝简介："><a href="#深拷贝与浅拷贝简介：" class="headerlink" title="深拷贝与浅拷贝简介："></a>深拷贝与浅拷贝简介：</h2><blockquote>
+<p>深拷贝: 深拷贝是将一个对象从内存中完整的拷贝一份出来,从堆内存中开辟一个新的区域存放新对象,且修改新对象不会影响原对象。</p>
+</blockquote>
+<blockquote>
+<p>浅拷贝: 浅拷贝是创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址 ，所以如果其中一个对象改变了这个地址，就会影响到另一个对象。</p>
+</blockquote>
+<h3 id="浅拷贝常见方法"><a href="#浅拷贝常见方法" class="headerlink" title="浅拷贝常见方法"></a>浅拷贝常见方法</h3><p>浅拷贝常见方法： 数组的slice()、concat()、Array.from()、Object.assign()、…(拓展运算符)、递归方式实现</p>
+<h4 id="方法一：slice"><a href="#方法一：slice" class="headerlink" title="方法一：slice()"></a>方法一：slice()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">       let testArr1 = [1, 2, &#123; name: &#x27;echo&#x27; &#125;, [11, 22]];</span><br><span class="line">let shallowClone1 = testArr1.slice();</span><br><span class="line">shallowClone1[0] = 666;</span><br><span class="line">shallowClone1[2].name = &#x27;boy&#x27;;</span><br><span class="line">shallowClone1[3][0] = 111</span><br><span class="line">console.log(shallowClone1); //[ 666, 2, &#123; name: &#x27;boy&#x27; &#125;, [111, 22] ]</span><br><span class="line">console.log(testArr1); //[ 1, 2, &#123; name: &#x27;boy&#x27; &#125;, [111, 22] ]</span><br><span class="line">// 通过结果看出若数组一层的基础数据类型进行浅拷贝，是直接独立出来的空间。引用数据类型则不是。</span><br></pre></td></tr></table></figure>
+<h4 id="方法二：-concat"><a href="#方法二：-concat" class="headerlink" title="方法二： concat()"></a>方法二： concat()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">		let testArr2 = [1, 2, 3];</span><br><span class="line">		let shallowClone2 = testArr2.concat()</span><br><span class="line">		shallowClone2[0] = 11;</span><br><span class="line">		console.log(testArr2); // [1, 2, 3]</span><br><span class="line">		console.log(shallowClone2); // [11, 2, 3]</span><br><span class="line">```                </span><br><span class="line">#### 方法三： Array.from()</span><br></pre></td></tr></table></figure>
+<pre><code>    let testArr3 = [2, 4, 6];
+    let shallowClone6 = Array.from(testArr3, item  =&gt; item)
+    console.log(&#39;这里是array.from的结果&#39;) 
+            //Array.from() 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。
+    console.log(shallowClone6) //[2, 4, 6]
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 方式四 Object.assign()</span><br></pre></td></tr></table></figure>
+<pre><code>    //项目中常用
+    let testObj1 = &#123; name: &#39;echo&#39;, age: 6, c: &#123; sex: 1&#125; &#125;
+    let shallowClone3 = Object.assign(&#123;&#125;, testObj1, &#123;age: 9&#125;);
+    console.log(testObj1) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 1 &#125;&#125;
+    console.log(shallowClone3) // &#123;name: &quot;echo&quot;, age: 9, c: &#123; sex: 1 &#125;&#125;
+    //对对象的引用
+    shallowClone3.c.sex = 0
+    console.log(testObj1) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 0 &#125;&#125;
+    console.log(shallowClone3) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 0 &#125;&#125;
+    //从结果中可以看出 浅拷贝的方式对引用类型进行修改会影响源数据
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#### 方式五 ... (拓展运算符)</span><br></pre></td></tr></table></figure>
+<pre><code>    let testObj2 = &#123; name: &#39;echo2&#39;, age: 6, obj: &#123; like: &#39;code&#39;&#125;&#125;
+    let shallowClone4 = &#123;...testObj2&#125;
+    shallowClone4.age = 9
+    console.log(testObj2) //&#123;name: &quot;echo2&quot;, age: 6&#125;
+    console.log(shallowClone4) //&#123;name: &quot;echo2&quot;, age: 9&#125;
+    //对象的引用
+    shallowClone4.obj.like = &#39;JavaScript&#39;
+    console.log(testObj2) // &#123;name: &quot;echo2&quot;, age: 6, obj: &#123; like: &#39;JavaScript&#39;&#125;&#125;
+    console.log(shallowClone4) // &#123;name: &quot;echo2&quot;, age: 6, obj: &#123; like: &#39;JavaScript&#39;&#125;&#125;
+</code></pre>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#### 方式六：递归实现</span><br></pre></td></tr></table></figure>
+<pre><code>    function shallowClone(obj) &#123;
+      if (typeof obj === &#39;object&#39; &amp;&amp; obj !== null) &#123;
+        const cloneTarget = Array.isArray(obj) ? []: &#123;&#125;;
+        for (let key in obj) &#123;
+          if (obj.hasOwnProperty(key)) &#123;
+              cloneTarget[key] = obj[key];
+          &#125;
+        &#125;
+        return cloneTarget;
+      &#125; else &#123;
+        return obj;
+      &#125;
+    &#125;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 深拷贝常见实现方式</span><br><span class="line"></span><br><span class="line">&gt; 为解决 浅拷贝对引用数据类型操作改变了源数据，采用深拷贝来解决问题</span><br><span class="line"></span><br><span class="line">#### 方式一： JSON.parse(JSON.srtingfy())</span><br></pre></td></tr></table></figure>
+<pre><code>    // 通过JSON.srtingfy()将数据转为json格式，通过JSON.parse()解析josn数据
+    // 弊端： 
+        // 1. 无法对Date、RegExp、Error对象进行深拷贝
+        // 2. 无法对函数
+        // 3. 无法解决循环引用
+        // 4. 如果obj里有NaN、Infinity和-Infinity，则序列化的结果会变成null
+    let testObj3 = &#123; name: &#39;lufei&#39;, age: 6, obj: &#123; like: &#39;code&#39; &#125;&#125;;
+    let deepClone1 = JSON.parse(JSON.stringify(testObj3))
+    deepClone1.obj.like = &#39;girl&#39;
+    console.log(testObj3) // &#123;name: &quot;lufei&quot;, age: 6, obj: &#123; like: &#39;code&#39;&#125;&#125;
+    console.log(deepClone1) // &#123;name: &quot;lufei&quot;, age: 6, obj: &#123; like: &#39;girl&#39;&#125;&#125;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#### 方式二： 递归实现</span><br></pre></td></tr></table></figure>
+<pre><code>    function deepClone(obj) &#123;
+        if(typeof obj !== &#39;object&#39;) &#123; return &#125;
+        let objTwo =  Array.isArray(obj) ?  [] : &#123;&#125;
+        for(let key in obj)&#123;
+            if(obj.hasOwnProperty(key))&#123;
+                objTwo[key] = typeof obj[key] === &#39;object&#39; ? deepClone(obj[key]) : obj[key]
+            &#125;
+        &#125;
+        return objTwo
+    &#125;
+    let ooo = &#123;name: 1,age:222, obj: &#123; haha: &#39;哈哈&#39;&#125;&#125;
+    deepClone(ooo)
+    
+    console.log(&#39;原始值和引用值 Array.from&#39;)
+    //类数组
+    let obj = &#123;
+        0:&#39;1&#39;,
+        1:&#39;2&#39;,
+        length: 2,
+    &#125;
+    let objArr = Array.from(obj, (item, index) =&gt; &#123;
+        return &#39;No.&#39; + item
+    &#125;)
+    console.log(objArr)
+    
+    let arr = [1,2]
+    arr = Array.from(arr)
+    console.log(arr === Array.from(arr))
+    
+    function Fun() &#123;
+        this.name = &#39;echo&#39;
+    &#125;
+    let oi = new Fun()
+    console.log(oi)
+</code></pre>
+<p>&#96;&#96;&#96;</p>
 
                 
             </div>
@@ -435,7 +533,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/10/26/hello-world/">http://example.com/2022/10/26/hello-world/</a>
+                    <a href="http://example.com/2022/11/06/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">http://example.com/2022/11/06/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -472,7 +570,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/js/">
+                                    <span class="chip bg-color">js</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -549,9 +651,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/11/06/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
@@ -569,9 +672,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-06
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -580,6 +683,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -595,7 +699,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2022/10/26/hello-world/">
@@ -625,7 +729,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
