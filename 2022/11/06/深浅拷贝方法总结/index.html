@@ -56,7 +56,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -411,113 +411,23 @@
 <p>浅拷贝: 浅拷贝是创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址 ，所以如果其中一个对象改变了这个地址，就会影响到另一个对象。</p>
 </blockquote>
 <h3 id="浅拷贝常见方法"><a href="#浅拷贝常见方法" class="headerlink" title="浅拷贝常见方法"></a>浅拷贝常见方法</h3><p>浅拷贝常见方法： 数组的slice()、concat()、Array.from()、Object.assign()、…(拓展运算符)、递归方式实现</p>
-<h4 id="方法一：slice"><a href="#方法一：slice" class="headerlink" title="方法一：slice()"></a>方法一：slice()</h4><pre><code>    let testArr1 = [1, 2, &#123; name: &#39;echo&#39; &#125;, [11, 22]];
-    let shallowClone1 = testArr1.slice();
-    shallowClone1[0] = 666;
-    shallowClone1[2].name = &#39;boy&#39;;
-    shallowClone1[3][0] = 111
-    console.log(shallowClone1); //[ 666, 2, &#123; name: &#39;boy&#39; &#125;, [111, 22] ]
-    console.log(testArr1); //[ 1, 2, &#123; name: &#39;boy&#39; &#125;, [111, 22] ]
-    // 通过结果看出若数组一层的基础数据类型进行浅拷贝，是直接独立出来的空间。引用数据类型则不是。
-</code></pre>
-<h4 id="方法二：-concat"><a href="#方法二：-concat" class="headerlink" title="方法二： concat()"></a>方法二： concat()</h4><pre><code>    let testArr2 = [1, 2, 3];
-    let shallowClone2 = testArr2.concat()
-    shallowClone2[0] = 11;
-    console.log(testArr2); // [1, 2, 3]
-    console.log(shallowClone2); // [11, 2, 3]
-</code></pre>
-<h4 id="方法三：-Array-from"><a href="#方法三：-Array-from" class="headerlink" title="方法三： Array.from()"></a>方法三： Array.from()</h4><pre><code>    let testArr3 = [2, 4, 6];
-    let shallowClone6 = Array.from(testArr3, item  =&gt; item)
-    console.log(&#39;这里是array.from的结果&#39;) 
-    //Array.from() 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。
-    console.log(shallowClone6) //[2, 4, 6]
-</code></pre>
-<h4 id="方式四-Object-assign"><a href="#方式四-Object-assign" class="headerlink" title="方式四 Object.assign()"></a>方式四 Object.assign()</h4><pre><code>    //项目中常用
-    let testObj1 = &#123; name: &#39;echo&#39;, age: 6, c: &#123; sex: 1&#125; &#125;
-    let shallowClone3 = Object.assign(&#123;&#125;, testObj1, &#123;age: 9&#125;);
-    console.log(testObj1) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 1 &#125;&#125;
-    console.log(shallowClone3) // &#123;name: &quot;echo&quot;, age: 9, c: &#123; sex: 1 &#125;&#125;
-    //对对象的引用
-    shallowClone3.c.sex = 0
-    console.log(testObj1) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 0 &#125;&#125;
-    console.log(shallowClone3) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 0 &#125;&#125;
-    //从结果中可以看出 浅拷贝的方式对引用类型进行修改会影响源数据
-</code></pre>
-<h4 id="方式五-…-拓展运算符"><a href="#方式五-…-拓展运算符" class="headerlink" title="方式五 … (拓展运算符)"></a>方式五 … (拓展运算符)</h4><pre><code>    let testObj2 = &#123; name: &#39;echo2&#39;, age: 6, obj: &#123; like: &#39;code&#39;&#125;&#125;
-    let shallowClone4 = &#123;...testObj2&#125;
-    shallowClone4.age = 9
-    console.log(testObj2) //&#123;name: &quot;echo2&quot;, age: 6&#125;
-    console.log(shallowClone4) //&#123;name: &quot;echo2&quot;, age: 9&#125;
-    //对象的引用
-    shallowClone4.obj.like = &#39;JavaScript&#39;
-    console.log(testObj2) // &#123;name: &quot;echo2&quot;, age: 6, obj: &#123; like: &#39;JavaScript&#39;&#125;&#125;
-    console.log(shallowClone4) // &#123;name: &quot;echo2&quot;, age: 6, obj: &#123; like: &#39;JavaScript&#39;&#125;&#125;
-</code></pre>
-<h4 id="方式六：递归实现"><a href="#方式六：递归实现" class="headerlink" title="方式六：递归实现"></a>方式六：递归实现</h4><pre><code>   function shallowClone(obj) &#123;
-       if (typeof obj === &#39;object&#39; &amp;&amp; obj !== null) &#123;
-       const cloneTarget = Array.isArray(obj) ? []: &#123;&#125;;
-       for (let key in obj) &#123;
-           if (obj.hasOwnProperty(key)) &#123;
-               cloneTarget[key] = obj[key];
-           &#125;
-       &#125;
-       return cloneTarget;
-       &#125; else &#123;
-       return obj;
-       &#125;
-   &#125;
-</code></pre>
+<h4 id="方法一：slice"><a href="#方法一：slice" class="headerlink" title="方法一：slice()"></a>方法一：slice()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   let testArr1 = [1, 2, &#123; name: &#x27;echo&#x27; &#125;, [11, 22]];</span><br><span class="line">let shallowClone1 = testArr1.slice();</span><br><span class="line">shallowClone1[0] = 666;</span><br><span class="line">shallowClone1[2].name = &#x27;boy&#x27;;</span><br><span class="line">shallowClone1[3][0] = 111</span><br><span class="line">console.log(shallowClone1); //[ 666, 2, &#123; name: &#x27;boy&#x27; &#125;, [111, 22] ]</span><br><span class="line">console.log(testArr1); //[ 1, 2, &#123; name: &#x27;boy&#x27; &#125;, [111, 22] ]</span><br><span class="line">// 通过结果看出若数组一层的基础数据类型进行浅拷贝，是直接独立出来的空间。引用数据类型则不是。</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二：-concat"><a href="#方法二：-concat" class="headerlink" title="方法二： concat()"></a>方法二： concat()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let testArr2 = [1, 2, 3];</span><br><span class="line">let shallowClone2 = testArr2.concat()</span><br><span class="line">shallowClone2[0] = 11;</span><br><span class="line">console.log(testArr2); // [1, 2, 3]</span><br><span class="line">console.log(shallowClone2); // [11, 2, 3]</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法三：-Array-from"><a href="#方法三：-Array-from" class="headerlink" title="方法三： Array.from()"></a>方法三： Array.from()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let testArr3 = [2, 4, 6];</span><br><span class="line">let shallowClone6 = Array.from(testArr3, item  =&gt; item)</span><br><span class="line">console.log(&#x27;这里是array.from的结果&#x27;) </span><br><span class="line">//Array.from() 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。</span><br><span class="line">console.log(shallowClone6) //[2, 4, 6]</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式四-Object-assign"><a href="#方式四-Object-assign" class="headerlink" title="方式四 Object.assign()"></a>方式四 Object.assign()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//项目中常用</span><br><span class="line">let testObj1 = &#123; name: &#x27;echo&#x27;, age: 6, c: &#123; sex: 1&#125; &#125;</span><br><span class="line">let shallowClone3 = Object.assign(&#123;&#125;, testObj1, &#123;age: 9&#125;);</span><br><span class="line">console.log(testObj1) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 1 &#125;&#125;</span><br><span class="line">console.log(shallowClone3) // &#123;name: &quot;echo&quot;, age: 9, c: &#123; sex: 1 &#125;&#125;</span><br><span class="line">//对对象的引用</span><br><span class="line">shallowClone3.c.sex = 0</span><br><span class="line">console.log(testObj1) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 0 &#125;&#125;</span><br><span class="line">console.log(shallowClone3) // &#123;name: &quot;echo&quot;, age: 6, c: &#123; sex: 0 &#125;&#125;</span><br><span class="line">//从结果中可以看出 浅拷贝的方式对引用类型进行修改会影响源数据</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式五-…-拓展运算符"><a href="#方式五-…-拓展运算符" class="headerlink" title="方式五 … (拓展运算符)"></a>方式五 … (拓展运算符)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let testObj2 = &#123; name: &#x27;echo2&#x27;, age: 6, obj: &#123; like: &#x27;code&#x27;&#125;&#125;</span><br><span class="line">let shallowClone4 = &#123;...testObj2&#125;</span><br><span class="line">shallowClone4.age = 9</span><br><span class="line">console.log(testObj2) //&#123;name: &quot;echo2&quot;, age: 6&#125;</span><br><span class="line">console.log(shallowClone4) //&#123;name: &quot;echo2&quot;, age: 9&#125;</span><br><span class="line">//对象的引用</span><br><span class="line">shallowClone4.obj.like = &#x27;JavaScript&#x27;</span><br><span class="line">console.log(testObj2) // &#123;name: &quot;echo2&quot;, age: 6, obj: &#123; like: &#x27;JavaScript&#x27;&#125;&#125;</span><br><span class="line">console.log(shallowClone4) // &#123;name: &quot;echo2&quot;, age: 6, obj: &#123; like: &#x27;JavaScript&#x27;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方式六：递归实现"><a href="#方式六：递归实现" class="headerlink" title="方式六：递归实现"></a>方式六：递归实现</h4> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function shallowClone(obj) &#123;</span><br><span class="line">    if (typeof obj === &#x27;object&#x27; &amp;&amp; obj !== null) &#123;</span><br><span class="line">    const cloneTarget = Array.isArray(obj) ? []: &#123;&#125;;</span><br><span class="line">    for (let key in obj) &#123;</span><br><span class="line">        if (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">            cloneTarget[key] = obj[key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return cloneTarget;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">    return obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <h3 id="深拷贝常见实现方式"><a href="#深拷贝常见实现方式" class="headerlink" title="深拷贝常见实现方式"></a>深拷贝常见实现方式</h3><blockquote>
 <p>为解决 浅拷贝对引用数据类型操作改变了源数据，采用深拷贝来解决问题</p>
 </blockquote>
-<h4 id="方式一：-JSON-parse-JSON-srtingfy"><a href="#方式一：-JSON-parse-JSON-srtingfy" class="headerlink" title="方式一： JSON.parse(JSON.srtingfy())"></a>方式一： JSON.parse(JSON.srtingfy())</h4><pre><code>    // 通过JSON.srtingfy()将数据转为json格式，通过JSON.parse()解析josn数据
-    // 弊端： 
-        // 1. 无法对Date、RegExp、Error对象进行深拷贝
-        // 2. 无法对函数
-        // 3. 无法解决循环引用
-        // 4. 如果obj里有NaN、Infinity和-Infinity，则序列化的结果会变成null
-    let testObj3 = &#123; name: &#39;lufei&#39;, age: 6, obj: &#123; like: &#39;code&#39; &#125;&#125;;
-    let deepClone1 = JSON.parse(JSON.stringify(testObj3))
-    deepClone1.obj.like = &#39;girl&#39;
-    console.log(testObj3) // &#123;name: &quot;lufei&quot;, age: 6, obj: &#123; like: &#39;code&#39;&#125;&#125;
-    console.log(deepClone1) // &#123;name: &quot;lufei&quot;, age: 6, obj: &#123; like: &#39;girl&#39;&#125;&#125;
-</code></pre>
-<h4 id="方式二：-递归实现"><a href="#方式二：-递归实现" class="headerlink" title="方式二： 递归实现"></a>方式二： 递归实现</h4><pre><code>    function deepClone(obj) &#123;
-        if(typeof obj !== &#39;object&#39;) &#123; return &#125;
-        let objTwo =  Array.isArray(obj) ?  [] : &#123;&#125;
-        for(let key in obj)&#123;
-            if(obj.hasOwnProperty(key))&#123;
-                objTwo[key] = typeof obj[key] === &#39;object&#39; ? deepClone(obj[key]) : obj[key]
-            &#125;
-        &#125;
-        return objTwo
-    &#125;
-    let ooo = &#123;name: 1,age:222, obj: &#123; haha: &#39;哈哈&#39;&#125;&#125;
-    deepClone(ooo)
-    
-    console.log(&#39;原始值和引用值 Array.from&#39;)
-    //类数组
-    let obj = &#123;
-        0:&#39;1&#39;,
-        1:&#39;2&#39;,
-        length: 2,
-    &#125;
-    let objArr = Array.from(obj, (item, index) =&gt; &#123;
-        return &#39;No.&#39; + item
-    &#125;)
-    console.log(objArr)
-    
-    let arr = [1,2]
-    arr = Array.from(arr)
-    console.log(arr === Array.from(arr))
-    
-    function Fun() &#123;
-        this.name = &#39;echo&#39;
-    &#125;
-    let oi = new Fun()
-    console.log(oi)
-</code></pre>
-
+<h4 id="方式一：-JSON-parse-JSON-srtingfy"><a href="#方式一：-JSON-parse-JSON-srtingfy" class="headerlink" title="方式一： JSON.parse(JSON.srtingfy())"></a>方式一： JSON.parse(JSON.srtingfy())</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 通过JSON.srtingfy()将数据转为json格式，通过JSON.parse()解析josn数据</span><br><span class="line">// 弊端： </span><br><span class="line">    // 1. 无法对Date、RegExp、Error对象进行深拷贝</span><br><span class="line">    // 2. 无法对函数</span><br><span class="line">    // 3. 无法解决循环引用</span><br><span class="line">    // 4. 如果obj里有NaN、Infinity和-Infinity，则序列化的结果会变成null</span><br><span class="line">let testObj3 = &#123; name: &#x27;lufei&#x27;, age: 6, obj: &#123; like: &#x27;code&#x27; &#125;&#125;;</span><br><span class="line">let deepClone1 = JSON.parse(JSON.stringify(testObj3))</span><br><span class="line">deepClone1.obj.like = &#x27;girl&#x27;</span><br><span class="line">console.log(testObj3) // &#123;name: &quot;lufei&quot;, age: 6, obj: &#123; like: &#x27;code&#x27;&#125;&#125;</span><br><span class="line">console.log(deepClone1) // &#123;name: &quot;lufei&quot;, age: 6, obj: &#123; like: &#x27;girl&#x27;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方式二：-递归实现"><a href="#方式二：-递归实现" class="headerlink" title="方式二： 递归实现"></a>方式二： 递归实现</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">function deepClone(obj) &#123;</span><br><span class="line">    if(typeof obj !== &#x27;object&#x27;) &#123; return &#125;</span><br><span class="line">    let objTwo =  Array.isArray(obj) ?  [] : &#123;&#125;</span><br><span class="line">    for(let key in obj)&#123;</span><br><span class="line">        if(obj.hasOwnProperty(key))&#123;</span><br><span class="line">            objTwo[key] = typeof obj[key] === &#x27;object&#x27; ? deepClone(obj[key]) : obj[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return objTwo</span><br><span class="line">&#125;</span><br><span class="line">let ooo = &#123;name: 1,age:222, obj: &#123; haha: &#x27;哈哈&#x27;&#125;&#125;</span><br><span class="line">deepClone(ooo)</span><br><span class="line"></span><br><span class="line">console.log(&#x27;原始值和引用值 Array.from&#x27;)</span><br><span class="line">//类数组</span><br><span class="line">let obj = &#123;</span><br><span class="line">    0:&#x27;1&#x27;,</span><br><span class="line">    1:&#x27;2&#x27;,</span><br><span class="line">    length: 2,</span><br><span class="line">&#125;</span><br><span class="line">let objArr = Array.from(obj, (item, index) =&gt; &#123;</span><br><span class="line">    return &#x27;No.&#x27; + item</span><br><span class="line">&#125;)</span><br><span class="line">console.log(objArr)</span><br><span class="line"></span><br><span class="line">let arr = [1,2]</span><br><span class="line">arr = Array.from(arr)</span><br><span class="line">console.log(arr === Array.from(arr))</span><br><span class="line"></span><br><span class="line">function Fun() &#123;</span><br><span class="line">    this.name = &#x27;echo&#x27;</span><br><span class="line">&#125;</span><br><span class="line">let oi = new Fun()</span><br><span class="line">console.log(oi)</span><br></pre></td></tr></table></figure>
                 
             </div>
             <hr/>
