@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>面经题总结及解答</title>
+      <link href="/2022/12/27/%E9%9D%A2%E7%BB%8F/"/>
+      <url>/2022/12/27/%E9%9D%A2%E7%BB%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="面经题总结及解答"><a href="#面经题总结及解答" class="headerlink" title="面经题总结及解答"></a>面经题总结及解答</h1><h2 id="JS相关"><a href="#JS相关" class="headerlink" title="JS相关"></a>JS相关</h2><h3 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h3><ol><li>介绍深浅拷贝</li><li>手写深拷贝、浅拷贝</li><li>深拷贝如何解决循环引用</li></ol><blockquote><p>介绍深浅拷贝</p></blockquote><p>深拷贝：MDN介绍拷贝的对象和生成的对象的属性不共享相同的引用，简洁的来说：深拷贝拷贝的是值。</p><p>浅拷贝：与深拷贝相反，拷贝的是引用地址。</p><blockquote><p>手写深拷贝、浅拷贝</p></blockquote><pre class="language-none"><code class="language-none">&#x2F;&#x2F;深拷贝function deepClone(obj)&#123;    if(typeof obj !&#x3D;&#x3D; &#39;object&#39;)&#123;        return ;    &#125;        let copyObj &#x3D; Array.isArray(obj) ? [] : &#123;&#125;;    for(let key in obj)&#123;        &#x2F;&#x2F;遍历对象自身及原型链上所有可枚举不可枚举属性        if(obj.hasOwnProperty(key))&#123;            copyObj[key] &#x3D; typeof obj[key] &#x3D;&#x3D;&#x3D; &#39;object&#39; ? deepClone(obj[key]) : obj[key];        &#125;    &#125;    return copyObj;&#125;&#x2F;&#x2F;浅拷贝 相对比深拷贝 缺少了递归赋值引用值的步骤function shallowClone(obj)&#123;    if(typeof obj !&#x3D;&#x3D; &#39;object&#39;)&#123;        return     &#125;        let copyObj &#x3D; Array.isArray(obj) ? [] : &#123;&#125;;    for(let key in obj)&#123;        copyObj[key] &#x3D; obj[key]    &#125;    return copyObj&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> js </tag>
+            
+            <tag> react </tag>
+            
+            <tag> 网络 </tag>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>深浅拷贝方法总结</title>
       <link href="/2022/11/06/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/"/>
       <url>/2022/11/06/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</url>
