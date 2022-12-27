@@ -8,13 +8,13 @@
     <meta name="description" content="面经题总结及解答JS相关深浅拷贝
 介绍深浅拷贝
 手写深拷贝、浅拷贝
+JSON.parse(JSON.srtingfy())的弊端
 深拷贝如何解决循环引用
 
 
 介绍深浅拷贝
 
-深拷贝：MDN介绍拷贝的对象和生成的对象的属性不共享相同的引用，简洁的来说：深拷贝拷贝的是值。
-浅拷贝：与深拷贝相反，拷贝的是引">
+深拷贝：MDN介绍拷贝的对象和生成的对象的属性不共享相同的引用，简">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -427,6 +427,7 @@
                 <h1 id="面经题总结及解答"><a href="#面经题总结及解答" class="headerlink" title="面经题总结及解答"></a>面经题总结及解答</h1><h2 id="JS相关"><a href="#JS相关" class="headerlink" title="JS相关"></a>JS相关</h2><h3 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h3><ol>
 <li>介绍深浅拷贝</li>
 <li>手写深拷贝、浅拷贝</li>
+<li>JSON.parse(JSON.srtingfy())的弊端</li>
 <li>深拷贝如何解决循环引用</li>
 </ol>
 <blockquote>
@@ -465,6 +466,53 @@ function shallowClone(obj)&#123;
     &#125;
     return copyObj
 &#125;</code></pre>
+
+<blockquote>
+<p> JSON.parse(JSON.srtingfy())的弊端</p>
+</blockquote>
+<ol>
+<li>无法对Date、RegExp、Error对象进行深拷贝</li>
+<li>无法对函数进行深拷贝</li>
+<li>无法解决循环引用</li>
+<li>如果obj里有NaN、Infinity和-Infinity，则序列化的结果会变成null</li>
+</ol>
+<blockquote>
+<p>深拷贝如何解决循环引用</p>
+</blockquote>
+<p>采用循环引用导致栈溢出代码 <code>Uncaught RangeError: Maximum call stack size exceeded</code></p>
+<pre class="language-none"><code class="language-none">const obj &#x3D; &#123;
+    name: &#39;echo&#39;
+&#125;;
+const testObj &#x3D; &#123;
+    name: &#39;sixi&#39;,
+    relative: obj
+&#125;;
+obj.relative &#x3D; testObj; &#x2F;&#x2F;循环引用
+const newObj &#x3D; deepClone(obj);
+console.log(newObj);</code></pre>
+
+<p>优化手写深拷贝代码：使用WeakMap对已遍历的对象进行保存，当递归调用的时候直接判断WeakMap是否存在，若已存在则直接返回，避免无限循环。</p>
+<pre class="language-none"><code class="language-none">function deepClone(obj, hash &#x3D; new WeakMap())&#123;
+
+    if(typeof obj !&#x3D;&#x3D; &#39;object&#39;)&#123;
+        return ;
+    &#125;
+
+    if(hash.has(obj))&#123;
+        return hash.get(obj)
+    &#125;
+    
+    let copyObj &#x3D; Array.isArray(obj) ? [] : &#123;&#125;;
+    hash.set(copyObj)
+    for(let key in obj)&#123;
+        &#x2F;&#x2F;遍历对象自身及原型链上所有可枚举不可枚举属性
+        if(obj.hasOwnProperty(key))&#123;
+            copyObj[key] &#x3D; typeof obj[key] &#x3D;&#x3D;&#x3D; &#39;object&#39; ? deepClone(obj[key], hash) : obj[key];
+        &#125;
+    &#125;
+    return copyObj;
+&#125;</code></pre>
+
 
                 
             </div>
