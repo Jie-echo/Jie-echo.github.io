@@ -499,11 +499,11 @@ console.log(newObj);</code></pre>
     &#125;
 
     if(hash.has(obj))&#123;
-        return hash.get(obj)
+        return hash.get(obj);
     &#125;
     
     let copyObj &#x3D; Array.isArray(obj) ? [] : &#123;&#125;;
-    hash.set(copyObj)
+    hash.set(obj, copyObj);
     for(let key in obj)&#123;
         &#x2F;&#x2F;遍历对象自身及原型链上所有可枚举不可枚举属性
         if(obj.hasOwnProperty(key))&#123;
