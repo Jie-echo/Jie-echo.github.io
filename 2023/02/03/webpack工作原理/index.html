@@ -4,15 +4,15 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="几分钟了解js模块化、IIFE, echo">
-    <meta name="description" content="模块化目前规定的四种模块化规范：	CommonJS、AMD、CMD、ES6 Modules import分为下面四点：
+    <meta name="keywords" content="webpack工作流程, echo">
+    <meta name="description" content="webpack工作流程
+webpack构建的核心是完成内容的转换和资源的合并。
 
-CommonJS
-AMD
-CMD
-ES6 Modules
+分初始化阶段、构建阶段、生成阶段来讲解webpack工作流程。
+初始化阶段
+初始化参数
 
-一： CommonJS:node模块中采用的就是Commo">
+将命令行参数和用户配置文件进行合并，使用schema-utils库的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -24,7 +24,7 @@ ES6 Modules
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>几分钟了解js模块化、IIFE | echo</title>
+    <title>webpack工作流程 | echo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -341,12 +341,12 @@ ES6 Modules
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">几分钟了解js模块化、IIFE</h1>
+                    <h1 class="description center-align post-title">webpack工作流程</h1>
                 </div>
             </div>
         </div>
@@ -370,8 +370,8 @@ ES6 Modules
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/js/">
-                                <span class="chip bg-color">js</span>
+                            <a href="/tags/webpacck/">
+                                <span class="chip bg-color">webpacck</span>
                             </a>
                         
                     </div>
@@ -386,7 +386,7 @@ ES6 Modules
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-01
+                    2023-02-03
                 </div>
                 
 
@@ -410,61 +410,177 @@ ES6 Modules
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>目前规定的四种模块化规范：	CommonJS、AMD、CMD、ES6 Modules import<br>分为下面四点：</p>
-<ol>
-<li>CommonJS</li>
-<li>AMD</li>
-<li>CMD</li>
-<li>ES6 Modules</li>
-</ol>
-<h2 id="一：-CommonJS"><a href="#一：-CommonJS" class="headerlink" title="一： CommonJS:"></a>一： CommonJS:</h2><p>node模块中采用的就是CommonJS模块规范,<br>暴露模块的方法: module.exports &#x3D; xxx,<br>引入模块的方法: require(xxx)  &#x2F;&#x2F;三方模块为：模块名； 自定义模块为： 路径名<br>特点: 加载模块是同步的: 加载完成,继续执行流程,</p>
-<h2 id="二：-AMD"><a href="#二：-AMD" class="headerlink" title="二： AMD:"></a>二： AMD:</h2><p>暴露模块的方法:<br>define(function(){<br>    return 模块<br>})<br>若暴露出的模块有依赖模块则:<br>define([], function(){<br>    &#x2F;&#x2F;数组中填写依赖模块名<br>    &#x2F;&#x2F;可以在function中带参数给依赖模块取别名<br>    return 模块<br>})<br>引入模块的方法:<br>require([], function(模块名,[…]){</p>
-<p>})</p>
-<h2 id="三-CMD"><a href="#三-CMD" class="headerlink" title="三: CMD:"></a>三: CMD:</h2><p>CMD是专门用于浏览器端. 异步加载. CommonJS与AMD的结合<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903744518389768#heading-40">若需详细了解可以查看:</a></p>
-<h2 id="四：-es6-Modules"><a href="#四：-es6-Modules" class="headerlink" title="四： es6 Modules"></a>四： es6 Modules</h2><p>默认暴露模块: export default () &#x3D;&gt; {<br>        xxx<br>}<br>选择性暴露模块 export xxx<br>举例:<br>    export function foo() {<br>            console.log(‘哈哈哈，我导出了一个方法哦！’)<br>    }<br>引入模块的方法:<br>    import { foo } from ‘文件名{文件名可以是路径 可以是库名}’<br>    &#x2F;&#x2F;可以按需引入 模块中的暴露出来的方法、值、对象</p>
-<h2 id="拓展知识"><a href="#拓展知识" class="headerlink" title="拓展知识"></a>拓展知识</h2><p>IIFE：立即执行函数  </p>
-<h3 id="立即执行函数的几种写法："><a href="#立即执行函数的几种写法：" class="headerlink" title="立即执行函数的几种写法："></a>立即执行函数的几种写法：</h3><p>第一种：</p>
-<pre class="language-none"><code class="language-none">(function foo()&#123;
-  console.log(&#39;我是第一个立即执行函数&#39;)
-&#125;)()</code></pre>
-<p>第二种：（规范推荐写法）</p>
-<pre class="language-none"><code class="language-none">(function foo()&#123;
-  console.log(&#39;我是第二个立即执行函数&#39;)
-&#125;())</code></pre>
-<p>第三种： </p>
-<pre class="language-none"><code class="language-none">let foo &#x3D; function foo()&#123;
-	console.log(&#39;我是第三个立即执行函数&#39;)
-&#125;()</code></pre>
-<p>第四种：</p>
-<pre class="language-none"><code class="language-none">true &amp;&amp; function foo()&#123;
-	console.log(&#39;我是第四个立即执行函数&#39;)
-&#125;()</code></pre>
-<p>总结：<br>第一种常见、已分辨该函数为立即执行函数；第二种为规范式写法；第三种到第四种为 当函数作为表达式运行时，可以在不需要写为()()。 () js自动解析为表达式。以此，立即执行函数的函数表达式的写法有多种。</p>
-<blockquote>
-<p>对于带参数的立即执行函数. 举例一个加法函数</p>
+                <h2 id="webpack工作流程"><a href="#webpack工作流程" class="headerlink" title="webpack工作流程"></a>webpack工作流程</h2><blockquote>
+<p>webpack构建的核心是完成内容的转换和资源的合并。</p>
 </blockquote>
-<pre class="language-none"><code class="language-none">(function sum(a, b)&#123;
-	console.log(a + b) &#x2F;&#x2F; 3
-&#125;)(1, 2)</code></pre>
+<p>分初始化阶段、构建阶段、生成阶段来讲解webpack工作流程。</p>
+<h3 id="初始化阶段"><a href="#初始化阶段" class="headerlink" title="初始化阶段"></a>初始化阶段</h3><ol>
+<li>初始化参数</li>
+</ol>
+<p>将命令行参数和用户配置文件进行合并，使用schema-utils库的getValidateSchema方法进行参数校验</p>
+<ol start="2">
+<li>创建编译对象、实例化配置信息</li>
+</ol>
+<p>webpack支持多个配置对象，比如一个library有多个构建目标，就需要传入多个配置对象，每个配置对象都要执行。<br><code>compiler对象包含了webpack环境所有的配置信息，比如options、loaders、plugins</code>。</p>
+<h4 id="createCompiler"><a href="#createCompiler" class="headerlink" title="createCompiler"></a>createCompiler</h4><p><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/webpack.js">源码</a>123行</p>
+<pre class="language-none"><code class="language-none">if (Array.isArray(options)) &#123;
+    compiler &#x3D; createMultiCompiler&#123;options&#125;
+    ...
+&#125;else &#123;
+    compiler &#x3D; createCompiler(options)
+    ...
+&#125;</code></pre>
+<p><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/webpack.js#L61">创建compiler</a></p>
+<pre class="language-none"><code class="language-none">const createCompiler &#x3D; rawOptions &#x3D;&gt; &#123;
+    const options &#x3D; getNormalizedWebpackOptions(rawOptions);
+    applyWebpackOptionsBaseDefaults(options);
+    const compiler &#x3D; new Compiler(options.context, options);
+    new NodeEnvironmentPlugin(&#123;
+            infrastructureLogging: options.infrastructureLogging
+    &#125;).apply(compiler);
+    if (Array.isArray(options.plugins)) &#123;
+            for (const plugin of options.plugins) &#123;
+                    if (typeof plugin &#x3D;&#x3D;&#x3D; &quot;function&quot;) &#123;
+                            plugin.call(compiler, compiler);
+                    &#125; else &#123;
+                            plugin.apply(compiler);
+                    &#125;
+            &#125;
+    &#125;
+    applyWebpackOptionsDefaults(options);
+    compiler.hooks.environment.call();
+    compiler.hooks.afterEnvironment.call();
+    new WebpackOptionsApply().process(options, compiler);
+    compiler.hooks.initialize.call();
+    return compiler;
+&#125;;</code></pre>
 
-<h2 id="全局上下文-GO-、函数上下文知识-AO"><a href="#全局上下文-GO-、函数上下文知识-AO" class="headerlink" title="全局上下文(GO)、函数上下文知识(AO)"></a>全局上下文(GO)、函数上下文知识(AO)</h2><p>下面一题答案： </p>
-<pre class="language-none"><code class="language-none">console.log(a)
-var a &#x3D; 5;
-function a()&#123;
-	console.log(&#39;这里是函数知识&#39;)
+<p>接下来针对createCompiler创建流程细化</p>
+<h4 id="NodeEnvironmentPlugin"><a href="#NodeEnvironmentPlugin" class="headerlink" title="NodeEnvironmentPlugin"></a>NodeEnvironmentPlugin</h4><p>实例化NodeEnvironmentPlugin</p>
+<pre class="language-none"><code class="language-none">&#x2F;&#x2F;65行
+new NodeEnvironmentPlugin(&#123;
+	infrastructureLogging: options.infrastructureLogging
+&#125;).apply(compiler);</code></pre>
+<p><code>NodeEnvironmentPlugin</code>可以对文件输入、输出、缓存、监听。<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/node/NodeEnvironmentPlugin.js">源码</a></p>
+<p>附含<a target="_blank" rel="noopener" href="https://webpack.docschina.org/api/compiler-hooks/">compiler hook</a> </p>
+<pre class="language-none"><code class="language-none">class NodeEnvironmentPlugin &#123;
+    constructor(options) &#123;
+        this.options &#x3D; options;
+    &#125;
+    
+    apply(compiler) &#123;
+        ...
+        &#x2F;&#x2F;文件输入
+        compiler.inputFileSystem &#x3D; new CachedInputFileSystem(fs, 60000);
+        &#x2F;&#x2F;文件输出
+        compiler.outputFilesSystem &#x3D; fs; &#x2F;&#x2F;const fs &#x3D; require(&quot;graceful-fs&quot;);
+        &#x2F;&#x2F;文件缓存
+        compiler.intermdiateFileSystem &#x3D; fs;
+        &#x2F;&#x2F;文件监听
+        compiler.watchFileSystem &#x3D; new NodeMatchFileSystem&#123; compiler.inputFileSystem &#125;;
+        &#x2F;&#x2F;项目配置插件提供了&#96;inputFileSystem&#96;对象就使用项目提供的
+        compiler.hooks.beforeRun.tap(&quot;NodeEnvironmentPlugin&quot;, compiler &#x3D;&gt; &#123;
+            if (compiler.inputFileSystem &#x3D;&#x3D;&#x3D; inputFileSystem) &#123;
+                compiler.fsStartTime &#x3D; Date.now();
+                inputFileSystem.purge();
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h4 id="解构options-plugins（注册plugins）"><a href="#解构options-plugins（注册plugins）" class="headerlink" title="解构options.plugins（注册plugins）"></a>解构options.plugins（注册plugins）</h4><p>判断plugins属性是否为数组，是数组然后解构为一个一个的plugin,<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/webpack.js#L68">直达</a></p>
+<p>遍历arguments对象，arguments成员-&gt;插件实例调用自身的apply方法执行注册流程。</p>
+<pre class="language-none"><code class="language-none">if (Array.isArray(options.plugins)) &#123;
+    for (const plugin of options.plugins) &#123;
+        if (typeof plugin &#x3D;&#x3D;&#x3D; &quot;function&quot;) &#123;
+            plugin.call(compiler, compiler);
+        &#125; else &#123;
+            plugin.apply(compiler);
+        &#125;
+    &#125;
+&#125;
+applyWebpackOptionsDefaults(options);</code></pre>
+<h4 id="compiler-options的重新赋值"><a href="#compiler-options的重新赋值" class="headerlink" title="compiler.options的重新赋值"></a>compiler.options的重新赋值</h4><pre class="language-none"><code class="language-none">compiler.hooks.environment.call();
+compiler.hooks.afterEnvironment.call();
+new WebpackOptionsApply().process(options, compiler);</code></pre>
+<p>在<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsApply.js">WebpackOptionsApply</a>类里面提供一个process方法。process(options, compiler) { }。而它主要做了以下几件事情</p>
+<ol>
+<li>将传入的options上的属性赋值给compiler对于对象</li>
+<li>根据options配置是否需要注册一些内部自带的插件和resolverFactory.hooks</li>
+<li>解析entry<code>new EntryOptionPlugin().apply(compiler);compiler.hooks.entryOption.call(options.context, options.entry);</code></li>
+<li>返回options</li>
+</ol>
+<p>resolverFactory.hooks主要包含<code>normal</code>、<code>context</code>、<code>loader</code></p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><pre class="language-none"><code class="language-none">compiler.hooks.initialize.call();</code></pre>
+
+<h3 id="构建阶段"><a href="#构建阶段" class="headerlink" title="构建阶段"></a>构建阶段</h3><p>构建阶段主要有以下几个流程：</p>
+<ol>
+<li>开始编译</li>
+<li>确认编译入口（读取entires配置，递归遍历所有入口文件）</li>
+<li>编译模块（从entry文件开始，调用loader对模块进行转译，通过<code>acorn</code>转换为AST）</li>
+<li>完成模块编译</li>
+</ol>
+<h4 id="compiler-run"><a href="#compiler-run" class="headerlink" title="compiler.run"></a>compiler.run</h4><p><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/Compiler.js#L514">Compiler.run()</a></p>
+<pre class="language-none"><code class="language-none">const run &#x3D; () &#x3D;&gt; &#123;
+    this.hooks.beforeRun.callAsync(this, err &#x3D;&gt; &#123;
+        if (err) return finalCallback(err);
+
+        this.hooks.run.callAsync(this, err &#x3D;&gt; &#123;
+            if (err) return finalCallback(err);
+
+            this.readRecords(err &#x3D;&gt; &#123;
+                if (err) return finalCallback(err);
+
+                this.compile(onCompiled);
+            &#125;);
+        &#125;);
+    &#125;);
+&#125;;</code></pre>
+<h4 id="compiler-compile"><a href="#compiler-compile" class="headerlink" title="compiler.compile"></a>compiler.compile</h4><p><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/Compiler.js#L1159">Compiler.compile(callback)</a></p>
+<p>在compile方法依次执行了以下几个hook</p>
+<ol>
+<li>beforeCompile</li>
+<li>compile</li>
+<li>make</li>
+<li>finishMake</li>
+<li>afterCompile</li>
+</ol>
+<p>在complie阶段通过<code>const compilation = this.newCompilation(params);</code>实例化了Compilation，对于compilation对象表现了当前的模块资源、编译生成的资源、变化的文件以及被跟踪依赖的状态信息，代表一次资源的构建。</p>
+<h3 id="生成阶段"><a href="#生成阶段" class="headerlink" title="生成阶段"></a>生成阶段</h3><p>输出资源、写入文件系统</p>
+<h3 id="关于Loader、Plugin"><a href="#关于Loader、Plugin" class="headerlink" title="关于Loader、Plugin"></a>关于Loader、Plugin</h3><p>Loader 是对一个个的文件进行处理，它是一个转换器，将A文件进行编译成B文件。</p>
+<p>Plugin 是贯穿在整个构建生命周期，可以对不同阶段的构建产物进行处理。</p>
+<h4 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h4><p>webpack的loader本质是一个<code>ESM</code>模块，它导出一个<code>函数</code>，这个函数就是对打包资源进行转换然后输出结果。</p>
+<pre class="language-none"><code class="language-none">function loader(source) &#x3D;&gt; &#123;
+    &#x2F;&#x2F;source 资源文件内容
+    &#x2F;&#x2F;TODO 处理过程
+    return &#39;加工后的输出&#39;
+&#125;
+
+loader.pitch &#x3D; function () &#123;
+    &#x2F;&#x2F;pitch loader
+    &#x2F;&#x2F;TODO
+&#125;
+
+module.exports &#x3D; loader;</code></pre>
+
+<h4 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h4><p>plugin是导出一个<code>class</code>，其中类包含了一个固定的方法名为<code>apply</code>,apply方法的第一个参数为<code>compiler</code>,我们可以通过拿到<code>compiler</code>对象的hooks进行添加事件.</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/webpack/tapable">Tapable</a>: 一个工具库，其中包含了很多hook。</p>
+</blockquote>
+<pre class="language-none"><code class="language-none">class EchoPlugin &#123;
+    constructor(options)&#123;
+        &#x2F;&#x2F;options
+    &#125;
+    
+    apply(compiler) &#123;
+        &#x2F;&#x2F;tap: 同步&#x2F;异步；topAsync：异步
+        &#x2F;&#x2F;可以在compiler任意生命周期内进行操作，举例emit的钩子
+        compiler.hooks.emit.tap(&#39;EchoPlugin&#39;, compilation &#x3D;&gt; &#123;
+            &#x2F;&#x2F;TODO
+        &#125;
+    &#125;
 &#125;</code></pre>
 
-<p>答案见评论区</p>
-<h2 id="知识小店1"><a href="#知识小店1" class="headerlink" title="知识小店1"></a>知识小店1</h2><p>display: -webkit-box;<br>-webkit-line-clamp: 3;<br>-webkit-box-orient: vertical;<br>overflow: hidden;<br>text-overflow: ellipsis;<br>&#x2F;&#x2F;实现三行文字，省略号显示</p>
-<p>&#x2F;&#x2F;在react中</p>
-<ol>
-<li>使用&#x2F;* autoprefixer: ignore next *&#x2F; 对-webkit-box-orient: vertical;进行过滤</li>
-<li>直接使用行内元素<br>overflow: hidden;<br>text-overflow: ellipsis;<br>display: -webkit-box;<br>-webkit-line-clamp: 3;<br>&#x2F;* autoprefixer: ignore next *&#x2F;<br>-webkit-box-orient: vertical;</li>
-</ol>
-<h2 id="知识小店2"><a href="#知识小店2" class="headerlink" title="知识小店2"></a>知识小店2</h2><p>?. &#x2F;&#x2F;在对于后端返回的数据进行判断<br>const obj &#x3D; {<br>info: {<br>        name: ‘echo’,<br>        age: 6<br>    }<br>}<br>const obj2 &#x3D; {<br>info: null<br>}<br>console.log(obj.info?.name) &#x2F;&#x2F;“echo”<br>console.log(obj2.info?.name) &#x2F;&#x2F;undefined<br>console.log(obj.info.name) &#x2F;&#x2F;Error: Cannot read property ‘name’ of null</p>
-<blockquote>
-<p>若不使用?. 判断则为： obj.info ? obj.info.name : null</p>
-</blockquote>
+<h3 id="总体流程图"><a href="#总体流程图" class="headerlink" title="总体流程图"></a>总体流程图</h3><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f647deaf7f34bdbafae0b9198574a7f~tplv-k3u1fbpfcp-watermark.image" alt="image.png"><br>推荐链接<a target="_blank" rel="noopener" href="https://febook.hzfe.org/awesome-interview/book1/engineer-webpack-workflow#31-%E7%94%9F%E6%88%90%E4%BA%A7%E7%89%A9">剑指前端Offer</a></p>
 
                 
             </div>
@@ -491,7 +607,7 @@ function a()&#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/02/01/%E5%87%A0%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3js%E6%A8%A1%E5%9D%97%E5%8C%96%E3%80%81IIFE/">http://example.com/2023/02/01/%E5%87%A0%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3js%E6%A8%A1%E5%9D%97%E5%8C%96%E3%80%81IIFE/</a>
+                    <a href="http://example.com/2023/02/03/webpack%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">http://example.com/2023/02/03/webpack%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -529,8 +645,8 @@ function a()&#123;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/js/">
-                                    <span class="chip bg-color">js</span>
+                                <a href="/tags/webpacck/">
+                                    <span class="chip bg-color">webpacck</span>
                                 </a>
                             
                         </div>
@@ -609,9 +725,10 @@ function a()&#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/02/03/webpack%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">
                     <div class="card-image">
@@ -629,9 +746,9 @@ function a()&#123;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -640,6 +757,7 @@ function a()&#123;
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -658,13 +776,13 @@ function a()&#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/01/06/JavaScript%E5%AE%9E%E7%8E%B0%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E3%80%81%E7%BB%A7%E6%89%BF/">
+                <a href="/2023/02/01/%E5%87%A0%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3js%E6%A8%A1%E5%9D%97%E5%8C%96%E3%80%81IIFE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="JavaScript实现封装、继承、多态">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="几分钟了解js模块化、IIFE">
                         
-                        <span class="card-title">JavaScript实现封装、继承、多态</span>
+                        <span class="card-title">几分钟了解js模块化、IIFE</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -675,7 +793,7 @@ function a()&#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
                             </span>
                         <span class="publish-author">
                             
