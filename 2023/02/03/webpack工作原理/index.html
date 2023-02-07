@@ -423,85 +423,85 @@ webpack构建的核心是完成内容的转换和资源的合并。
 </ol>
 <p>webpack支持多个配置对象，比如一个library有多个构建目标，就需要传入多个配置对象，每个配置对象都要执行。<br><code>compiler对象包含了webpack环境所有的配置信息，比如options、loaders、plugins</code>。</p>
 <h4 id="createCompiler"><a href="#createCompiler" class="headerlink" title="createCompiler"></a>createCompiler</h4><p><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/webpack.js">源码</a>123行</p>
-<pre class="language-none"><code class="language-none">if (Array.isArray(options)) &#123;
-    compiler &#x3D; createMultiCompiler&#123;options&#125;
-    ...
-&#125;else &#123;
-    compiler &#x3D; createCompiler(options)
-    ...
-&#125;</code></pre>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    compiler <span class="token operator">=</span> createMultiCompiler<span class="token punctuation">&#123;</span>options<span class="token punctuation">&#125;</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    compiler <span class="token operator">=</span> <span class="token function">createCompiler</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">&#125;</span></code></pre>
 <p><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/webpack.js#L61">创建compiler</a></p>
-<pre class="language-none"><code class="language-none">const createCompiler &#x3D; rawOptions &#x3D;&gt; &#123;
-    const options &#x3D; getNormalizedWebpackOptions(rawOptions);
-    applyWebpackOptionsBaseDefaults(options);
-    const compiler &#x3D; new Compiler(options.context, options);
-    new NodeEnvironmentPlugin(&#123;
-            infrastructureLogging: options.infrastructureLogging
-    &#125;).apply(compiler);
-    if (Array.isArray(options.plugins)) &#123;
-            for (const plugin of options.plugins) &#123;
-                    if (typeof plugin &#x3D;&#x3D;&#x3D; &quot;function&quot;) &#123;
-                            plugin.call(compiler, compiler);
-                    &#125; else &#123;
-                            plugin.apply(compiler);
-                    &#125;
-            &#125;
-    &#125;
-    applyWebpackOptionsDefaults(options);
-    compiler.hooks.environment.call();
-    compiler.hooks.afterEnvironment.call();
-    new WebpackOptionsApply().process(options, compiler);
-    compiler.hooks.initialize.call();
-    return compiler;
-&#125;;</code></pre>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">createCompiler</span> <span class="token operator">=</span> <span class="token parameter">rawOptions</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token function">getNormalizedWebpackOptions</span><span class="token punctuation">(</span>rawOptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">applyWebpackOptionsBaseDefaults</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> compiler <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Compiler</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>context<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">new</span> <span class="token class-name">NodeEnvironmentPlugin</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            <span class="token literal-property property">infrastructureLogging</span><span class="token operator">:</span> options<span class="token punctuation">.</span>infrastructureLogging
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>plugins<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> plugin <span class="token keyword">of</span> options<span class="token punctuation">.</span>plugins<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> plugin <span class="token operator">===</span> <span class="token string">"function"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            <span class="token function">plugin</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>compiler<span class="token punctuation">,</span> compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                            <span class="token function">plugin</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">applyWebpackOptionsDefaults</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span><span class="token function">environment</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span><span class="token function">afterEnvironment</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">new</span> <span class="token class-name">WebpackOptionsApply</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">process</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span><span class="token function">initialize</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> compiler<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
 
 <p>接下来针对createCompiler创建流程细化</p>
 <h4 id="NodeEnvironmentPlugin"><a href="#NodeEnvironmentPlugin" class="headerlink" title="NodeEnvironmentPlugin"></a>NodeEnvironmentPlugin</h4><p>实例化NodeEnvironmentPlugin</p>
-<pre class="language-none"><code class="language-none">&#x2F;&#x2F;65行
-new NodeEnvironmentPlugin(&#123;
-	infrastructureLogging: options.infrastructureLogging
-&#125;).apply(compiler);</code></pre>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//65行</span>
+<span class="token keyword">new</span> <span class="token class-name">NodeEnvironmentPlugin</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+	<span class="token literal-property property">infrastructureLogging</span><span class="token operator">:</span> options<span class="token punctuation">.</span>infrastructureLogging
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p><code>NodeEnvironmentPlugin</code>可以对文件输入、输出、缓存、监听。<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/node/NodeEnvironmentPlugin.js">源码</a></p>
 <p>附含<a target="_blank" rel="noopener" href="https://webpack.docschina.org/api/compiler-hooks/">compiler hook</a> </p>
-<pre class="language-none"><code class="language-none">class NodeEnvironmentPlugin &#123;
-    constructor(options) &#123;
-        this.options &#x3D; options;
-    &#125;
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">NodeEnvironmentPlugin</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> options<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
     
-    apply(compiler) &#123;
-        ...
-        &#x2F;&#x2F;文件输入
-        compiler.inputFileSystem &#x3D; new CachedInputFileSystem(fs, 60000);
-        &#x2F;&#x2F;文件输出
-        compiler.outputFilesSystem &#x3D; fs; &#x2F;&#x2F;const fs &#x3D; require(&quot;graceful-fs&quot;);
-        &#x2F;&#x2F;文件缓存
-        compiler.intermdiateFileSystem &#x3D; fs;
-        &#x2F;&#x2F;文件监听
-        compiler.watchFileSystem &#x3D; new NodeMatchFileSystem&#123; compiler.inputFileSystem &#125;;
-        &#x2F;&#x2F;项目配置插件提供了&#96;inputFileSystem&#96;对象就使用项目提供的
-        compiler.hooks.beforeRun.tap(&quot;NodeEnvironmentPlugin&quot;, compiler &#x3D;&gt; &#123;
-            if (compiler.inputFileSystem &#x3D;&#x3D;&#x3D; inputFileSystem) &#123;
-                compiler.fsStartTime &#x3D; Date.now();
-                inputFileSystem.purge();
-            &#125;
-        &#125;
-    &#125;
-&#125;</code></pre>
+    <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token operator">...</span>
+        <span class="token comment">//文件输入</span>
+        compiler<span class="token punctuation">.</span>inputFileSystem <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CachedInputFileSystem</span><span class="token punctuation">(</span>fs<span class="token punctuation">,</span> <span class="token number">60000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//文件输出</span>
+        compiler<span class="token punctuation">.</span>outputFilesSystem <span class="token operator">=</span> fs<span class="token punctuation">;</span> <span class="token comment">//const fs = require("graceful-fs");</span>
+        <span class="token comment">//文件缓存</span>
+        compiler<span class="token punctuation">.</span>intermdiateFileSystem <span class="token operator">=</span> fs<span class="token punctuation">;</span>
+        <span class="token comment">//文件监听</span>
+        compiler<span class="token punctuation">.</span>watchFileSystem <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">NodeMatchFileSystem</span><span class="token punctuation">&#123;</span> compiler<span class="token punctuation">.</span>inputFileSystem <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        <span class="token comment">//项目配置插件提供了`inputFileSystem`对象就使用项目提供的</span>
+        compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>beforeRun<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">"NodeEnvironmentPlugin"</span><span class="token punctuation">,</span> <span class="token parameter">compiler</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>compiler<span class="token punctuation">.</span>inputFileSystem <span class="token operator">===</span> inputFileSystem<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                compiler<span class="token punctuation">.</span>fsStartTime <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                inputFileSystem<span class="token punctuation">.</span><span class="token function">purge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
 <h4 id="解构options-plugins（注册plugins）"><a href="#解构options-plugins（注册plugins）" class="headerlink" title="解构options.plugins（注册plugins）"></a>解构options.plugins（注册plugins）</h4><p>判断plugins属性是否为数组，是数组然后解构为一个一个的plugin,<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/webpack.js#L68">直达</a></p>
 <p>遍历arguments对象，arguments成员-&gt;插件实例调用自身的apply方法执行注册流程。</p>
-<pre class="language-none"><code class="language-none">if (Array.isArray(options.plugins)) &#123;
-    for (const plugin of options.plugins) &#123;
-        if (typeof plugin &#x3D;&#x3D;&#x3D; &quot;function&quot;) &#123;
-            plugin.call(compiler, compiler);
-        &#125; else &#123;
-            plugin.apply(compiler);
-        &#125;
-    &#125;
-&#125;
-applyWebpackOptionsDefaults(options);</code></pre>
-<h4 id="compiler-options的重新赋值"><a href="#compiler-options的重新赋值" class="headerlink" title="compiler.options的重新赋值"></a>compiler.options的重新赋值</h4><pre class="language-none"><code class="language-none">compiler.hooks.environment.call();
-compiler.hooks.afterEnvironment.call();
-new WebpackOptionsApply().process(options, compiler);</code></pre>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>plugins<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> plugin <span class="token keyword">of</span> options<span class="token punctuation">.</span>plugins<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> plugin <span class="token operator">===</span> <span class="token string">"function"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">plugin</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>compiler<span class="token punctuation">,</span> compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">plugin</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">applyWebpackOptionsDefaults</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h4 id="compiler-options的重新赋值"><a href="#compiler-options的重新赋值" class="headerlink" title="compiler.options的重新赋值"></a>compiler.options的重新赋值</h4><pre class="language-javascript" data-language="javascript"><code class="language-javascript">compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span><span class="token function">environment</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span><span class="token function">afterEnvironment</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">WebpackOptionsApply</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">process</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> compiler<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>在<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsApply.js">WebpackOptionsApply</a>类里面提供一个process方法。process(options, compiler) { }。而它主要做了以下几件事情</p>
 <ol>
 <li>将传入的options上的属性赋值给compiler对于对象</li>
@@ -510,7 +510,7 @@ new WebpackOptionsApply().process(options, compiler);</code></pre>
 <li>返回options</li>
 </ol>
 <p>resolverFactory.hooks主要包含<code>normal</code>、<code>context</code>、<code>loader</code></p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><pre class="language-none"><code class="language-none">compiler.hooks.initialize.call();</code></pre>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><pre class="language-javascript" data-language="javascript"><code class="language-javascript">compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span><span class="token function">initialize</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 <h3 id="构建阶段"><a href="#构建阶段" class="headerlink" title="构建阶段"></a>构建阶段</h3><p>构建阶段主要有以下几个流程：</p>
 <ol>
@@ -520,21 +520,21 @@ new WebpackOptionsApply().process(options, compiler);</code></pre>
 <li>完成模块编译</li>
 </ol>
 <h4 id="compiler-run"><a href="#compiler-run" class="headerlink" title="compiler.run"></a>compiler.run</h4><p><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/Compiler.js#L514">Compiler.run()</a></p>
-<pre class="language-none"><code class="language-none">const run &#x3D; () &#x3D;&gt; &#123;
-    this.hooks.beforeRun.callAsync(this, err &#x3D;&gt; &#123;
-        if (err) return finalCallback(err);
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">run</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>beforeRun<span class="token punctuation">.</span><span class="token function">callAsync</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token parameter">err</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">finalCallback</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        this.hooks.run.callAsync(this, err &#x3D;&gt; &#123;
-            if (err) return finalCallback(err);
+        <span class="token keyword">this</span><span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>run<span class="token punctuation">.</span><span class="token function">callAsync</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token parameter">err</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">finalCallback</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            this.readRecords(err &#x3D;&gt; &#123;
-                if (err) return finalCallback(err);
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">readRecords</span><span class="token punctuation">(</span><span class="token parameter">err</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">finalCallback</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-                this.compile(onCompiled);
-            &#125;);
-        &#125;);
-    &#125;);
-&#125;;</code></pre>
+                <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span>onCompiled<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
 <h4 id="compiler-compile"><a href="#compiler-compile" class="headerlink" title="compiler.compile"></a>compiler.compile</h4><p><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/Compiler.js#L1159">Compiler.compile(callback)</a></p>
 <p>在compile方法依次执行了以下几个hook</p>
 <ol>
@@ -549,36 +549,36 @@ new WebpackOptionsApply().process(options, compiler);</code></pre>
 <h3 id="关于Loader、Plugin"><a href="#关于Loader、Plugin" class="headerlink" title="关于Loader、Plugin"></a>关于Loader、Plugin</h3><p>Loader 是对一个个的文件进行处理，它是一个转换器，将A文件进行编译成B文件。</p>
 <p>Plugin 是贯穿在整个构建生命周期，可以对不同阶段的构建产物进行处理。</p>
 <h4 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h4><p>webpack的loader本质是一个<code>ESM</code>模块，它导出一个<code>函数</code>，这个函数就是对打包资源进行转换然后输出结果。</p>
-<pre class="language-none"><code class="language-none">function loader(source) &#x3D;&gt; &#123;
-    &#x2F;&#x2F;source 资源文件内容
-    &#x2F;&#x2F;TODO 处理过程
-    return &#39;加工后的输出&#39;
-&#125;
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">loader</span><span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//source 资源文件内容</span>
+    <span class="token comment">//TODO 处理过程</span>
+    <span class="token keyword">return</span> <span class="token string">'加工后的输出'</span>
+<span class="token punctuation">&#125;</span>
 
-loader.pitch &#x3D; function () &#123;
-    &#x2F;&#x2F;pitch loader
-    &#x2F;&#x2F;TODO
-&#125;
+loader<span class="token punctuation">.</span><span class="token function-variable function">pitch</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//pitch loader</span>
+    <span class="token comment">//TODO</span>
+<span class="token punctuation">&#125;</span>
 
-module.exports &#x3D; loader;</code></pre>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> loader<span class="token punctuation">;</span></code></pre>
 
 <h4 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h4><p>plugin是导出一个<code>class</code>，其中类包含了一个固定的方法名为<code>apply</code>,apply方法的第一个参数为<code>compiler</code>,我们可以通过拿到<code>compiler</code>对象的hooks进行添加事件.</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/webpack/tapable">Tapable</a>: 一个工具库，其中包含了很多hook。</p>
 </blockquote>
-<pre class="language-none"><code class="language-none">class EchoPlugin &#123;
-    constructor(options)&#123;
-        &#x2F;&#x2F;options
-    &#125;
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">EchoPlugin</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">//options</span>
+    <span class="token punctuation">&#125;</span>
     
-    apply(compiler) &#123;
-        &#x2F;&#x2F;tap: 同步&#x2F;异步；topAsync：异步
-        &#x2F;&#x2F;可以在compiler任意生命周期内进行操作，举例emit的钩子
-        compiler.hooks.emit.tap(&#39;EchoPlugin&#39;, compilation &#x3D;&gt; &#123;
-            &#x2F;&#x2F;TODO
-        &#125;
-    &#125;
-&#125;</code></pre>
+    <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//tap: 同步/异步；topAsync：异步</span>
+        <span class="token comment">//可以在compiler任意生命周期内进行操作，举例emit的钩子</span>
+        compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">'EchoPlugin'</span><span class="token punctuation">,</span> <span class="token parameter">compilation</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">//TODO</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
 
 <h3 id="总体流程图"><a href="#总体流程图" class="headerlink" title="总体流程图"></a>总体流程图</h3><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f647deaf7f34bdbafae0b9198574a7f~tplv-k3u1fbpfcp-watermark.image" alt="image.png"><br>推荐链接<a target="_blank" rel="noopener" href="https://febook.hzfe.org/awesome-interview/book1/engineer-webpack-workflow#31-%E7%94%9F%E6%88%90%E4%BA%A7%E7%89%A9">剑指前端Offer</a></p>
 
@@ -725,18 +725,17 @@ module.exports &#x3D; loader;</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/03/webpack%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">
+                <a href="/2023/02/07/JS%E6%89%8B%E5%86%99%E6%96%B9%E6%B3%95%E5%90%88%E9%9B%86/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="webpack工作流程">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="JS手写方法合集">
                         
-                        <span class="card-title">webpack工作流程</span>
+                        <span class="card-title">JS手写方法合集</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -746,9 +745,9 @@ module.exports &#x3D; loader;</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-03
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-07
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -757,12 +756,11 @@ module.exports &#x3D; loader;</code></pre>
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/webpacck/">
-                        <span class="chip bg-color">webpacck</span>
+                    <a href="/tags/js/">
+                        <span class="chip bg-color">js</span>
                     </a>
                     
                 </div>

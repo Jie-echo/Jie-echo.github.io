@@ -443,34 +443,34 @@ JS基础类型、对象">
 <blockquote>
 <p>手写深拷贝、浅拷贝</p>
 </blockquote>
-<pre class="language-none"><code class="language-none">&#x2F;&#x2F;深拷贝
-function deepClone(obj)&#123;
-    if(typeof obj !&#x3D;&#x3D; &#39;object&#39;)&#123;
-        return ;
-    &#125;
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//深拷贝</span>
+<span class="token keyword">function</span> <span class="token function">deepClone</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
     
-    let copyObj &#x3D; Array.isArray(obj) ? [] : &#123;&#125;;
-    for(let key in obj)&#123;
-        &#x2F;&#x2F;遍历对象自身及原型链上所有可枚举不可枚举属性
-        if(obj.hasOwnProperty(key))&#123;
-            copyObj[key] &#x3D; typeof obj[key] &#x3D;&#x3D;&#x3D; &#39;object&#39; ? deepClone(obj[key]) : obj[key];
-        &#125;
-    &#125;
-    return copyObj;
-&#125;
+    <span class="token keyword">let</span> copyObj <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">//遍历对象自身及原型链上所有可枚举不可枚举属性</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            copyObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">?</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">:</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> copyObj<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-&#x2F;&#x2F;浅拷贝 相对比深拷贝 缺少了递归赋值引用值的步骤
-function shallowClone(obj)&#123;
-    if(typeof obj !&#x3D;&#x3D; &#39;object&#39;)&#123;
-        return 
-    &#125;
+<span class="token comment">//浅拷贝 相对比深拷贝 缺少了递归赋值引用值的步骤</span>
+<span class="token keyword">function</span> <span class="token function">shallowClone</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> 
+    <span class="token punctuation">&#125;</span>
     
-    let copyObj &#x3D; Array.isArray(obj) ? [] : &#123;&#125;;
-    for(let key in obj)&#123;
-        copyObj[key] &#x3D; obj[key]
-    &#125;
-    return copyObj
-&#125;</code></pre>
+    <span class="token keyword">let</span> copyObj <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        copyObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> copyObj
+<span class="token punctuation">&#125;</span></code></pre>
 
 <blockquote>
 <p> JSON.parse(JSON.srtingfy())的弊端</p>
@@ -485,38 +485,38 @@ function shallowClone(obj)&#123;
 <p>深拷贝如何解决循环引用</p>
 </blockquote>
 <p>采用循环引用导致栈溢出代码 <code>Uncaught RangeError: Maximum call stack size exceeded</code></p>
-<pre class="language-none"><code class="language-none">const obj &#x3D; &#123;
-    name: &#39;echo&#39;
-&#125;;
-const testObj &#x3D; &#123;
-    name: &#39;sixi&#39;,
-    relative: obj
-&#125;;
-obj.relative &#x3D; testObj; &#x2F;&#x2F;循环引用
-const newObj &#x3D; deepClone(obj);
-console.log(newObj);</code></pre>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'echo'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> testObj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'sixi'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">relative</span><span class="token operator">:</span> obj
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+obj<span class="token punctuation">.</span>relative <span class="token operator">=</span> testObj<span class="token punctuation">;</span> <span class="token comment">//循环引用</span>
+<span class="token keyword">const</span> newObj <span class="token operator">=</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newObj<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 <p>优化手写深拷贝代码：使用WeakMap对已遍历的对象进行保存，当递归调用的时候直接判断WeakMap是否存在，若已存在则直接返回，避免无限循环。</p>
-<pre class="language-none"><code class="language-none">function deepClone(obj, hash &#x3D; new WeakMap())&#123;
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> hash <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeakMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 
-    if(typeof obj !&#x3D;&#x3D; &#39;object&#39;)&#123;
-        return ;
-    &#125;
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    if(hash.has(obj))&#123;
-        return hash.get(obj);
-    &#125;
+    <span class="token keyword">if</span><span class="token punctuation">(</span>hash<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> hash<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
     
-    let copyObj &#x3D; Array.isArray(obj) ? [] : &#123;&#125;;
-    hash.set(obj, copyObj);
-    for(let key in obj)&#123;
-        &#x2F;&#x2F;遍历对象自身及原型链上所有可枚举不可枚举属性
-        if(obj.hasOwnProperty(key))&#123;
-            copyObj[key] &#x3D; typeof obj[key] &#x3D;&#x3D;&#x3D; &#39;object&#39; ? deepClone(obj[key], hash) : obj[key];
-        &#125;
-    &#125;
-    return copyObj;
-&#125;</code></pre>
+    <span class="token keyword">let</span> copyObj <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    hash<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> copyObj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">//遍历对象自身及原型链上所有可枚举不可枚举属性</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            copyObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">?</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> hash<span class="token punctuation">)</span> <span class="token operator">:</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> copyObj<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
 
 <h3 id="关于闭包"><a href="#关于闭包" class="headerlink" title="关于闭包"></a>关于闭包</h3><ol>
 <li>讲讲闭包</li>
@@ -574,51 +574,51 @@ a();</code></pre>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d1b83be45d645d88514b89c3876b787~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
 <h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>原型链继承、构造函数（改变this指向）、组合继承（原型链+构造函数）、寄生继承、寄生组合、类<br><code>借鉴红宝书</code></p>
 <h4 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h4><p>缺点：原型中包含引用值，其引用值会在所有实例中共享</p>
-<pre class="language-none"><code class="language-none">function Sixi()&#123;
-    this.arr &#x3D; [1,2]
-&#125;
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span>
 
-function Echo()&#123;&#125;
+<span class="token keyword">function</span> <span class="token function">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 
-Echo.prototype &#x3D; new Sixi()
+<span class="token class-name">Echo</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-let instance &#x3D; new Echo()
-instance.arr.push(3)
-console.log(instance?.arr) &#x2F;&#x2F; [1, 2, 3]
+<span class="token keyword">let</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+instance<span class="token punctuation">.</span>arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance<span class="token operator">?.</span>arr<span class="token punctuation">)</span> <span class="token comment">// [1, 2, 3]</span>
 
-let instance2 &#x3D; new Echo()
-console.log(instance2?.arr) &#x2F;&#x2F; [1, 2, 3]
+<span class="token keyword">let</span> instance2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance2<span class="token operator">?.</span>arr<span class="token punctuation">)</span> <span class="token comment">// [1, 2, 3]</span>
 </code></pre>
 <h4 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h4><p>缺点：1. 必须在构造函数中定义方法，导致函数不能重用。 2. 子类不能访问父类原型上定义的方法</p>
-<pre class="language-none"><code class="language-none">function Sixi(age)&#123;
-    this.age &#x3D; age;
-&#125;
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token parameter">age</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-function Echo()&#123;
-    Sixi.call(this, &#39;18&#39;);
-    this.name &#x3D; &#39;echo_sixi&#39;
-&#125;
+<span class="token keyword">function</span> <span class="token function">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">Sixi</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">'18'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'echo_sixi'</span>
+<span class="token punctuation">&#125;</span>
 
-let instance &#x3D; new Echo();
-console.log(instance?.age); &#x2F;&#x2F;18
-console.log(instance?.name); &#x2F;&#x2F;echo_sixi
+<span class="token keyword">let</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance<span class="token operator">?.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//18</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance<span class="token operator">?.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//echo_sixi</span>
 </code></pre>
 
-<h4 id="类（class）"><a href="#类（class）" class="headerlink" title="类（class）"></a>类（class）</h4><pre class="language-none"><code class="language-none">class Echo&#123;
-    constructor()&#123;
-        this.age &#x3D; 18;
-    &#125;
-&#125;
+<h4 id="类（class）"><a href="#类（class）" class="headerlink" title="类（class）"></a>类（class）</h4><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Echo</span><span class="token punctuation">&#123;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">18</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-class Sixi extends Echo &#123;
-    constructor()&#123;
-        super()
-        this.name &#x3D; &#39;echo_sixi&#39;
-    &#125;
-&#125;
+<span class="token keyword">class</span> <span class="token class-name">Sixi</span> <span class="token keyword">extends</span> <span class="token class-name">Echo</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'echo_sixi'</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-let person &#x3D; new Sixi()
-console.log(person.age); &#x2F;&#x2F;18</code></pre>
+<span class="token keyword">let</span> person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>person<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//18</span></code></pre>
 
 <h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><ol>
 <li>讲讲eventLoop</li>
