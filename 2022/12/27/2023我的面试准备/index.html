@@ -573,7 +573,8 @@ a();</code></pre>
 </ul>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d1b83be45d645d88514b89c3876b787~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
 <h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>原型链继承、构造函数（改变this指向）、组合继承（原型链+构造函数）、寄生继承、寄生组合、类<br><code>借鉴红宝书</code></p>
-<h4 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h4><p>缺点：原型中包含引用值，其引用值会在所有实例中共享</p>
+<p>Java类的访问权限修饰符<br><code>public</code>和<code>private</code>是访问权限修饰符，用于控制外界对类内部成员的访问。</p>
+<h4 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h4><p>缺点：原型中包含引用值，其引用值会在所有实例中共享 可以类比 public</p>
 <pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
 <span class="token punctuation">&#125;</span>
@@ -589,7 +590,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">let</span> instance2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance2<span class="token operator">?.</span>arr<span class="token punctuation">)</span> <span class="token comment">// [1, 2, 3]</span>
 </code></pre>
-<h4 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h4><p>缺点：1. 必须在构造函数中定义方法，导致函数不能重用。 2. 子类不能访问父类原型上定义的方法</p>
+<h4 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h4><p>缺点：1. 必须在构造函数中定义方法，导致函数不能重用。 2. 子类不能访问父类原型上定义的方法 可以类比 private</p>
 <pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token parameter">age</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
