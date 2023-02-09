@@ -708,7 +708,49 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h4 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h4><p>1.构建DOM树：浏览器无法直接识别HTML语言，讲HTML转为浏览器可以识别的DOM树，document<br>2.样式计算： 同上。document.styleSheets<br>    1.解析为<code>styleSheets</code><br>    2.转换样式表中的属性值 -&gt; 标准化 （color: #ffffff -&gt; color: rgb(255,255,255)）<br>    3.计算每个节点具体样式（CSS继承、层叠）<br>        继承：子节点继承父节点样式<br>        层叠：样式叠加、样式属性相同根据优先级<br>        盒子的最终样式：例如Chrome：F12-&gt;Elements-&gt;Computed<br>3.布局阶段：<br>    1.创建布局树：遍历DOM树的可见节点，例如head标签、display:none、visibility: hidden等就会被排除<br>4.分层：3D、滚动、z-index、fixed等：渲染引擎为特定的节点生成专用图层，生成一颗对应的图层树（LayerTree）<br>    例如Chrome: F12-&gt; … -&gt;More tools -&gt;Layers<br>    1.拥有层叠上下文属性的元素会单独一层<br>    2.需要剪裁的地方也会被创建为图层<br>5.栅格化<br>    合成线程会将图层划分为图块（256<em>256、512</em>512)<br>    合成线程会按照视口附近的图块优先生成位图，实际生成的位图操作实际是由栅格化来执行的<br>    栅格化：将图块转换为位图，使用GPU生成的位图的过程称为快速栅格化、成成的位图保存在GPU内存中、<br>6.合成和显示<br>    所有图块都被光栅化，合成线程-&gt;DrawQuad命令-&gt;浏览器进程（将页面内容绘制到内存中，再显示到页面上）</p>
 <h4 id="重绘、重排、合成"><a href="#重绘、重排、合成" class="headerlink" title="重绘、重排、合成"></a>重绘、重排、合成</h4><p>知识点： <code>重绘</code>、<code>重排</code>、<code>合成</code><br>重绘：比如样式修改：背景色修改 -&gt; 不会影响布局阶段和分层阶段<br>重排：比如样式修改：高度 -&gt; 影响布局  新增BFC -&gt; 影响布局、分层<br>对比：重绘比重排快-&gt;重绘相比重排 没有layout、layer阶段</p>
 <p>合成：浏览器渲染跳过layout、layer阶段的操作<br>举例：transform属性 -&gt; 所以transform来实现动画效果要好一些</p>
-<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p>强缓存、协商缓存</p>
+<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p>浏览器缓存的方式可以减少网络带宽、降低服务器的压力、减少网络延迟、加快页面打开速度<br>常见的缓存有<code>强缓存</code>和<code>协商缓存</code></p>
+<h4 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h4><p>强缓存：第一次读取到服务器数据后，在设置的过期时间内都不会去重复请求，而是从本地缓存去读取。<br>本地缓存有<code>memory cache</code>、<code>disk cache</code><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cb1327b93985435484e1b3ca6da9f2ce~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>如上图所示：</p>
+<ul>
+<li>memory cache一般缓存图片、样式、字体，退出进程数据就清除了</li>
+<li>disk cache一般缓存脚本，存储在硬盘上，需要手动清除</li>
+</ul>
+<p>强缓存的标识 Expires、Cache-control<br>http1.0使用 Expires<br>http1.1使用 Cache-control max-age</p>
+<p>Expires: 具体的时间：Sun, 21 Mar 2027 08:52:14 GMT<br>Cache-control的 max-age 是具体的时间戳</p>
+<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>协商缓存和强缓存不同就是每次都会跟服务器通信，并带上缓存标识（<code>if-Modified-Since</code> &#x2F; <code>if-None-Match</code>）<br>流程：<br>    浏览器请求 -&gt; 服务器<br>    服务器响应 -&gt; 响应头带上<code>Last-Modified</code> &#x2F; <code>Etag</code><br>    浏览器再次请求，请求头会带上<code>if-Modified-Since</code> &#x2F; <code>if-None-Match</code> -&gt; 服务器<br>    服务器响应 -&gt; 响应头带上新的<code>Last-Modified</code> &#x2F; <code>Etag</code></p>
+<blockquote>
+<p>浏览器请求协商缓存命中，则状态码为 <code>304</code></p>
+</blockquote>
+<p>Last-Modified和Etag的区别：</p>
+<ol>
+<li>Last-Modified不能对1s之内的资源变动进行判断</li>
+<li>Etag每一次都是一个新的Hash值</li>
+</ol>
+<h4 id="启发式缓存"><a href="#启发式缓存" class="headerlink" title="启发式缓存"></a>启发式缓存</h4><p>启发式缓存：浏览器自带的缓存策略，每个浏览器变现各不相同。</p>
+<blockquote>
+<p>如果请求头没设置Expires和Cache-control但是响应头返回了Last-Modified信息，这种浏览器会启用自带的缓存策略：<code>(当前时间 - Last-Modified)*0.1</code>;</p>
+</blockquote>
+<h3 id="babel相关"><a href="#babel相关" class="headerlink" title="babel相关"></a>babel相关</h3><h4 id="babel的编译流程"><a href="#babel的编译流程" class="headerlink" title="babel的编译流程"></a>babel的编译流程</h4><p>babel的编译流程可以分别：解析、转换、生成</p>
+<ul>
+<li>解析：使用@babel&#x2F;parser，词法分析和语法分析，词法分析为标记化转为tokenization，语法分析为转换为AST树</li>
+<li>转换：使用@babel&#x2F;traverse,AST进行深度遍历并进行各种增删改</li>
+<li>生成：使用@babel&#x2F;generator,AST -&gt; code</li>
+</ul>
+<h4 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h4><p>Babel默认只是转换箭头函数，而let Promise、includes这些没有转换</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//转换前：</span>
+<span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+array<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> item <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//转转换后：</span>
+<span class="token keyword">var</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+array<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> item <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<blockquote>
+<p>Babel把JavaScript语法分为<code>语法</code>和<code>api</code>,语法在JavaScript中运行时是无法重写的。而api就可以支持方法重写</p>
+</blockquote>
+<p>Babel只对语法进行处理，对于api就使用polyfill模块进行处理的，由于polyfill体积太大，使用babel7提供的useBuiltIns:(false, entry, usage: 按需添加)<br>@babel&#x2F;runtime, @babel&#x2F;plugin-transform-runtime 把 helpers 和 polyfill 功能拆分了。默认只提供 helpers</p>
 
                 
             </div>
