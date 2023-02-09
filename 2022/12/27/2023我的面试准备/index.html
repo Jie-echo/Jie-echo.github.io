@@ -708,7 +708,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h4 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h4><p>1.构建DOM树：浏览器无法直接识别HTML语言，讲HTML转为浏览器可以识别的DOM树，document<br>2.样式计算： 同上。document.styleSheets<br>    1.解析为<code>styleSheets</code><br>    2.转换样式表中的属性值 -&gt; 标准化 （color: #ffffff -&gt; color: rgb(255,255,255)）<br>    3.计算每个节点具体样式（CSS继承、层叠）<br>        继承：子节点继承父节点样式<br>        层叠：样式叠加、样式属性相同根据优先级<br>        盒子的最终样式：例如Chrome：F12-&gt;Elements-&gt;Computed<br>3.布局阶段：<br>    1.创建布局树：遍历DOM树的可见节点，例如head标签、display:none、visibility: hidden等就会被排除<br>4.分层：3D、滚动、z-index、fixed等：渲染引擎为特定的节点生成专用图层，生成一颗对应的图层树（LayerTree）<br>    例如Chrome: F12-&gt; … -&gt;More tools -&gt;Layers<br>    1.拥有层叠上下文属性的元素会单独一层<br>    2.需要剪裁的地方也会被创建为图层<br>5.栅格化<br>    合成线程会将图层划分为图块（256<em>256、512</em>512)<br>    合成线程会按照视口附近的图块优先生成位图，实际生成的位图操作实际是由栅格化来执行的<br>    栅格化：将图块转换为位图，使用GPU生成的位图的过程称为快速栅格化、成成的位图保存在GPU内存中、<br>6.合成和显示<br>    所有图块都被光栅化，合成线程-&gt;DrawQuad命令-&gt;浏览器进程（将页面内容绘制到内存中，再显示到页面上）</p>
 <h4 id="重绘、重排、合成"><a href="#重绘、重排、合成" class="headerlink" title="重绘、重排、合成"></a>重绘、重排、合成</h4><p>知识点： <code>重绘</code>、<code>重排</code>、<code>合成</code><br>重绘：比如样式修改：背景色修改 -&gt; 不会影响布局阶段和分层阶段<br>重排：比如样式修改：高度 -&gt; 影响布局  新增BFC -&gt; 影响布局、分层<br>对比：重绘比重排快-&gt;重绘相比重排 没有layout、layer阶段</p>
 <p>合成：浏览器渲染跳过layout、layer阶段的操作<br>举例：transform属性 -&gt; 所以transform来实现动画效果要好一些</p>
-<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3>
+<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p>强缓存、协商缓存</p>
+
                 
             </div>
             <hr/>
