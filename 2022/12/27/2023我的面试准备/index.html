@@ -528,13 +528,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>AO：函数作用域</p>
 <p>GO：全局作用域</p>
 <p>块级作用域：ES6-&gt;const、let</p>
-<pre class="language-none"><code class="language-none">function a()&#123;
-    function b()&#123;
-        const name &#x3D; &#39;echo&#39;;
-    &#125;;
-    b();
-&#125;;
-a();</code></pre>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">function</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token string">'echo'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p><code>JS执行流程： JIT（及时性编译语言），先编译再执行 -&gt; </code></p>
 <ol>
 <li>a被定义时，a的作用域链是GO；a被执行时，a的作用域链是AO-&gt;GO。</li>
@@ -572,7 +572,7 @@ a();</code></pre>
 <li><code>constructor</code>对象的原型设置为新创建的对象的原型</li>
 </ul>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d1b83be45d645d88514b89c3876b787~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>原型链继承、构造函数（改变this指向）、组合继承（原型链+构造函数）、寄生继承、寄生组合、类<br><code>借鉴红宝书</code></p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>原型链继承、借用构造函数（改变this指向）、组合继承（原型链+构造函数）、寄生继承、寄生组合、类<br><code>借鉴红宝书</code></p>
 <p>Java类的访问权限修饰符<br><code>public</code>和<code>private</code>是访问权限修饰符，用于控制外界对类内部成员的访问。</p>
 <h4 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h4><p>缺点：原型中包含引用值，其引用值会在所有实例中共享 可以类比 public</p>
 <pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -590,8 +590,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">let</span> instance2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance2<span class="token operator">?.</span>arr<span class="token punctuation">)</span> <span class="token comment">// [1, 2, 3]</span>
 </code></pre>
-<h4 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h4><p>缺点：1. 必须在构造函数中定义方法，导致函数不能重用。 2. 子类不能访问父类原型上定义的方法 可以类比 private</p>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token parameter">age</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+<h4 id="借用构造函数继承"><a href="#借用构造函数继承" class="headerlink" title="借用构造函数继承"></a>借用构造函数继承</h4><p>缺点：</p>
+<ol>
+<li>必须在构造函数中定义方法，导致函数不能重用。 </li>
+<li>子类不能访问父类原型上定义的方法 可以类比 private<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token parameter">age</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
@@ -603,7 +605,24 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">let</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance<span class="token operator">?.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//18</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance<span class="token operator">?.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//echo_sixi</span>
+</code></pre></li>
+</ol>
+<h4 id="圣杯模式"><a href="#圣杯模式" class="headerlink" title="圣杯模式"></a>圣杯模式</h4><p>代码实现</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">
+<span class="token keyword">function</span> <span class="token function">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">inherit</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">inherit</span><span class="token punctuation">(</span><span class="token parameter">child<span class="token punctuation">,</span> parent</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">function</span> <span class="token constant">F</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">F</span><span class="token punctuation">.</span>prototype  <span class="token operator">=</span> parent<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+    child<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token class-name">F</span><span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+    child<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructior <span class="token operator">=</span> child<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token function">inherit</span><span class="token punctuation">(</span>Sixi<span class="token punctuation">,</span> Echo<span class="token punctuation">)</span>
+<span class="token keyword">const</span> echo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> sixi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
+
 
 <h4 id="类（class）"><a href="#类（class）" class="headerlink" title="类（class）"></a>类（class）</h4><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Echo</span><span class="token punctuation">&#123;</span>
     <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -660,6 +679,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>Promise对象</li>
 <li>async&#x2F;await</li>
 </ul>
+<h3 id="script标签中的属性"><a href="#script标签中的属性" class="headerlink" title="script标签中的属性"></a>script标签中的属性</h3><h4 id="script标签"><a href="#script标签" class="headerlink" title="script标签"></a>script标签</h4><p>默认的script标签执行脚本，会根据顺序来执行，如果遇到js，就会阻塞DOM渲染</p>
+<h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><p>设置了defer的属性，支持异步下载并且不会影响到DOM的渲染，script是顺序执行</p>
+<h4 id="async"><a href="#async" class="headerlink" title="async"></a>async</h4><p>async和defer的区别，async不会按照顺序执行，是谁先加载完谁执行</p>
 <h2 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h2><h3 id="浏览器输入URL到页面展示发生了什么"><a href="#浏览器输入URL到页面展示发生了什么" class="headerlink" title="浏览器输入URL到页面展示发生了什么"></a>浏览器输入URL到页面展示发生了什么</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9e3b40358e9d4fdea8d2fd6a715cd488~tplv-k3u1fbpfcp-watermark.image" alt="show.webp"></p>
 <ul>
 <li>浏览器进程：用户交互、子进程管理、文件存储</li>
@@ -771,6 +793,7 @@ array<span class="token punctuation">.</span><span class="token function">includ
 <p>Babel把JavaScript语法分为<code>语法</code>和<code>api</code>,语法在JavaScript中运行时是无法重写的。而api就可以支持方法重写</p>
 </blockquote>
 <p>Babel只对语法进行处理，对于api就使用polyfill模块进行处理的，由于polyfill体积太大，使用babel7提供的useBuiltIns:(false, entry, usage: 按需添加)<br>@babel&#x2F;runtime, @babel&#x2F;plugin-transform-runtime 把 helpers 和 polyfill 功能拆分了。默认只提供 helpers</p>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p><a target="_blank" rel="noopener" href="https://beta.reactjs.org/">React官方文档</a></p>
 
                 
             </div>
