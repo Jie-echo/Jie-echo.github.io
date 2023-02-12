@@ -705,6 +705,26 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>DNS缓存、页面资源缓存<br>DNS缓存：浏览器本地的IP和域名映射<br>页面资源缓存：响应头Cache-Control:Max-age&#x3D;2000</p>
 </blockquote>
+<h3 id="HTTP版本区别"><a href="#HTTP版本区别" class="headerlink" title="HTTP版本区别"></a>HTTP版本区别</h3><h4 id="http1-1"><a href="#http1-1" class="headerlink" title="http1.1"></a>http1.1</h4><p>http1.1是目前主流的http协议版本</p>
+<ul>
+<li>持久化链接 通过keep-alive来设置</li>
+<li>管道机制，同一个tpc连接客户端可以发多个请求</li>
+<li>支持断点续传，通过请求头的Range</li>
+<li>支持chunked 数据分块，body里面分块 利于大文件传输 Transfer-Encoding: chunked</li>
+</ul>
+<h4 id="http2-0"><a href="#http2-0" class="headerlink" title="http2.0"></a>http2.0</h4><ul>
+<li>二进制分帧</li>
+<li>头部压缩 HPACK算法 哈夫曼编码</li>
+<li>多路复用 解决队头阻塞</li>
+<li>服务器推送</li>
+<li>请求优先级</li>
+</ul>
+<p>tip： <code>队头阻塞</code>: HTTP开启长连接，公用一个TCP连接，当某个请求时间过长，其它请求只能处于阻塞状态<br>解决方案： 1. 并发连接 2.域名分片</p>
+<h3 id="HTTP和HTTPS的区别"><a href="#HTTP和HTTPS的区别" class="headerlink" title="HTTP和HTTPS的区别"></a>HTTP和HTTPS的区别</h3><ol>
+<li>端口号不同，http是80 https是443</li>
+<li>https需要CA证书</li>
+<li>http信息是明文传输的，https是由ssl+http协议构建可进行加密传输、身份认证的网络协议</li>
+</ol>
 <h4 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h4><p>1.构建DOM树：浏览器无法直接识别HTML语言，讲HTML转为浏览器可以识别的DOM树，document<br>2.样式计算： 同上。document.styleSheets<br>    1.解析为<code>styleSheets</code><br>    2.转换样式表中的属性值 -&gt; 标准化 （color: #ffffff -&gt; color: rgb(255,255,255)）<br>    3.计算每个节点具体样式（CSS继承、层叠）<br>        继承：子节点继承父节点样式<br>        层叠：样式叠加、样式属性相同根据优先级<br>        盒子的最终样式：例如Chrome：F12-&gt;Elements-&gt;Computed<br>3.布局阶段：<br>    1.创建布局树：遍历DOM树的可见节点，例如head标签、display:none、visibility: hidden等就会被排除<br>4.分层：3D、滚动、z-index、fixed等：渲染引擎为特定的节点生成专用图层，生成一颗对应的图层树（LayerTree）<br>    例如Chrome: F12-&gt; … -&gt;More tools -&gt;Layers<br>    1.拥有层叠上下文属性的元素会单独一层<br>    2.需要剪裁的地方也会被创建为图层<br>5.栅格化<br>    合成线程会将图层划分为图块（256<em>256、512</em>512)<br>    合成线程会按照视口附近的图块优先生成位图，实际生成的位图操作实际是由栅格化来执行的<br>    栅格化：将图块转换为位图，使用GPU生成的位图的过程称为快速栅格化、成成的位图保存在GPU内存中、<br>6.合成和显示<br>    所有图块都被光栅化，合成线程-&gt;DrawQuad命令-&gt;浏览器进程（将页面内容绘制到内存中，再显示到页面上）</p>
 <h4 id="重绘、重排、合成"><a href="#重绘、重排、合成" class="headerlink" title="重绘、重排、合成"></a>重绘、重排、合成</h4><p>知识点： <code>重绘</code>、<code>重排</code>、<code>合成</code><br>重绘：比如样式修改：背景色修改 -&gt; 不会影响布局阶段和分层阶段<br>重排：比如样式修改：高度 -&gt; 影响布局  新增BFC -&gt; 影响布局、分层<br>对比：重绘比重排快-&gt;重绘相比重排 没有layout、layer阶段</p>
 <p>合成：浏览器渲染跳过layout、layer阶段的操作<br>举例：transform属性 -&gt; 所以transform来实现动画效果要好一些</p>
