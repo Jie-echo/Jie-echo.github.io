@@ -59,7 +59,7 @@ JS基础类型、对象">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
@@ -563,7 +563,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h3 id="垃圾回收（GC机制）"><a href="#垃圾回收（GC机制）" class="headerlink" title="垃圾回收（GC机制）"></a>垃圾回收（GC机制）</h3><h4 id="栈和堆的垃圾回收"><a href="#栈和堆的垃圾回收" class="headerlink" title="栈和堆的垃圾回收"></a>栈和堆的垃圾回收</h4><p>栈的垃圾回收</p>
 <ul>
 <li>一个记录当前执行状态的指针（称为ESP），指向调用栈中的函数执行上下文</li>
-<li>当一个寒素执行结束后，JavaScript 引擎会通过向下移动 <code>ESP</code> 来销毁该函数保存在栈中的执行上下文</li>
+<li>当一个函数执行结束后，JavaScript 引擎会通过向下移动 <code>ESP</code> 来销毁该函数保存在栈中的执行上下文</li>
 </ul>
 <p>堆的垃圾回收</p>
 <ul>
