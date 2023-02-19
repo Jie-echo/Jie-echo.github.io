@@ -794,6 +794,19 @@ array<span class="token punctuation">.</span><span class="token function">includ
 </blockquote>
 <p>Babel只对语法进行处理，对于api就使用polyfill模块进行处理的，由于polyfill体积太大，使用babel7提供的useBuiltIns:(false, entry, usage: 按需添加)<br>@babel&#x2F;runtime, @babel&#x2F;plugin-transform-runtime 把 helpers 和 polyfill 功能拆分了。默认只提供 helpers</p>
 <h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p><a target="_blank" rel="noopener" href="https://beta.reactjs.org/">React官方文档</a></p>
+<h4 id="React架构"><a href="#React架构" class="headerlink" title="React架构"></a>React架构</h4><h5 id="React-1"><a href="#React-1" class="headerlink" title="React"></a>React</h5><blockquote>
+<p>知识点<br>主流浏览器刷新频率60Hz，每（1000ms&#x2F;60Hz）16.6ms浏览器刷新一次<br>渲染线程和JS线程是互斥的，JS执行会中断渲染进程<br>在浏览器刷新一次的16.6ms时间中，它需要完成：JS脚本执行-&gt;样式布局-&gt;样式绘制<br>当JS执行时间超过16.6ms那么样式布局和样式绘制的处理就没有在此次刷新中执行</p>
+</blockquote>
+<p>react15：栈实现、同步更新、协调器同步、递归执行<br>Stack reconciler（协调器）：执行函数组件、class组件将JSX转为DOM树（diff算法、挂载、卸载、更新）<br>Renderer（渲染器）：负责将变化组件渲染到页面上</p>
+<p>react16: Fibe、扁平化的单链表的数据结构r、可中断的异步更新、循环迭代<br>Scheduler（调度器）、Reconciler（协调器）、Renderer（渲染器）</p>
+<p>调度器：浏览器是否有剩余时间，浏览器API（requestIdleCallback）<br>let yieldInterval &#x3D; 5; 源码为5毫秒</p>
+<p>双缓冲技术：类似计算机图形学 中的 双缓冲策略 </p>
+<ul>
+<li>WIP树（workInProgress tree）</li>
+<li>WIP节点不是全部新的。如果某颗子树不需要变动，直接复用</li>
+<li>异常处理，有异常继续使用旧树</li>
+<li>WIP从旧树fork出来，第二阶段commit</li>
+</ul>
 <h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/">Vue官方文档</a></p>
 
                 
