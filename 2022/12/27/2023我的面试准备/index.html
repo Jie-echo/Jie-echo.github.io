@@ -560,6 +560,32 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>对于引用的某些库，可以使用自带的实例销毁方法。</li>
 <li>对于某些对象可以使用 <code>global = null；</code> 解除对函数的引用，释放内存。</li>
 </ul>
+<h3 id="垃圾回收（GC机制）"><a href="#垃圾回收（GC机制）" class="headerlink" title="垃圾回收（GC机制）"></a>垃圾回收（GC机制）</h3><h4 id="栈和堆的垃圾回收"><a href="#栈和堆的垃圾回收" class="headerlink" title="栈和堆的垃圾回收"></a>栈和堆的垃圾回收</h4><p>栈的垃圾回收</p>
+<ul>
+<li>一个记录当前执行状态的指针（称为ESP），指向调用栈中的函数执行上下文</li>
+<li>当一个寒素执行结束后，JavaScript 引擎会通过向下移动 <code>ESP</code> 来销毁该函数保存在栈中的执行上下文</li>
+</ul>
+<p>堆的垃圾回收</p>
+<ul>
+<li><p>引用计数法 </p>
+</li>
+<li><p>标记清除法 （使用广泛）</p>
+<blockquote>
+<p>标记清除法：标记阶段即为所有活动对象做上标记，清除阶段则把没有标记（也就是非活动对象）销毁</p>
+</blockquote>
+</li>
+<li><p>标记：比如当变量进入执行环境时，反转某一位（通过一个二进制字符来表示标记），又或者可以维护进入环境变量和离开环境变量这样两个列表，可以自由的把变量从一个列表转移到另一个列表<br>需要从出发点去遍历内存中所有的对象去打标记，而这个出发点有很多，我们称之为一组 根 对象，而所谓的根对象，其实在浏览器环境中包括又不止于 全局Window对象、文档DOM树 等</p>
+</li>
+<li><p>垃圾收集器在运行时会给内存中的所有变量都加上一个标记，假设内存中所有对象都是垃圾，全标记为0</p>
+</li>
+<li><p>然后从各个根对象开始遍历，把不是垃圾的节点（能访问到的节点）改成1</p>
+</li>
+<li><p>清理所有标记为0的垃圾，销毁并回收它们所占用的内存空间</p>
+</li>
+<li><p>最后，把所有内存中对象标记修改为0，等待下一轮垃圾回收</p>
+</li>
+</ul>
+<p>标记整理（Mark-Compact）算法对标记清除法的优化</p>
 <h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>调用函数时，会创建一个执行环境，this就根据函数的执行环境绑定。</p>
 <ol>
 <li>浏览器中默认this指向Window</li>
@@ -795,7 +821,7 @@ array<span class="token punctuation">.</span><span class="token function">includ
 <p>Babel只对语法进行处理，对于api就使用polyfill模块进行处理的，由于polyfill体积太大，使用babel7提供的useBuiltIns:(false, entry, usage: 按需添加)<br>@babel&#x2F;runtime, @babel&#x2F;plugin-transform-runtime 把 helpers 和 polyfill 功能拆分了。默认只提供 helpers</p>
 <h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p><a target="_blank" rel="noopener" href="https://beta.reactjs.org/">React官方文档</a></p>
 <h4 id="React架构"><a href="#React架构" class="headerlink" title="React架构"></a>React架构</h4><h5 id="React-1"><a href="#React-1" class="headerlink" title="React"></a>React</h5><blockquote>
-<p>知识点<br>主流浏览器刷新频率60Hz，每（1000ms&#x2F;60Hz）16.6ms浏览器刷新一次<br>渲染线程和JS线程是互斥的，JS执行会中断渲染进程<br>在浏览器刷新一次的16.6ms时间中，它需要完成：JS脚本执行-&gt;样式布局-&gt;样式绘制<br>当JS执行时间超过16.6ms那么样式布局和样式绘制的处理就没有在此次刷新中执行</p>
+<p>知识点<br>主流浏览器刷新频率60Hz，每（1000ms&#x2F;60Hz）<code>16.6ms</code>浏览器刷新一次<br>渲染线程和JS线程是互斥的，JS执行会中断渲染进程<br>在浏览器刷新一次的16.6ms时间中，它需要完成：JS脚本执行-&gt;样式布局-&gt;样式绘制<br>当JS执行时间超过16.6ms那么样式布局和样式绘制的处理就没有在此次刷新中执行</p>
 </blockquote>
 <p>react15：栈实现、同步更新、协调器同步、递归执行<br>Stack reconciler（协调器）：执行函数组件、class组件将JSX转为DOM树（diff算法、挂载、卸载、更新）<br>Renderer（渲染器）：负责将变化组件渲染到页面上</p>
 <p>react16: Fibe、扁平化的单链表的数据结构r、可中断的异步更新、循环迭代<br>Scheduler（调度器）、Reconciler（协调器）、Renderer（渲染器）</p>
