@@ -674,7 +674,15 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>关于eventLoop</p>
 </blockquote>
-<p>TODO：</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd754eb33121459d9c5e3e43f430ee5c~tplv-k3u1fbpfcp-watermark.image" alt="eventLoop.png"></p>
+<p><code>JS单线程</code><br>JS主线程 -&gt; 执行栈（<code>先进后出</code>）<br>callback queue -&gt; 任务队列（<code>先进先出</code>）</p>
+<h4 id="event-loop执行流程"><a href="#event-loop执行流程" class="headerlink" title="event loop执行流程"></a>event loop执行流程</h4><ol>
+<li>区分同步任务和异步任务</li>
+<li>同步任务在执行栈执行，异步任务如图交给<code>WebAPIs</code>，再放入callback queue中</li>
+<li>等待执行栈中没有可以执行的任务了，会从任务队列中取出执行</li>
+<li>从任务队列中取出来的任务执行完后，会依次取下一个，直到队列取出完的过程称为<code>event loop事件轮询</code></li>
+</ol>
+<h4 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h4><h4 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h4><p>TODO：</p>
 <blockquote>
 <p>宏任务</p>
 </blockquote>
