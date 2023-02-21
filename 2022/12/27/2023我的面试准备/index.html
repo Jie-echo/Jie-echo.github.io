@@ -59,7 +59,7 @@ JS基础类型、对象">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
@@ -806,11 +806,26 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>如果请求头没设置Expires和Cache-control但是响应头返回了Last-Modified信息，这种浏览器会启用自带的缓存策略：<code>(当前时间 - Last-Modified)*0.1</code>;</p>
 </blockquote>
-<h3 id="babel相关"><a href="#babel相关" class="headerlink" title="babel相关"></a>babel相关</h3><h4 id="babel的编译流程"><a href="#babel的编译流程" class="headerlink" title="babel的编译流程"></a>babel的编译流程</h4><p>babel的编译流程可以分别：解析、转换、生成</p>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p><a target="_blank" rel="noopener" href="https://beta.reactjs.org/">React官方文档</a></p>
+<h4 id="React架构"><a href="#React架构" class="headerlink" title="React架构"></a>React架构</h4><h5 id="React-1"><a href="#React-1" class="headerlink" title="React"></a>React</h5><blockquote>
+<p>知识点<br>主流浏览器刷新频率60Hz，每（1000ms&#x2F;60Hz）<code>16.6ms</code>浏览器刷新一次<br>渲染线程和JS线程是互斥的，JS执行会中断渲染进程<br>在浏览器刷新一次的16.6ms时间中，它需要完成：JS脚本执行-&gt;样式布局-&gt;样式绘制<br>当JS执行时间超过16.6ms那么样式布局和样式绘制的处理就没有在此次刷新中执行</p>
+</blockquote>
+<p>react15：栈实现、同步更新、协调器同步、递归执行<br>Stack reconciler（协调器）：执行函数组件、class组件将JSX转为DOM树（diff算法、挂载、卸载、更新）<br>Renderer（渲染器）：负责将变化组件渲染到页面上</p>
+<p>react16: Fibe、扁平化的单链表的数据结构r、可中断的异步更新、循环迭代<br>Scheduler（调度器）、Reconciler（协调器）、Renderer（渲染器）</p>
+<p>调度器：浏览器是否有剩余时间，浏览器API（requestIdleCallback）<br>let yieldInterval &#x3D; 5; 源码为5毫秒</p>
+<p>双缓冲技术：类似计算机图形学 中的 双缓冲策略<br>画图呈现到屏幕的过程 -&gt; 创建位图对象，操作位图对象，最后再呈现位图对象</p>
+<ul>
+<li>WIP树（workInProgress tree）</li>
+<li>WIP节点不是全部新的。如果某颗子树不需要变动，直接复用</li>
+<li>异常处理，有异常继续使用旧树</li>
+<li>WIP从旧树fork出来，第二阶段commit</li>
+</ul>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/">Vue官方文档</a></p>
+<h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><h3 id="babel相关"><a href="#babel相关" class="headerlink" title="babel相关"></a>babel相关</h3><h4 id="babel的编译流程"><a href="#babel的编译流程" class="headerlink" title="babel的编译流程"></a>babel的编译流程</h4><p>babel的编译流程可以分别：解析、转换、生成</p>
 <ul>
 <li>解析：使用@babel&#x2F;parser，词法分析和语法分析，词法分析为标记化转为tokenization，语法分析为转换为AST树</li>
-<li>转换：使用@babel&#x2F;traverse,AST进行深度遍历并进行各种增删改</li>
-<li>生成：使用@babel&#x2F;generator,AST -&gt; code</li>
+<li>转换：使用@babel&#x2F;traverse, AST进行深度遍历并进行各种增删改</li>
+<li>生成：使用@babel&#x2F;generator, AST -&gt; code</li>
 </ul>
 <h4 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h4><p>Babel默认只是转换箭头函数，而let Promise、includes这些没有转换</p>
 <pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//转换前：</span>
@@ -827,26 +842,18 @@ array<span class="token punctuation">.</span><span class="token function">includ
 <p>Babel把JavaScript语法分为<code>语法</code>和<code>api</code>,语法在JavaScript中运行时是无法重写的。而api就可以支持方法重写</p>
 </blockquote>
 <p>Babel只对语法进行处理，对于api就使用polyfill模块进行处理的，由于polyfill体积太大，使用babel7提供的useBuiltIns:(false, entry, usage: 按需添加)<br>@babel&#x2F;runtime, @babel&#x2F;plugin-transform-runtime 把 helpers 和 polyfill 功能拆分了。默认只提供 helpers</p>
-<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p><a target="_blank" rel="noopener" href="https://beta.reactjs.org/">React官方文档</a></p>
-<h4 id="React架构"><a href="#React架构" class="headerlink" title="React架构"></a>React架构</h4><h5 id="React-1"><a href="#React-1" class="headerlink" title="React"></a>React</h5><blockquote>
-<p>知识点<br>主流浏览器刷新频率60Hz，每（1000ms&#x2F;60Hz）<code>16.6ms</code>浏览器刷新一次<br>渲染线程和JS线程是互斥的，JS执行会中断渲染进程<br>在浏览器刷新一次的16.6ms时间中，它需要完成：JS脚本执行-&gt;样式布局-&gt;样式绘制<br>当JS执行时间超过16.6ms那么样式布局和样式绘制的处理就没有在此次刷新中执行</p>
-</blockquote>
-<p>react15：栈实现、同步更新、协调器同步、递归执行<br>Stack reconciler（协调器）：执行函数组件、class组件将JSX转为DOM树（diff算法、挂载、卸载、更新）<br>Renderer（渲染器）：负责将变化组件渲染到页面上</p>
-<p>react16: Fibe、扁平化的单链表的数据结构r、可中断的异步更新、循环迭代<br>Scheduler（调度器）、Reconciler（协调器）、Renderer（渲染器）</p>
-<p>调度器：浏览器是否有剩余时间，浏览器API（requestIdleCallback）<br>let yieldInterval &#x3D; 5; 源码为5毫秒</p>
-<p>双缓冲技术：类似计算机图形学 中的 双缓冲策略<br>画图呈现到屏幕的过程 -&gt; 创建位图对象，操作位图对象，最后再呈现位图对象</p>
-<ul>
-<li>WIP树（workInProgress tree）</li>
-<li>WIP节点不是全部新的。如果某颗子树不需要变动，直接复用</li>
-<li>异常处理，有异常继续使用旧树</li>
-<li>WIP从旧树fork出来，第二阶段commit</li>
-</ul>
-<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/">Vue官方文档</a></p>
-<h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><h4 id="webpack自动编译的三种方式"><a href="#webpack自动编译的三种方式" class="headerlink" title="webpack自动编译的三种方式"></a>webpack自动编译的三种方式</h4><ol>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><h4 id="webpack自动编译的三种方式"><a href="#webpack自动编译的三种方式" class="headerlink" title="webpack自动编译的三种方式"></a>webpack自动编译的三种方式</h4><ol>
 <li>watch mode 观察模式</li>
 <li>webpack-dev-server web服务器</li>
 <li>webpack-dev-middleware webpack中间件 + express</li>
 </ol>
+<h4 id="webpack的热更新"><a href="#webpack的热更新" class="headerlink" title="webpack的热更新"></a>webpack的热更新</h4><p><strong>什么是runtime？</strong><br>runtime 包含：在模块交互时，连接模块所需的加载和解析逻辑。包括浏览器中的已加载模块的连接，以及懒加载模块的执行逻辑</p>
+<p><strong>什么是manifest？</strong><br>当 <code>compiler</code> 开始执行、解析和映射应用程序时，它会保留所有模块的详细要点。这个数据集合称为 “<code>manifest</code>“<br>当完成打包并发送到浏览器时，会在运行时（Runtime）通过 Manifest 来解析和加载模块。<br>无论你选择哪种模块语法，那些import或require语句现在都已经转换为__webpack_require__方法，此方法指向模块标识符<br><strong>通过使用 <code>manifest</code> 中的数据，<code>runtime</code> 将能够查询模块标识符，检索出背后对应的模块。</strong></p>
+<p>总结： </p>
+<ol>
+<li>webpack-dev-server会创建两个服务-&gt;express的http服务和web socket服务</li>
+</ol>
+<p>webpack的热更新的原文链接： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30669007">https://zhuanlan.zhihu.com/p/30669007</a></p>
 <h4 id="webpack优化方案"><a href="#webpack优化方案" class="headerlink" title="webpack优化方案"></a>webpack优化方案</h4><ol>
 <li><code>SplitChunksPlugin</code>代码块分割</li>
 <li>模块懒加载<code>import()</code> -&gt; 比如router文件<br> why：如果模块不懒加载，最终代码会被打包到一个js文件中。</li>
@@ -856,13 +863,13 @@ array<span class="token punctuation">.</span><span class="token function">includ
 <li><code>devServer.compress: true</code> <a target="_blank" rel="noopener" href="https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/">gzip compression</a></li>
 </ol>
 <h2 id="Hybrid-App"><a href="#Hybrid-App" class="headerlink" title="Hybrid App"></a>Hybrid App</h2><p>目前项目中使用的是基于<a target="_blank" rel="noopener" href="https://github.com/marcuswestin/WebViewJavascriptBridge">WebViewJavaScriptBridge</a></p>
-<h3 id="Hybrid-App的优缺点"><a href="#Hybrid-App的优缺点" class="headerlink" title="Hybrid App的优缺点"></a>Hybrid App的优缺点</h3><p>优点：</p>
+<h3 id="Hybrid-App的优缺点"><a href="#Hybrid-App的优缺点" class="headerlink" title="Hybrid App的优缺点"></a>Hybrid App的优缺点</h3><p><strong>优点：</strong></p>
 <ol>
 <li>不受限应用商店审核，直接部署到线上环境。</li>
 <li>页面有变动，不需要重新下载APP</li>
 <li>部分页面由H5做，减少APP打包体积</li>
 </ol>
-<p>缺点：</p>
+<p><strong>缺点：</strong></p>
 <ol>
 <li>每次需求需花时间理清哪部分为APP页面，哪部分为H5页面</li>
 <li>H5在移动端上很多IOS和Android的UI兼容性问题</li>
