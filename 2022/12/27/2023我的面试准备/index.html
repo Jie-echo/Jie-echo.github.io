@@ -59,7 +59,7 @@ JS基础类型、对象">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -821,6 +821,19 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>WIP从旧树fork出来，第二阶段commit</li>
 </ul>
 <h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/">Vue官方文档</a></p>
+<h4 id="Vue2和Vue3实现双向绑定的原理"><a href="#Vue2和Vue3实现双向绑定的原理" class="headerlink" title="Vue2和Vue3实现双向绑定的原理"></a>Vue2和Vue3实现双向绑定的原理</h4><p>Vue2使用Object.definePropty、Vue3使用Proxy</p>
+<h4 id="Vue的Api风格"><a href="#Vue的Api风格" class="headerlink" title="Vue的Api风格"></a>Vue的Api风格</h4><p>Options API和Composition API。</p>
+<ul>
+<li>选项式API是在组合式API基础上实现的。Options API以组件实例的概念为中心。</li>
+<li>Composition API 常配合 <code>&lt;script setup&gt;</code>,使用组合函数可以很好的组织和重用逻辑。</li>
+</ul>
+<p>Composition API 可以重用逻辑，Vue2就不可以重用逻辑吗？</p>
+<p>Vue2逻辑复用机制是mixins（接收一个数组），用于扩充父组件的对象和方法。</p>
+<p>mixins的缺点：覆盖性会导致不稳定性，操作不当会造成全局污染</p>
+<h4 id="Vue的computed和watch"><a href="#Vue的computed和watch" class="headerlink" title="Vue的computed和watch"></a>Vue的computed和watch</h4><ul>
+<li>computed 只有在依赖的响应式数据发生变化时才会重新计算，而 watch 则是在被监听的响应式数据发生变化时立即执行回调函数。</li>
+<li>computed 一般用于计算和处理数据，而 watch 一般用于监听数据的变化并执行一些副作用，如异步操作、界面更新等。</li>
+</ul>
 <h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><h3 id="babel相关"><a href="#babel相关" class="headerlink" title="babel相关"></a>babel相关</h3><h4 id="babel的编译流程"><a href="#babel的编译流程" class="headerlink" title="babel的编译流程"></a>babel的编译流程</h4><p>babel的编译流程可以分别：解析、转换、生成</p>
 <ul>
 <li>解析：使用@babel&#x2F;parser，词法分析和语法分析，词法分析为标记化转为tokenization，语法分析为转换为AST树</li>
@@ -851,9 +864,15 @@ array<span class="token punctuation">.</span><span class="token function">includ
 <p><strong>什么是manifest？</strong><br>当 <code>compiler</code> 开始执行、解析和映射应用程序时，它会保留所有模块的详细要点。这个数据集合称为 “<code>manifest</code>“<br>当完成打包并发送到浏览器时，会在运行时（Runtime）通过 Manifest 来解析和加载模块。<br>无论你选择哪种模块语法，那些import或require语句现在都已经转换为__webpack_require__方法，此方法指向模块标识符<br><strong>通过使用 <code>manifest</code> 中的数据，<code>runtime</code> 将能够查询模块标识符，检索出背后对应的模块。</strong></p>
 <p>总结： </p>
 <ol>
-<li>webpack-dev-server会创建两个服务-&gt;express的http服务和web socket服务</li>
+<li>webpack-dev-server会创建两个服务-&gt;express的http服务和web socket服务 （sockjs建立webSocket长连接）</li>
+<li>webpack监听到文件或模块变化时会重新编译打包，生成的hash值</li>
+<li>通过HMR runtime中的check方法拿到hash值向server端发送ajax请求和jsonp请求，服务器端会返回一个json文件(manifest)和js文件(update chunk)<br> ajax请求json文件  jsonp请求js模块文件</li>
+<li>通过返回的json文件包含的hash值来获取最新模块代码，再利用runtime机制进行热更新</li>
 </ol>
+<p>如果未配置热更新会在第二步后走以下操作<br>通过webSocket发送的type为ok时，直接执行reload操作，刷新浏览器</p>
 <p>webpack的热更新的原文链接： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30669007">https://zhuanlan.zhihu.com/p/30669007</a></p>
+<h3 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h3><p><a target="_blank" rel="noopener" href="https://cn.vitejs.dev/">https://cn.vitejs.dev/</a><br>使用原生ESM文件，无需打包<br>超快的热重载</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/424842555">https://zhuanlan.zhihu.com/p/424842555</a></p>
 <h4 id="webpack优化方案"><a href="#webpack优化方案" class="headerlink" title="webpack优化方案"></a>webpack优化方案</h4><ol>
 <li><code>SplitChunksPlugin</code>代码块分割</li>
 <li>模块懒加载<code>import()</code> -&gt; 比如router文件<br> why：如果模块不懒加载，最终代码会被打包到一个js文件中。</li>
