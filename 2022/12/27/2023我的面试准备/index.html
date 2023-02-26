@@ -59,7 +59,7 @@ JS基础类型、对象">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
@@ -893,7 +893,7 @@ array<span class="token punctuation">.</span><span class="token function">includ
 <li>每次需求需花时间理清哪部分为APP页面，哪部分为H5页面</li>
 <li>H5在移动端上很多IOS和Android的UI兼容性问题</li>
 </ol>
-<h3 id="H5-gt-IOS"><a href="#H5-gt-IOS" class="headerlink" title="H5 -&gt; IOS"></a>H5 -&gt; IOS</h3><p>请求拦截</p>
+<h3 id="JSBrige"><a href="#JSBrige" class="headerlink" title="JSBrige"></a>JSBrige</h3><p>H5 -&gt; IOS： 请求拦截 <strong>URL scheme</strong></p>
 <p>在H5中发起请求方式一般有location.href和iframe，使用iframe方式</p>
 <blockquote>
 <p>连续多次修改window.location.href的值，Native层只能接受到最后一次请求。</p>
@@ -907,8 +907,35 @@ setTimeout(function () &#123;
 &#125;, 0);</code></pre>
 
 <p>IOS端拦截请求，解析、执行原生方法</p>
-<h3 id="客户端和H5通信"><a href="#客户端和H5通信" class="headerlink" title="客户端和H5通信"></a>客户端和H5通信</h3><p>window注入</p>
+<p>客户端和H5通信： <strong>window注入</strong></p>
 <p>H5需要先注册监听事件，原生在某个时刻调用js的window.WebViewJavascriptBridge对象里方法。</p>
+<h3 id="响应式设计"><a href="#响应式设计" class="headerlink" title="响应式设计"></a>响应式设计</h3><p>响应式网页设计是让WEB页面适应不同屏幕的宽度。</p>
+<p>媒介查询 → <code>@media screen</code></p>
+<p>灵活网格 → 百分比(%)</p>
+<p>现代布局技术 → 多栏布局（<code>column-count</code>）、<code>flex</code>、 <code>grid</code></p>
+<p>响应式排版 → rem、vh、vw</p>
+<p>视口元标签 → <code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;</code></p>
+<p>rem实现</p>
+<ul>
+<li>插件 <strong>postcss-pxtorem</strong> + <strong><strong>amfe-flexible</strong></strong></li>
+<li>手动修改</li>
+</ul>
+<pre class="language-jsx" data-language="jsx"><code class="language-jsx">function convert() &#123;
+  const documentElement &#x3D; document.documentElement;
+  &#x2F;&#x2F; 设计图默认字体16, 屏宽375. 开发时按设计图大小编码即可.
+  documentElement.style.fontSize &#x3D;
+    (16 * documentElement.clientWidth) &#x2F; 375 + &#39;px&#39;;
+&#125;
+
+export function pxToRem(px: number) &#123;
+  return px &#x2F; 16 + &#39;rem&#39;;
+&#125;
+
+export default function() &#123;
+  window.addEventListener(&#39;resize&#39;, convert, false);
+  convert();
+&#125;</code></pre>
+
 <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>JavaScript中的单例模式：单例模式核心 -&gt; 确保只有一个实例，提供全局访问</p>
 <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>观察者模式：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖它的对象都得到通知。<br>在js开发中，我们一般用<code>事件模型</code>来代替传统的发布-订阅模式</p>
 
