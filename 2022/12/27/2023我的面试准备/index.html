@@ -56,7 +56,7 @@ JSON.parse(JSON.srtingfy())的">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -633,18 +633,22 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </ol>
 <h4 id="圣杯模式"><a href="#圣杯模式" class="headerlink" title="圣杯模式"></a>圣杯模式</h4><p>代码实现</p>
 <pre class="language-javascript" data-language="javascript"><code class="language-javascript">
-<span class="token keyword">function</span> <span class="token function">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'123'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token function-variable function">inherit</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">inherit</span><span class="token punctuation">(</span><span class="token parameter">child<span class="token punctuation">,</span> parent</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">function</span> <span class="token constant">F</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">inherit</span><span class="token punctuation">(</span><span class="token parameter">child<span class="token punctuation">,</span> parent</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">function</span> <span class="token constant">F</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
     <span class="token class-name">F</span><span class="token punctuation">.</span>prototype  <span class="token operator">=</span> parent<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
-    child<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token class-name">F</span><span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+    child<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">F</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     child<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructior <span class="token operator">=</span> child<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
 
 <span class="token function">inherit</span><span class="token punctuation">(</span>Sixi<span class="token punctuation">,</span> Echo<span class="token punctuation">)</span>
+<span class="token class-name">Echo</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'456'</span>
 <span class="token keyword">const</span> echo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> sixi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sixi<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment">// 456</span>
 </code></pre>
 
 
