@@ -4,8 +4,12 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="标签: js, echo">
-    <meta name="description" content="echo">
+    <meta name="keywords" content="JS数据结构, echo">
+    <meta name="description" content="数据结构的重要性。掌握常见的数据结构，可以利用一些数据结构去解决一些业务中的数据。
+数据结构栈(stack)栈结构是一种受限的线性表。后进先出（LIFO：last in first out）。
+栈常见的操作
+
+push：添加元素到栈顶  →">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签: js | echo</title>
+    <title>JS数据结构 | echo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -330,316 +334,514 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                echo的笔记
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">JS数据结构</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/js/">
+                                <span class="chip bg-color">js</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-08
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>数据结构的重要性。掌握常见的数据结构，可以利用一些数据结构去解决一些业务中的数据。</p>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="栈-stack"><a href="#栈-stack" class="headerlink" title="栈(stack)"></a>栈(stack)</h2><p>栈结构是一种受限的线性表。<code>后进先出（LIFO：last in first out）</code>。</p>
+<p>栈常见的操作</p>
+<ul>
+<li>push：添加元素到栈顶  → 入栈</li>
+<li>pop：移除栈顶元素，同时返回被移除的元素  → 出栈</li>
+<li>peek：返回栈顶元素</li>
+<li>isEmpty：栈里是否有元素</li>
+<li>size：返回栈元素个数</li>
+<li>toString：栈结构以字符形式返回</li>
+</ul>
+<p>实现一个栈结构，用栈结构来封装 十进制转二进制函数</p>
+<pre class="language-jsx" data-language="jsx"><code class="language-jsx">function Stack()&#123;
+	this.arr &#x3D; [];
+	
+	Stack.prototype.push &#x3D; function (ele) &#123;
+		return this.arr.push(ele)
+	&#125;
+
+	Stack.prototype.pop &#x3D; function ()&#123;
+		return this.arr.pop()
+	&#125;
+
+	Stack.prototype.peek &#x3D; function () &#123;
+		return this.arr?.[this.arr.length - 1]
+	&#125;
+
+	Stack.prototype.isEmpty &#x3D; function () &#123;
+		return this.arr?.length &#x3D;&#x3D;&#x3D; 0
+	&#125;
+
+	Stack.prototype.toString &#x3D; function () &#123;
+		return this.arr.splice(&#39;,&#39;).join(&#39; &#39;)
+	&#125;
+&#125;
+
+const s &#x3D; new Stack()</code></pre>
+
+<h2 id="队列-Queue"><a href="#队列-Queue" class="headerlink" title="队列(Queue)"></a>队列(Queue)</h2><p>队列结构也是一种受限的线性结构。先进先出（FIFO: first in first out）</p>
+<p>队列常见的操作</p>
+<ul>
+<li>enqueue：向队列尾部添加一个元素    → 入队</li>
+<li>dequeue：移除队列的第一项，并返回被移除的元素 → 出队</li>
+<li>front：返回队列中第一个元素</li>
+<li>isEmpty：队列是否为空</li>
+<li>size：返回队列长度</li>
+<li>toString：将队列中的内容，转换为字符串</li>
+</ul>
+<p>实现队列 - &gt; 使用队列封装击鼓传花的方法</p>
+<pre class="language-jsx" data-language="jsx"><code class="language-jsx">function Queue()&#123;
+	this.arr &#x3D; []
+
+	Queue.prototype.enqueue &#x3D; function (ele) &#123;
+		&#x2F;&#x2F;TODO
+	&#125;
+&#125;
+
+const queue &#x3D; new Queue()
+
+function passGame(nameList, num) &#123;
+
+&#125;</code></pre>
+
+<p><strong>优先级队列</strong></p>
+<p>数组实现</p>
+<pre class="language-jsx" data-language="jsx"><code class="language-jsx">function PriorityQueue() &#123;
+	&#x2F;&#x2F;优先级队列元素 包含内容及优先级系数 -&gt; 创建内部类
+	function QueueElement(ele, zindex) &#123;
+		this.ele &#x3D; ele;
+		this.zindex &#x3D; zindex;
+	&#125;
+	
+	this.arr &#x3D; [];
+	
+	&#x2F;&#x2F;插入
+	PriorityQueue.prototype.enqueue &#x3D; function (element, index) &#123;
+		&#x2F;&#x2F;创建队列元素对象
+		const queueElement &#x3D; new QueueElement(element, index);
+
+		&#x2F;&#x2F;1.队列为空直接入队
+		&#x2F;&#x2F;2.根据优先级然后插入
+		&#x2F;&#x2F;TODO
+	&#125;
+	
+&#125;</code></pre>
+
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">echo_sixi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/03/08/JS%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">http://example.com/2023/03/08/JS%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">echo_sixi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/js/">
+                                    <span class="chip bg-color">js</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/pay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/pay.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    $(function () {
+        $('.tabs').tabs();
+    });
 </script>
 
-
-    </div>
-</div>
-
-<main class="content">
-
-    
-
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/js/" title="js: 7">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="js" style="background-color: #F9EBEA;">js
-                        <span class="tag-length">7</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/webpacck/" title="webpacck: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="webpacck" style="background-color: #F5EEF8;">webpacck
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/react/" title="react: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="react" style="background-color: #D5F5E3;">react
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%BD%91%E7%BB%9C/" title="网络: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="网络" style="background-color: #E8F8F5;">网络
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/css/" title="css: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="css" style="background-color: #FEF9E7;">css
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-            </div>
+            
         </div>
     </div>
-</div>
 
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="js" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2023/03/08/JS%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <div class="card-image tag-image">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/03/08/JS%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="JS数据结构">
+                        
+                        <span class="card-title">JS数据结构</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
                             
-                            
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="JS数据结构">
-                            
-                            <span class="card-title">JS数据结构</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
+                        
+                    </div>
+                    <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2023-03-08
                             </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                echo_sixi
-                                
-                            </span>
-                        </div>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            echo_sixi
+                            
+                        </span>
                     </div>
                 </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="js" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2023/02/07/JS%E6%89%8B%E5%86%99%E6%96%B9%E6%B3%95%E5%90%88%E9%9B%86/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="JS手写方法合集">
-                            
-                            <span class="card-title">JS手写方法合集</span>
-                        </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/js/">
+                        <span class="chip bg-color">js</span>
                     </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/07/JS%E6%89%8B%E5%86%99%E6%96%B9%E6%B3%95%E5%90%88%E9%9B%86/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="JS手写方法合集">
+                        
+                        <span class="card-title">JS手写方法合集</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2023-02-07
                             </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                echo_sixi
-                                
-                            </span>
-                        </div>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            echo_sixi
+                            
+                        </span>
                     </div>
                 </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="js" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2023/02/01/%E5%87%A0%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3js%E6%A8%A1%E5%9D%97%E5%8C%96%E3%80%81IIFE/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="几分钟了解js模块化、IIFE">
-                            
-                            <span class="card-title">几分钟了解js模块化、IIFE</span>
-                        </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/js/">
+                        <span class="chip bg-color">js</span>
                     </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                echo_sixi
-                                
-                            </span>
-                        </div>
-                    </div>
+                    
                 </div>
+                
             </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="js" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2023/01/06/JavaScript%E5%AE%9E%E7%8E%B0%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E3%80%81%E7%BB%A7%E6%89%BF/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="JavaScript实现封装、继承、多态">
-                            
-                            <span class="card-title">JavaScript实现封装、继承、多态</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-06
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                echo_sixi
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="js, react, 网络, css" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2022/12/27/2023/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="2023">
-                            
-                            <span class="card-title">2023</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-27
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                echo_sixi
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="js" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2022/11/06/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="深浅拷贝方法总结">
-                            
-                            <span class="card-title">深浅拷贝方法总结</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-06
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                echo_sixi
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
         </div>
-    </article>
-</main>
+        
+    </div>
+</article>
+
+</div>
 
 
-<div class="container paging">
-    <div class="row">
-        <div class="col s6 m4 l4">
-            
-            <a class="left btn-floating btn-large disabled">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            
-        </div>
-        <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">1 / 2</div>
-        </div>
-        <div class="col s6 m4 l4">
-            
-            <a href="/tags/js/page/2/"
-               class="right btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fas fa-angle-right"></i>
-            </a>
-            
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
         </div>
     </div>
 </div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
 
 
 
