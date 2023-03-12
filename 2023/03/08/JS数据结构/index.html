@@ -56,7 +56,7 @@ push：添加元素到栈顶  →">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -559,7 +559,62 @@ function passGame(nameList, num) &#123;
 	
 &#125;</code></pre>
 
-<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2>
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p><img src="/%E6%A0%91%20c53844d94f6d409e8c531a7e49d761c3/Untitled.png" alt="Untitled"></p>
+<p>二叉树：树中每个节点最多只能有两个子节点。</p>
+<p>二叉树的特性</p>
+<ul>
+<li>一个二叉树第 i 层的最大节点数为： 2^(i - 1), i ≥ 1;</li>
+<li>深度为K的二叉树有最大节点总数为：2^k - 1, k ≥ 1;</li>
+<li>对任何非空二叉树T，若n0表示叶节点的哥数、n2是度为2的非叶子节点合格数，那么两者满足关系n0 &#x3D; n2 + 1</li>
+</ul>
+<p>完全二叉树：除叶子节点都是满的</p>
+<p>树的遍历方式</p>
+<p>先序遍历</p>
+<p><img src="/%E6%A0%91%20c53844d94f6d409e8c531a7e49d761c3/Untitled%201.png" alt="Untitled"></p>
+<ol>
+<li>访问根节点</li>
+<li>先序遍历其左子树</li>
+<li>先序遍历其右子树</li>
+</ol>
+<p>中序遍历</p>
+<p><img src="/%E6%A0%91%20c53844d94f6d409e8c531a7e49d761c3/Untitled%202.png" alt="Untitled"></p>
+<ol>
+<li>中序遍历其左子树</li>
+<li>访问根节点</li>
+<li>中序遍历其右子树</li>
+</ol>
+<p>后序遍历</p>
+<p><img src="/%E6%A0%91%20c53844d94f6d409e8c531a7e49d761c3/Untitled%203.png" alt="Untitled"></p>
+<ol>
+<li>后序遍历其左子树</li>
+<li>后序遍历其右子树</li>
+<li>访问根节点</li>
+</ol>
+<p>二叉搜索树</p>
+<p>常见方法：</p>
+<ul>
+<li>insert：向树中插入一个新的键</li>
+<li>search：查找一个键</li>
+<li>inOrderTraverse：通过中序遍历方式遍历所有节点</li>
+<li>preOrderTraverse：通过先序遍历方式遍历所有节点</li>
+<li>postOrderTraverse：通过后序遍历方式遍历所有节点</li>
+<li>min：返回树中最小值</li>
+<li>max：返回树中最大值</li>
+<li>remove：删除某个键</li>
+</ul>
+<p>封装二叉搜素树</p>
+<pre class="language-jsx" data-language="jsx"><code class="language-jsx">function BinarySerachTree() &#123;
+	function Node(key) &#123;
+	
+	&#125;
+
+	this.root &#x3D; null
+
+&#125;</code></pre>
+
+<p>对于一颗平衡二叉树来说，插入、查找等操作的效率是O(logN)</p>
+<p>对于一颗非平衡二叉树，相当于编写了一个链表，查找效率是O(N)</p>
+
                 
             </div>
             <hr/>
