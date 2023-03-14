@@ -796,9 +796,16 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>memory cache一般缓存图片、样式、字体，退出进程数据就清除了</li>
 <li>disk cache一般缓存脚本，存储在硬盘上，需要手动清除</li>
 </ul>
-<p>强缓存的标识 Expires、Cache-control<br>http1.0使用 Expires<br>http1.1使用 Cache-control max-age</p>
-<p>Expires: 具体的时间：Sun, 21 Mar 2027 08:52:14 GMT<br>Cache-control的 max-age 是具体的时间戳</p>
-<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>协商缓存和强缓存不同就是每次都会跟服务器通信，并带上缓存标识（<code>if-Modified-Since</code> &#x2F; <code>if-None-Match</code>）<br>流程：<br>    浏览器请求 -&gt; 服务器<br>    服务器响应 -&gt; 响应头带上<code>Last-Modified</code> &#x2F; <code>Etag</code><br>    浏览器再次请求，请求头会带上<code>if-Modified-Since</code> &#x2F; <code>if-None-Match</code> -&gt; 服务器<br>    服务器响应 -&gt; 响应头带上新的<code>Last-Modified</code> &#x2F; <code>Etag</code></p>
+<p>强缓存优先级高于协商缓存，通过设置响应头控制资源强缓存，使用强缓存，不需要请求服务器。</p>
+<p>Cache-Control: max-age&#x3D;3600 相对时间，单位秒<br>Expires: Mon, 14 Mar 2023 08:00:00 GMT 具体的时间，单位秒</p>
+<p>同时使用，Cache-Control的优先级高</p>
+<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>协商缓存和强缓存不同就是每次都会跟服务器通信，并带上缓存标识（<code>if-Modified-Since</code> &#x2F; <code>if-None-Match</code>）<br>流程：</p>
+<ol>
+<li>浏览器发送一个请求到服务器，请求包含一个资源的URL和一些缓存相关的头部信息，例如<code>if-None-Match</code> 或者<code>if-Modified-Since</code></li>
+<li>服务器接收到请求后，会检查头部信息，确定浏览器是否有资源的最新版本</li>
+<li>如果是最新版本，返回304状态码和空的响应体，告诉浏览器使用缓存资源</li>
+<li>不是最新版本，返回200状态码和新的响应体，告诉浏览器更新缓存资源</li>
+</ol>
 <blockquote>
 <p>浏览器请求协商缓存命中，则状态码为 <code>304</code></p>
 </blockquote>
