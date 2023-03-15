@@ -57,7 +57,7 @@ JSON.parse(JSON.srtingfy())的弊端
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
@@ -679,13 +679,21 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </blockquote>
 <p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd754eb33121459d9c5e3e43f430ee5c~tplv-k3u1fbpfcp-watermark.image" alt="eventLoop.png"></p>
 <p><code>JS单线程</code><br>JS主线程 -&gt; 执行栈（<code>先进后出</code>）<br>callback queue -&gt; 任务队列（<code>先进先出</code>）</p>
-<h4 id="event-loop执行流程"><a href="#event-loop执行流程" class="headerlink" title="event loop执行流程"></a>event loop执行流程</h4><ol>
-<li>区分同步任务和异步任务</li>
-<li>同步任务在执行栈执行，异步任务如图交给<code>WebAPIs</code>，再放入callback queue中</li>
-<li>等待执行栈中没有可以执行的任务了，会从任务队列中取出执行</li>
-<li>从任务队列中取出来的任务执行完后，会依次取下一个，直到队列取出完的过程称为<code>event loop事件轮询</code></li>
-</ol>
-<h4 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h4><h4 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h4><p>TODO：</p>
+<h4 id="event-loop执行流程"><a href="#event-loop执行流程" class="headerlink" title="event loop执行流程"></a>event loop执行流程</h4><p>QA:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> eventloop的定义和作用</li>
+<li><input checked="" disabled="" type="checkbox"> eventloop的执行过程</li>
+<li><input disabled="" type="checkbox"> 异步任务的微任务和宏任务</li>
+</ul>
+<blockquote>
+<p>eventloop是一种异步的编程机制，它可以在单线程中实现并发，通过轮询事件队列中的事件来判断是否有新的任务执行，从而实现异步操作。</p>
+</blockquote>
+<p>在执行过程中，事件循环会将所有的异步任务（回调函数、Promise、async&#x2F;await、定时器、事件监听 → 回调函数）放入一个事件队列中，然后在程序的执行期间不断去检查队列中是否有待处理的事件。当事件队列中有事件则取出执行，如果又包含了异步处理，则交给其它线程进行处理然后返回，继续检查队列中的下一个事件。事件循环采用轮询机制，可以保证任务的执行顺序，同时避免程序阻塞执行。</p>
+<p>主线程执行过程中，遇到JavaScript程序执行的到异步操作，主线程将该任务交给系统或者其它线程进行处理，同时继续执行后面的代码。当异步任务操作完成后，系统或者其它线程会通知主线程，将结果放入事件队列中。主线程空闲时，会检查事件队列中是否有待处理的事件，如果有，则立即执行，没有则继续等待。</p>
+<p>JavaScript的异步任务中，可以将异步任务分为：宏任务和微任务</p>
+<p><code>宏任务</code>：指需要在任务队列中排队等待的执行的任务 → 定时器、ajax请求等。</p>
+<p><code>微任务</code>：指当前任务完毕后需要立即执行的任务 → Promise的then、catch、finally；async&#x2F;await等</p>
+<p>事件循环启动时，会执行当前代码所在的宏任务代码块，当宏任务代码块被执行完了，就会立即执行所有可用的微任务，直到微任务队列为空。然后事件循环会继续执行下一个宏任务，重复这个过程。</p>
 <blockquote>
 <p>宏任务</p>
 </blockquote>
