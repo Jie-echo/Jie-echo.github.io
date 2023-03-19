@@ -6,11 +6,9 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="2023, echo">
     <meta name="description" content="2023记录2023，体系化查漏补缺。从HTML、CSS、JS、网络层面、框架、工程化、设计模式等方面总结。
-JS相关深浅拷贝
-介绍深浅拷贝
-手写深拷贝、浅拷贝
-JSON.parse(JSON.srtingfy())的弊端
-深拷贝如何解决循">
+JS相关JS类型检测JavaScript类型检测的几种方式
+
+typeof 操作符：返回一个字符串，表示值的类型，可能的值有 “u">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -421,7 +419,14 @@ JSON.parse(JSON.srtingfy())的弊端
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><p>记录2023，体系化查漏补缺。从HTML、CSS、JS、网络层面、框架、工程化、设计模式等方面总结。</p>
-<h2 id="JS相关"><a href="#JS相关" class="headerlink" title="JS相关"></a>JS相关</h2><h3 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h3><ol>
+<h2 id="JS相关"><a href="#JS相关" class="headerlink" title="JS相关"></a>JS相关</h2><h3 id="JS类型检测"><a href="#JS类型检测" class="headerlink" title="JS类型检测"></a>JS类型检测</h3><p><strong>JavaScript类型检测的几种方式</strong></p>
+<ol>
+<li>typeof 操作符：返回一个字符串，表示值的类型，可能的值有 “undefined”、”boolean”、”number”、”string”、”bigint”、”symbol” 和 “object”。使用 typeof 检测基本数据类型比较方便，但是对于复杂数据类型（比如 null 或对象）可能会得到不准确的结果，所以使用时需要谨慎。</li>
+<li>instanceof 操作符：用于检测对象的类型，可以检测对象的原型链中是否存在某个构造函数。使用 instanceof 操作符检测一个对象是否属于某个类时，需要使用该类的构造函数进行检测，对于基本数据类型和 null 无法使用 instanceof 操作符检测。</li>
+<li>Object.prototype.toString() 方法：该方法返回一个表示对象的字符串，格式为 “[object 类型]”，其中类型指的是对象的内部属性 [[Class]] 的值。这种方式可以准确地检测所有类型的值，包括 null 和 undefined。</li>
+<li>Array.isArray() 方法：用于检测一个值是否为数组类型，返回一个布尔值。该方法只能检测数组类型，无法检测其他类型的值。</li>
+</ol>
+<h3 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h3><ol>
 <li>介绍深浅拷贝</li>
 <li>手写深拷贝、浅拷贝</li>
 <li>JSON.parse(JSON.srtingfy())的弊端</li>
