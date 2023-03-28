@@ -56,7 +56,7 @@ push：添加元素到栈顶  →">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
@@ -448,7 +448,34 @@ const s &#x3D; new Stack()</code></pre>
 <h3 id="有效括号"><a href="#有效括号" class="headerlink" title="有效括号"></a>有效括号</h3><p>思路：</p>
 <ol>
 <li>采用栈结构，入栈出栈</li>
-<li>使用map映射</li>
+<li>使用map映射<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">isValid</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> stack <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">'&#123;'</span><span class="token operator">:</span> <span class="token string">'&#125;'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'['</span><span class="token operator">:</span> <span class="token string">']'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'('</span><span class="token operator">:</span> <span class="token string">')'</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">in</span> str<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> value <span class="token operator">=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>value <span class="token operator">===</span> <span class="token string">'&#123;'</span> <span class="token operator">||</span> value <span class="token operator">===</span> <span class="token string">'['</span> <span class="token operator">||</span> value <span class="token operator">===</span> <span class="token string">'('</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">let</span> left <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+            <span class="token keyword">let</span> right <span class="token operator">=</span> map<span class="token punctuation">[</span>left<span class="token punctuation">]</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>value <span class="token operator">!==</span> right<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> stack<span class="token operator">?.</span>length <span class="token operator">===</span> <span class="token number">0</span>
+<span class="token punctuation">&#125;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">isValid</span><span class="token punctuation">(</span><span class="token string">"()"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// true</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">isValid</span><span class="token punctuation">(</span><span class="token string">"()[]&#123;&#125;"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// true</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">isValid</span><span class="token punctuation">(</span><span class="token string">"(]"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// false</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">isValid</span><span class="token punctuation">(</span><span class="token string">"([)]"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// false</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">isValid</span><span class="token punctuation">(</span><span class="token string">"&#123;[]&#125;"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// true</span></code></pre></li>
 </ol>
 <h2 id="队列-Queue"><a href="#队列-Queue" class="headerlink" title="队列(Queue)"></a>队列(Queue)</h2><p>队列结构也是一种受限的线性结构。先进先出（FIFO: first in first out）</p>
 <p>队列常见的操作</p>
@@ -563,6 +590,8 @@ function passGame(nameList, num) &#123;
 <pre class="language-jsx" data-language="jsx"><code class="language-jsx">function DoulyLinkedList()&#123;
 	
 &#125;</code></pre>
+
+
 
 <h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p><img src="/%E6%A0%91%20c53844d94f6d409e8c531a7e49d761c3/Untitled.png" alt="Untitled"></p>
 <p>二叉树：树中每个节点最多只能有两个子节点。</p>
