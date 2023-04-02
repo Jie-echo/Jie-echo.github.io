@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>移动端图片优化方案</title>
+      <link href="/2023/04/02/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/"/>
+      <url>/2023/04/02/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/</url>
+      
+        <content type="html"><![CDATA[<h1 id="图片优化"><a href="#图片优化" class="headerlink" title="图片优化"></a>图片优化</h1><h2 id="项目中图片的忧优化方案"><a href="#项目中图片的忧优化方案" class="headerlink" title="项目中图片的忧优化方案"></a>项目中图片的忧优化方案</h2><ol><li>使用CDN</li><li>图片懒加载</li><li>图片的动态剪裁</li><li>骨架屏</li></ol><h2 id="CDN（内容分发网络）"><a href="#CDN（内容分发网络）" class="headerlink" title="CDN（内容分发网络）"></a>CDN（内容分发网络）</h2><p><strong>什么是CDN</strong></p><p>CDN是指内容分发网络（Content Delivery Network），是一种用于提高网站性能和可用性的网络架构。它通过在全球各地的服务器上缓存网站的静态和动态内容，使用户能够更快速地访问网站并获得更好的用户体验。</p><p><strong>CDN的作用</strong></p><p>CDN通过将内容缓存在分布式的服务器上，使得用户可以从最近的服务器获取内容，从而减少了加载时间和延迟。它还可以通过负载均衡和自动故障转移，提高网站的可用性和稳定性。</p><p>使用CDN缓存，可以提高图片的加载速度和用户体验</p><p>主要体现在以下方面：降低服务器压力、降低成本、提高图片访问速度</p><h2 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h2><p>实现原理都可以使用IntersectionObserver的API实现</p><p>图片懒加载、无限滚动 → <a href="https://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html">阮一峰IntersectionObserver API 使用教程</a></p><p><strong>什么是…、作用是…</strong></p><p>图片懒加载是当图片进入视口区域才进行加载，这样可以节省带宽，提高网页性能。</p><p><strong>如何实现</strong></p><p>IntersectionObserverFunc组件</p><pre class="language-jsx" data-language="jsx"><code class="language-jsx">import &#123; useEffect, useRef, useState &#125; from &#39;react&#39;import styles from &#39;.&#x2F;index.less&#39;interface PropsType &#123;  src: string&#125;const IntersectionObserverFuc &#x3D; (props: PropsType)&#x3D;&gt;&#123;  const &#123;src&#125; &#x3D; props;  const imgRef &#x3D; useRef(null)  const [imgSrc, setImgSrc] &#x3D; useState(src)  useEffect(() &#x3D;&gt; &#123;    const intersectionObserver &#x3D; new IntersectionObserver(function(entries) &#123;      entries.forEach( function(element: any, index) &#123;        &#x2F;&#x2F; debugger          if (element.isIntersecting) &#123;            setImgSrc(src)&#x2F;&#x2F;停止观察            intersectionObserver.disconnect()          &#125; else&#123;            let img &#x3D; &#39;&#39;; &#x2F;&#x2F;可以使用默认图片            setImgSrc(img)          &#125;      &#125;);    &#125;);    intersectionObserver.observe(imgRef?.current);    return () &#x3D;&gt; &#123;      if(imgRef.current) &#123;&#x2F;&#x2F;关闭观察器        intersectionObserver.unobserve(imgRef.current)      &#125;    &#125;;  &#125;, [])  return &lt;img src&#x3D;&#123;imgSrc&#125; alt&#x3D;&quot;&quot;  ref&#x3D;&#123;imgRef&#125; className&#x3D;&#123;styles.img&#125;&#x2F;&gt;&#125;export default IntersectionObserverFuc&#x2F;&#x2F;使用let imgSrc &#x3D; &#39;https:&#x2F;&#x2F;img0.baidu.com&#x2F;it&#x2F;u&#x3D;2054720471,487433032&amp;fm&#x3D;253&amp;fmt&#x3D;auto&amp;app&#x3D;138&amp;f&#x3D;JPEG?w&#x3D;800&amp;h&#x3D;500&#39;;&#123;  Array(100).fill(imgSrc)?.map((item, index) &#x3D;&gt; &#123;    return(      &lt;IntersectionObserverFuc src&#x3D;&#123;item&#125; key&#x3D;&#123;index&#125;&#x2F;&gt;    )  &#125;)&#125;</code></pre><h2 id="图片的动态剪裁"><a href="#图片的动态剪裁" class="headerlink" title="图片的动态剪裁"></a>图片的动态剪裁</h2><p><strong>什么是…、作用是…</strong></p><p>图片的动态剪裁是一种图片处理的技术，可以根据实际需要动态地剪裁图片的大小和比例，以适应不同的显示设备和尺寸。图片的动态剪裁通常是通过调用服务器端的图片处理的API实现的。</p><p>通常可以配置：图片地址、剪裁位置、缩放模式、加水印、滤镜等效果</p><p>作用：提升图片的加载速度和用户体验。</p><p><strong>举例</strong></p><p>图片的动态剪裁：阿里云和七牛云都支持参数，比如:</p><pre class="language-jsx" data-language="jsx"><code class="language-jsx">&#x2F;&#x2F;没剪裁的https:&#x2F;&#x2F;img.alicdn.com&#x2F;imgextra&#x2F;i4&#x2F;379092709&#x2F;O1CN01adpXJe1VslgpbprWS_!!379092709.jpg&#x2F;&#x2F;剪裁后的https:&#x2F;&#x2F;img.alicdn.com&#x2F;imgextra&#x2F;i4&#x2F;379092709&#x2F;O1CN01adpXJe1VslgpbprWS_!!379092709.jpg_310x310</code></pre><h2 id="骨架屏、菊花图（loading）"><a href="#骨架屏、菊花图（loading）" class="headerlink" title="骨架屏、菊花图（loading）"></a>骨架屏、菊花图（loading）</h2><p>使用骨架屏和菊花图可以防止应用程序白屏太久，提高用户体验。</p><p>骨架屏可以使用UI图配合IntersectionObserverFunc来使用，</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 性能优化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>axios的cancelToken封装</title>
       <link href="/2023/03/28/cancelToken/"/>
       <url>/2023/03/28/cancelToken/</url>
