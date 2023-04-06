@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>React源码解读</title>
+      <link href="/2023/04/06/React%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"/>
+      <url>/2023/04/06/React%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</url>
+      
+        <content type="html"><![CDATA[<p>本片用于记录阅读React设计原理的架构篇读书笔记。持续完成更新…..</p><p>阅读React设计原理，解读Reconciler三个工作阶段：render、commot、schedule</p><h2 id="render阶段"><a href="#render阶段" class="headerlink" title="render阶段"></a>render阶段</h2><blockquote><p>render阶段可能开始于performSyncWorkOnRoot（同步更新流程）或performConcurrentWorkRoot（并发更新阶段）</p></blockquote><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">workLoopSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token keyword">while</span> <span class="token punctuation">(</span>workInProgress <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token function">performUnitOfWork</span><span class="token punctuation">(</span>workInProgress<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token keyword">function</span> <span class="token function">workLoopConcurrent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token keyword">while</span> <span class="token punctuation">(</span>workInProgress <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">shouldYieId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token function">performUnitOfWork</span><span class="token punctuation">(</span>workInProgress<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></code></pre><p>同步更新流程和并发更新流程方法唯一区别是调用”shouldYieId ⇒ 是否可中断“</p><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">performUnitOfWork</span><span class="token punctuation">(</span><span class="token parameter">filberNode</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//省略执行beginWork工作</span><span class="token keyword">if</span><span class="token punctuation">(</span>fiberNode<span class="token punctuation">.</span>child<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token function">performUnitOfWork</span><span class="token punctuation">(</span>fiberNode<span class="token punctuation">.</span>child<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token comment">//省略执行completeWork工作</span><span class="token keyword">if</span><span class="token punctuation">(</span>fiberNode<span class="token punctuation">.</span>sibling<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token function">performUnitOfWork</span><span class="token punctuation">(</span>fiberNode<span class="token punctuation">.</span>sibling<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></code></pre><p>beginWork工作流程</p><p>判断当前流程属于mount还是update流程，根据wip.tag进入不同类型元素的处理分支，使用reconcile算法生成下一级fiberNode</p><p>较比update阶段可复用fiber节点时，会给生成的fiberNode带上副作用flags。</p><p>flags标记：</p><ul><li>ChildDeletion，代表删除操作</li><li>Placement，代表插入或移动操作</li></ul><p>completeWork工作流程</p><ol><li>创建或者标记元素更新</li><li>flags冒泡</li></ol><p>完成工作流程1（更新的标记）之后，更新中的增删改操作均已完成，Reconciler中的解析flags。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> React </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>移动端图片优化方案</title>
       <link href="/2023/04/02/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/"/>
       <url>/2023/04/02/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/</url>
