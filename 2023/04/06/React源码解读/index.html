@@ -55,7 +55,7 @@ render阶段可能开始于perfor">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
@@ -448,6 +448,23 @@ render阶段可能开始于perfor">
 <li>flags冒泡</li>
 </ol>
 <p>完成工作流程1（更新的标记）之后，更新中的增删改操作均已完成，Reconciler中的解析flags。 </p>
+<p>Reconciler工作流程采用DFS的顺序构建WipFiberTree。整个过程分为“递”和“归”两个阶段，分别对应beginWork和completeWork。</p>
+<p>最终HostRootFiber完成completeWork时，Reconciler的工作流程结束。此时我们可以得到：</p>
+<ul>
+<li>代表本次更新的Wip Fiber Tree</li>
+<li>被标记的flags</li>
+</ul>
+<hr>
+<h1 id="commit阶段"><a href="#commit阶段" class="headerlink" title="commit阶段"></a>commit阶段</h1><p>在commit阶段会将各种副作用（flags表示）commit（提交）到宿主环境UI中。</p>
+<blockquote>
+<p>render阶段流程可能被打断，而commit阶段一旦开始就会同步执行完成。</p>
+</blockquote>
+<p>整个阶段分为以下三个子阶段</p>
+<ul>
+<li>BeforeMutation阶段</li>
+<li>Mutation阶段</li>
+<li>Layout阶段</li>
+</ul>
 
                 
             </div>
