@@ -461,9 +461,9 @@ render阶段可能开始于perfor">
 </blockquote>
 <p>整个阶段分为以下三个子阶段</p>
 <ul>
-<li>BeforeMutation阶段</li>
-<li>Mutation阶段</li>
-<li>Layout阶段</li>
+<li>BeforeMutation阶段 DOM操作前</li>
+<li>Mutation阶段 操作DOM元素的增删改</li>
+<li>Layout阶段 执行DOM操作后</li>
 </ul>
 <p>BeforeMutation阶段主要与Update、Snapshot两个flags相关。<br>Mutation阶段包含的flags大多是完成”Ui相关副作用“。</p>
 
