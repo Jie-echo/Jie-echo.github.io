@@ -409,11 +409,11 @@ GitHub - avwo&amp;#x2F;whistle: HTTP, HTTP2, HTTPS, We">
 <h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><h3 id="一：安装whistle"><a href="#一：安装whistle" class="headerlink" title="一：安装whistle"></a>一：安装whistle</h3><p>Windows使用<code>npm i -g whistle &amp;&amp; w2 start --init</code> 一键安装</p>
 <p>whistle文档介绍建议安装<strong>最新的 LTS 版本</strong>安装</p>
 <p>node不兼容，安装失败问题</p>
-<p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled.png" alt="Untitled"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/838e734f7bed4bdf8ac77a25380d1b84~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2000&h=860&s=637713&e=png&b=0c0c0c" alt="image.png"></p>
 <p>使用nvm查看一下node版本：</p>
-<p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%201.png" alt="Untitled"></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/83706bfdb7384e7ca29e793cb9755c6b~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2000&h=322&s=128718&e=png&b=0d0d0d" alt="image.png"></p>
 <p>切换为node14.17.5可以下载</p>
-<p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%202.png" alt="Untitled"></p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f07b89e30fb04f4ab5e4d4576ab23feb~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2000&h=765&s=457056&e=png&b=0d0d0d" alt="image.png"></p>
 <h3 id="二：启动whistle"><a href="#二：启动whistle" class="headerlink" title="二：启动whistle"></a>二：启动whistle</h3><p>常用whistle的命令：</p>
 <ul>
 <li>w2 start 启动</li>
@@ -422,13 +422,13 @@ GitHub - avwo&amp;#x2F;whistle: HTTP, HTTP2, HTTPS, We">
 <li>w2 start -p port 指定代理端口</li>
 </ul>
 <p>启动whistle</p>
-<p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%203.png" alt="Untitled"></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7dbcafef2e5744279b5fd97265699fe6~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2000&h=490&s=338179&e=png&b=0c0c0c" alt="image.png"></p>
 <p>通过上面的链接可以进去管理whistle的主界面</p>
 <p>127.0.0.1:8899</p>
-<p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%204.png" alt="Untitled"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9e87f78363724cd9a95fee9bf1380ff3~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2000&h=570&s=161591&e=png&b=002240" alt="image.png"></p>
 <h3 id="三：使用SwitchyOmega-设置代理"><a href="#三：使用SwitchyOmega-设置代理" class="headerlink" title="三：使用SwitchyOmega 设置代理"></a>三：使用SwitchyOmega 设置代理</h3><p><strong>安装 SwitchyOmega</strong></p>
 <p>打开 Chrome 扩展商店进行安装 <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif">https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif</a></p>
-<p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%205.png" alt="Untitled"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a46a4550ba5d469eab8053623aef152e~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2000&h=931&s=222062&e=png&b=fefefe" alt="image.png"></p>
 <p>将浏览器请求 → net 变为 浏览器请求 → switchyOmega劫持配置 → whistle → net</p>
 <p>关于线上错误排查，由于线上是https请求，所以看不到请求具体内容，可以通过安装证书即可查看详细的请求内容。</p>
 <p>证书下载：浏览器输入rootca.pro</p>
