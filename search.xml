@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>whistle快速入门</title>
+      <link href="/2024/04/10/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
+      <url>/2024/04/10/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="whistle快速入门"><a href="#whistle快速入门" class="headerlink" title="whistle快速入门"></a>whistle快速入门</h1><h2 id="什么是whistle"><a href="#什么是whistle" class="headerlink" title="什么是whistle"></a>什么是whistle</h2><p>whistle不是口哨，而是基于Node实现的跨平台抓包调试工具，它是一个开源免费的跨平台软件。</p><p><a href="https://github.com/avwo/whistle/tree/master">GitHub - avwo&#x2F;whistle: HTTP, HTTP2, HTTPS, Websocket debugging proxy</a></p><h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><h3 id="一：安装whistle"><a href="#一：安装whistle" class="headerlink" title="一：安装whistle"></a>一：安装whistle</h3><p>Windows使用<code>npm i -g whistle &amp;&amp; w2 start --init</code> 一键安装</p><p>whistle文档介绍建议安装<strong>最新的 LTS 版本</strong>安装</p><p>node不兼容，安装失败问题</p><p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled.png" alt="Untitled"></p><p>使用nvm查看一下node版本：</p><p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%201.png" alt="Untitled"></p><p>切换为node14.17.5可以下载</p><p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%202.png" alt="Untitled"></p><h3 id="二：启动whistle"><a href="#二：启动whistle" class="headerlink" title="二：启动whistle"></a>二：启动whistle</h3><p>常用whistle的命令：</p><ul><li>w2 start 启动</li><li>w2 restart 重启</li><li>w2 stop 停止</li><li>w2 start -p port 指定代理端口</li></ul><p>启动whistle</p><p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%203.png" alt="Untitled"></p><p>通过上面的链接可以进去管理whistle的主界面</p><p>127.0.0.1:8899</p><p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%204.png" alt="Untitled"></p><h3 id="三：使用SwitchyOmega-设置代理"><a href="#三：使用SwitchyOmega-设置代理" class="headerlink" title="三：使用SwitchyOmega 设置代理"></a>三：使用SwitchyOmega 设置代理</h3><p><strong>安装 SwitchyOmega</strong></p><p>打开 Chrome 扩展商店进行安装 <a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif">https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif</a></p><p><img src="/whistle%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%201866f605cf4d47d89b81a7f3f1a63e25/Untitled%205.png" alt="Untitled"></p><p>将浏览器请求 → net 变为 浏览器请求 → switchyOmega劫持配置 → whistle → net</p><p>关于线上错误排查，由于线上是https请求，所以看不到请求具体内容，可以通过安装证书即可查看详细的请求内容。</p><p>证书下载：浏览器输入rootca.pro</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>React源码解读</title>
       <link href="/2023/04/06/React%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"/>
       <url>/2023/04/06/React%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</url>
