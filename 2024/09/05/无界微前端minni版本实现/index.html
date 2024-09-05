@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="echo">
+    <meta name="keywords" content="无界微前端 -&gt; 简易实现版, echo">
     <meta name="description" content="无界微前端：如何简单实现 JavaScript 和 CSS 的隔离面对将要接入三方网站的方案选型上，调研了目前已有微前端的框架，最终选择了无界；无界的思想也非常牛，接入无界后，需要对无界这个微前端框架也需要更加了解。本文主要介绍无界的源码剖">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>echo</title>
+    <title>无界微前端 -&gt; 简易实现版 | echo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -334,12 +334,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">无界微前端 -&gt; 简易实现版</h1>
                 </div>
             </div>
         </div>
@@ -361,9 +361,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/js/">
+                                <span class="chip bg-color">js</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -463,7 +467,7 @@ await newSandbox.active(&#123; url, sync, prefix, template: processedHtml, el, p
 await newSandbox.start(getExternalScripts);
 return newSandbox.destroy;</code></pre>
 
-<h3 id="无界思想实现"><a href="#无界思想实现" class="headerlink" title="无界思想实现"></a>无界思想实现</h3><p><img src="/image.png" alt="image.png"></p>
+<h3 id="无界思想实现"><a href="#无界思想实现" class="headerlink" title="无界思想实现"></a>无界思想实现</h3><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/eb292bc3f93b4c96a6a589ffe026e51a~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgZWNob-imgeWKquWKmw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjYwMzI0OTM0NjI5NjE1OCJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1725635379&x-orig-sign=OneAJhMDIkQl7r6AweIQ4051p/I=" alt="image.png"></p>
 <p>如上图可见，上述主要做了以下事情</p>
 <ol>
 <li>需要一个容器</li>
@@ -472,9 +476,9 @@ return newSandbox.destroy;</code></pre>
 <li>创建了iframe容器用于存放js代码，js执行代理到shadowRoot中</li>
 <li>路由同步 &#x3D;&gt; iframe自身就有自己的路由系统，这里需要将iframe的url同步到window上的url</li>
 </ol>
-<h3 id="实现效果图："><a href="#实现效果图：" class="headerlink" title="实现效果图："></a>实现效果图：</h3><h3 id="样式隔离："><a href="#样式隔离：" class="headerlink" title="样式隔离："></a>样式隔离：</h3><p><img src="/image%201.png" alt="image.png"></p>
-<h3 id="js隔离："><a href="#js隔离：" class="headerlink" title="js隔离："></a>js隔离：</h3><p><img src="/image%202.png" alt="image.png"></p>
-<h3 id="document代理"><a href="#document代理" class="headerlink" title="document代理"></a>document代理</h3><p><img src="/image%203.png" alt="image.png"></p>
+<h3 id="实现效果图："><a href="#实现效果图：" class="headerlink" title="实现效果图："></a>实现效果图：</h3><h3 id="样式隔离："><a href="#样式隔离：" class="headerlink" title="样式隔离："></a>样式隔离：</h3><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/df85833ff9324473a1624343aa47b829~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgZWNob-imgeWKquWKmw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjYwMzI0OTM0NjI5NjE1OCJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1725635424&x-orig-sign=sat7BXkU5Y3DQRn37MQSALIGthE=" alt="image.png"></p>
+<h3 id="js隔离："><a href="#js隔离：" class="headerlink" title="js隔离："></a>js隔离：</h3><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/799d59267602441d8111134d521241f7~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgZWNob-imgeWKquWKmw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjYwMzI0OTM0NjI5NjE1OCJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1725635439&x-orig-sign=jScWJ7u2DkEixChyRZwDWxmLcb0=" alt="image.png"></p>
+<h3 id="document代理"><a href="#document代理" class="headerlink" title="document代理"></a>document代理</h3><p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/a1a3a9c237d94772a343e95820127d2c~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgZWNob-imgeWKquWKmw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjYwMzI0OTM0NjI5NjE1OCJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1725635468&x-orig-sign=xcY4BUxgpi7HTMlEfluwDH/j5og=" alt="image.png"></p>
 <h3 id="mini-wujie实现"><a href="#mini-wujie实现" class="headerlink" title="mini-wujie实现"></a>mini-wujie实现</h3><p>根据以下步骤进行实现，其方面命名均采用wujie源码方法，更容易理解。</p>
 <ol>
 <li>创建沙箱</li>
@@ -482,7 +486,7 @@ return newSandbox.destroy;</code></pre>
 <li>将html、css放入shadowDOM</li>
 <li>沙箱执行js (proxy document等)</li>
 </ol>
-<p>实现：<br>地址: -&gt; </p>
+<p>实现：<br>地址: -&gt; <a target="_blank" rel="noopener" href="https://github.com/Jie-echo/mini-wujie">https://github.com/Jie-echo/mini-wujie</a></p>
 
                 
             </div>
@@ -546,7 +550,11 @@ return newSandbox.destroy;</code></pre>
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/js/">
+                                    <span class="chip bg-color">js</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -632,9 +640,9 @@ return newSandbox.destroy;</code></pre>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="无界微前端 -&gt; 简易实现版">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">无界微前端 -&gt; 简易实现版</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -656,6 +664,14 @@ return newSandbox.destroy;</code></pre>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/js/">
+                        <span class="chip bg-color">js</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
