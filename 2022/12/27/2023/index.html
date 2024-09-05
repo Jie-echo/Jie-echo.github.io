@@ -1,0 +1,1666 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="2023, echo">
+    <meta name="description" content="
+
+2023记录2023，体系化查漏补缺。从HTML、CSS、JS、网络层面、框架、工程化、设计模式等方面总结。
+JS相关JS类型检测JavaScript类型检测的几种方式
+
+typeof 操作符：返回一个字符串，表示值的类型，可能的值有 ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>2023 | echo</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">echo</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">echo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">2023</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/js/">
+                                <span class="chip bg-color">js</span>
+                            </a>
+                        
+                            <a href="/tags/react/">
+                                <span class="chip bg-color">react</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">网络</span>
+                            </a>
+                        
+                            <a href="/tags/css/">
+                                <span class="chip bg-color">css</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-12-27
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <meta name="referrer" content="no-referrer">
+
+<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><p>记录2023，体系化查漏补缺。从HTML、CSS、JS、网络层面、框架、工程化、设计模式等方面总结。</p>
+<h2 id="JS相关"><a href="#JS相关" class="headerlink" title="JS相关"></a>JS相关</h2><h3 id="JS类型检测"><a href="#JS类型检测" class="headerlink" title="JS类型检测"></a>JS类型检测</h3><p><strong>JavaScript类型检测的几种方式</strong></p>
+<ol>
+<li>typeof 操作符：返回一个字符串，表示值的类型，可能的值有 “undefined”、”boolean”、”number”、”string”、”bigint”、”symbol” 和 “object”。使用 typeof 检测基本数据类型比较方便，但是对于复杂数据类型（比如 null 或对象）可能会得到不准确的结果，所以使用时需要谨慎。</li>
+<li>instanceof 操作符：用于检测对象的类型，可以检测对象的原型链中是否存在某个构造函数。使用 instanceof 操作符检测一个对象是否属于某个类时，需要使用该类的构造函数进行检测，对于基本数据类型和 null 无法使用 instanceof 操作符检测。</li>
+<li>Object.prototype.toString() 方法：该方法返回一个表示对象的字符串，格式为 “[object 类型]”，其中类型指的是对象的内部属性 [[Class]] 的值。这种方式可以准确地检测所有类型的值，包括 null 和 undefined。</li>
+<li>Array.isArray() 方法：用于检测一个值是否为数组类型，返回一个布尔值。该方法只能检测数组类型，无法检测其他类型的值。</li>
+</ol>
+<h3 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h3><ol>
+<li>介绍深浅拷贝</li>
+<li>手写深拷贝、浅拷贝</li>
+<li>JSON.parse(JSON.srtingfy())的弊端</li>
+<li>深拷贝如何解决循环引用</li>
+</ol>
+<p>讲深、浅拷贝之前，我们先了解一哈js的基础类型和对象类型。</p>
+<h4 id="JS基础类型、对象类型"><a href="#JS基础类型、对象类型" class="headerlink" title="JS基础类型、对象类型"></a>JS基础类型、对象类型</h4><ul>
+<li>基础类型 -&gt; <code>栈内存</code></li>
+<li>对象类型 -&gt; <code>堆内存</code></li>
+<li>对象类型在栈空间存储的是堆内存的引用地址</li>
+<li>对于赋值： 基础类型会完整复制变量值、引用类型赋值时复制引用地址</li>
+</ul>
+<blockquote>
+<p>介绍深浅拷贝</p>
+</blockquote>
+<p>深拷贝：MDN介绍拷贝的对象和生成的对象的属性不共享相同的引用，简洁的来说：深拷贝拷贝的是值。</p>
+<p>浅拷贝：与深拷贝相反，拷贝的是引用地址。</p>
+<blockquote>
+<p>手写深拷贝、浅拷贝</p>
+</blockquote>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//深拷贝</span>
+<span class="token keyword">function</span> <span class="token function">deepClone</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">let</span> copyObj <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">//遍历对象自身及原型链上所有可枚举不可枚举属性</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            copyObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">?</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">:</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> copyObj<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//浅拷贝 相对比深拷贝 缺少了递归赋值引用值的步骤</span>
+<span class="token keyword">function</span> <span class="token function">shallowClone</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> 
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">let</span> copyObj <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        copyObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> copyObj
+<span class="token punctuation">&#125;</span></code></pre>
+
+<blockquote>
+<p> JSON.parse(JSON.srtingfy())的弊端</p>
+</blockquote>
+<ol>
+<li>无法对Date、RegExp、Error对象进行深拷贝</li>
+<li>无法对函数进行深拷贝</li>
+<li>无法解决循环引用</li>
+<li>如果obj里有NaN、Infinity和-Infinity，则序列化的结果会变成null</li>
+</ol>
+<blockquote>
+<p>深拷贝如何解决循环引用</p>
+</blockquote>
+<p>采用循环引用导致栈溢出代码 <code>Uncaught RangeError: Maximum call stack size exceeded</code></p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'echo'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> testObj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'sixi'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">relative</span><span class="token operator">:</span> obj
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+obj<span class="token punctuation">.</span>relative <span class="token operator">=</span> testObj<span class="token punctuation">;</span> <span class="token comment">//循环引用</span>
+<span class="token keyword">const</span> newObj <span class="token operator">=</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newObj<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<p>优化手写深拷贝代码：使用WeakMap对已遍历的对象进行保存，当递归调用的时候直接判断WeakMap是否存在，若已存在则直接返回，避免无限循环。</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> hash <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeakMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>hash<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> hash<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">let</span> copyObj <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    hash<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> copyObj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">//遍历对象自身及原型链上所有可枚举不可枚举属性</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            copyObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">?</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> hash<span class="token punctuation">)</span> <span class="token operator">:</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> copyObj<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="关于闭包"><a href="#关于闭包" class="headerlink" title="关于闭包"></a>关于闭包</h3><ol>
+<li>讲讲闭包</li>
+<li>闭包的缺点</li>
+<li>如何解决闭包</li>
+</ol>
+<p>讲闭包之前，我们先了解一哈<code>作用域</code>,<code>作用域链</code>、<code>AO</code>、<code>GO</code>。</p>
+<h4 id="作用域链、AO、GO"><a href="#作用域链、AO、GO" class="headerlink" title="作用域链、AO、GO"></a>作用域链、AO、GO</h4><p>作用域： 指在程序中定义变量的区域（全局作用域、函数作用域、块级作用域）</p>
+<p>AO：函数作用域</p>
+<p>GO：全局作用域</p>
+<p>块级作用域：ES6-&gt;const、let</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">function</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token string">'echo'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><code>JS执行流程： JIT（及时性编译语言），先编译再执行 -&gt; </code></p>
+<ol>
+<li>a被定义时，a的作用域链是GO；a被执行时，a的作用域链是AO-&gt;GO。</li>
+<li>b被定义时，b的作用域链是a的AO-&gt;GO；b被执行时，b的作用域链是b的AO-&gt;a的AO-&gt;GO。</li>
+<li>b被销毁时，销毁b的AO；</li>
+<li>a被销毁时，销毁a的AO；</li>
+</ol>
+<blockquote>
+<p>讲讲闭包</p>
+</blockquote>
+<p>闭包是指引用了另外函数作用域中的变量的函数。通常是指在嵌套函数中实现的。</p>
+<blockquote>
+<p>闭包的优缺点</p>
+</blockquote>
+<ul>
+<li>闭包存在，就会保存保留它们包含的函数作用域，导致内存消耗，v8等优化有垃圾回收机制（GC）。</li>
+<li>闭包的处理速度和内存消耗方面对脚本性能具有负面影响。</li>
+</ul>
+<blockquote>
+<p>如何解决闭包</p>
+</blockquote>
+<ul>
+<li>对于引用的某些库，可以使用自带的实例销毁方法。</li>
+<li>对于某些对象可以使用 <code>global = null；</code> 解除对函数的引用，释放内存。</li>
+</ul>
+<h3 id="垃圾回收（GC机制）"><a href="#垃圾回收（GC机制）" class="headerlink" title="垃圾回收（GC机制）"></a>垃圾回收（GC机制）</h3><h4 id="栈和堆的垃圾回收"><a href="#栈和堆的垃圾回收" class="headerlink" title="栈和堆的垃圾回收"></a>栈和堆的垃圾回收</h4><p>栈的垃圾回收</p>
+<ul>
+<li>一个记录当前执行状态的指针（称为ESP），指向调用栈中的函数执行上下文</li>
+<li>当一个函数执行结束后，JavaScript 引擎会通过向下移动 <code>ESP</code> 来销毁该函数保存在栈中的执行上下文</li>
+</ul>
+<p>堆的垃圾回收</p>
+<ul>
+<li><p>引用计数法 </p>
+</li>
+<li><p>标记清除法 （使用广泛）</p>
+<blockquote>
+<p>标记清除法：标记阶段即为所有活动对象做上标记，清除阶段则把没有标记（也就是非活动对象）销毁</p>
+</blockquote>
+</li>
+<li><p>标记：比如当变量进入执行环境时，反转某一位（通过一个二进制字符来表示标记），又或者可以维护进入环境变量和离开环境变量这样两个列表，可以自由的把变量从一个列表转移到另一个列表<br>需要从出发点去遍历内存中所有的对象去打标记，而这个出发点有很多，我们称之为一组 根 对象，而所谓的根对象，其实在浏览器环境中包括又不止于 全局Window对象、文档DOM树 等</p>
+</li>
+<li><p>垃圾收集器在运行时会给内存中的所有变量都加上一个标记，假设内存中所有对象都是垃圾，全标记为0</p>
+</li>
+<li><p>然后从各个根对象开始遍历，把不是垃圾的节点（能访问到的节点）改成1</p>
+</li>
+<li><p>清理所有标记为0的垃圾，销毁并回收它们所占用的内存空间</p>
+</li>
+<li><p>最后，把所有内存中对象标记修改为0，等待下一轮垃圾回收</p>
+</li>
+</ul>
+<p>标记整理（Mark-Compact）算法对标记清除法的优化</p>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>调用函数时，会创建一个执行环境，this就根据函数的执行环境绑定。</p>
+<ol>
+<li>浏览器中默认this指向Window</li>
+<li>普通函数this -&gt; Window对象</li>
+<li>构造函数this -&gt; 构造函数的实例对象</li>
+</ol>
+<h3 id="原型、原型链"><a href="#原型、原型链" class="headerlink" title="原型、原型链"></a>原型、原型链</h3><ul>
+<li>每一个函数都会创建一个<code>prototype</code>属性，该属性是函数的原型对象  <code>Person.prototype = Person.prototype</code></li>
+<li>每一个函数的原型都具有一个<code>constructor</code>属性，该属性指向函数本身 <code>Person.prototype.constructor = Person</code></li>
+<li><code>constructor</code>对象的原型设置为新创建的对象的原型</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d1b83be45d645d88514b89c3876b787~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>原型链继承、借用构造函数（改变this指向）、组合继承（原型链+构造函数）、寄生继承、寄生组合、类<br><code>借鉴红宝书</code></p>
+<p>Java类的访问权限修饰符<br><code>public</code>和<code>private</code>是访问权限修饰符，用于控制外界对类内部成员的访问。</p>
+<h4 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h4><p>缺点：原型中包含引用值，其引用值会在所有实例中共享 可以类比 public</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token class-name">Echo</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">let</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+instance<span class="token punctuation">.</span>arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance<span class="token operator">?.</span>arr<span class="token punctuation">)</span> <span class="token comment">// [1, 2, 3]</span>
+
+<span class="token keyword">let</span> instance2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance2<span class="token operator">?.</span>arr<span class="token punctuation">)</span> <span class="token comment">// [1, 2, 3]</span>
+</code></pre>
+<h4 id="借用构造函数继承"><a href="#借用构造函数继承" class="headerlink" title="借用构造函数继承"></a>借用构造函数继承</h4><p>缺点：</p>
+<ol>
+<li>必须在构造函数中定义方法，导致函数不能重用。 </li>
+<li>子类不能访问父类原型上定义的方法 可以类比 private<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token parameter">age</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">Sixi</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">'18'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'echo_sixi'</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">let</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance<span class="token operator">?.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//18</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>instance<span class="token operator">?.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//echo_sixi</span>
+</code></pre></li>
+</ol>
+<h4 id="圣杯模式"><a href="#圣杯模式" class="headerlink" title="圣杯模式"></a>圣杯模式</h4><p>代码实现</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">
+<span class="token keyword">function</span> <span class="token function">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'123'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">inherit</span><span class="token punctuation">(</span><span class="token parameter">child<span class="token punctuation">,</span> parent</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">function</span> <span class="token constant">F</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token class-name">F</span><span class="token punctuation">.</span>prototype  <span class="token operator">=</span> parent<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+    child<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">F</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    child<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructior <span class="token operator">=</span> child<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">inherit</span><span class="token punctuation">(</span>Sixi<span class="token punctuation">,</span> Echo<span class="token punctuation">)</span>
+<span class="token class-name">Echo</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'456'</span>
+<span class="token keyword">const</span> echo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Echo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> sixi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sixi<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment">// 456</span>
+</code></pre>
+
+
+<h4 id="类（class）"><a href="#类（class）" class="headerlink" title="类（class）"></a>类（class）</h4><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Echo</span><span class="token punctuation">&#123;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">18</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Sixi</span> <span class="token keyword">extends</span> <span class="token class-name">Echo</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'echo_sixi'</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">let</span> person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Sixi</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>person<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//18</span></code></pre>
+
+<h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><ol>
+<li>讲讲eventLoop</li>
+<li>宏任务</li>
+<li>微任务</li>
+</ol>
+<blockquote>
+<p>关于eventLoop</p>
+</blockquote>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd754eb33121459d9c5e3e43f430ee5c~tplv-k3u1fbpfcp-watermark.image" alt="eventLoop.png"></p>
+<p><code>JS单线程</code><br>JS主线程 -&gt; 执行栈（<code>先进后出</code>）<br>callback queue -&gt; 任务队列（<code>先进先出</code>）</p>
+<h4 id="event-loop执行流程"><a href="#event-loop执行流程" class="headerlink" title="event loop执行流程"></a>event loop执行流程</h4><p>QA:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> eventloop的定义和作用</li>
+<li><input checked="" disabled="" type="checkbox"> eventloop的执行过程</li>
+<li><input disabled="" type="checkbox"> 异步任务的微任务和宏任务</li>
+</ul>
+<blockquote>
+<p>eventloop是一种异步的编程机制，它可以在单线程中实现并发，通过轮询事件队列中的事件来判断是否有新的任务执行，从而实现异步操作。</p>
+</blockquote>
+<p>在执行过程中，事件循环会将所有的异步任务（回调函数、Promise、async&#x2F;await、定时器、事件监听 → 回调函数）放入一个事件队列中，然后在程序的执行期间不断去检查队列中是否有待处理的事件。当事件队列中有事件则取出执行，如果又包含了异步处理，则交给其它线程进行处理然后返回，继续检查队列中的下一个事件。事件循环采用轮询机制，可以保证任务的执行顺序，同时避免程序阻塞执行。</p>
+<p>主线程执行过程中，遇到JavaScript程序执行的到异步操作，主线程将该任务交给系统或者其它线程进行处理，同时继续执行后面的代码。当异步任务操作完成后，系统或者其它线程会通知主线程，将结果放入事件队列中。主线程空闲时，会检查事件队列中是否有待处理的事件，如果有，则立即执行，没有则继续等待。</p>
+<p>JavaScript的异步任务中，可以将异步任务分为：宏任务和微任务</p>
+<p><code>宏任务</code>：指需要在任务队列中排队等待的执行的任务 → 定时器、ajax请求等。</p>
+<p><code>微任务</code>：指当前任务完毕后需要立即执行的任务 → Promise的then、catch、finally；async&#x2F;await等</p>
+<p>事件循环启动时，会执行当前代码所在的宏任务代码块，当宏任务代码块被执行完了，就会立即执行所有可用的微任务，直到微任务队列为空。然后事件循环会继续执行下一个宏任务，重复这个过程。</p>
+<blockquote>
+<p>宏任务</p>
+</blockquote>
+<p>异步 Ajax 请求、<br>setTimeout、setInterval、<br>文件操作<br>MessageChannel<br>其它宏任务</p>
+<blockquote>
+<p>微任务</p>
+</blockquote>
+<p>Promise.then、.catch 和 .finally<br>process.nextTick<br>MutationObserver<br>其它微任务</p>
+<h3 id="关于异步"><a href="#关于异步" class="headerlink" title="关于异步"></a>关于异步</h3><ol>
+<li>ES6之前之后的异步编程</li>
+<li>讲讲Generator函数</li>
+<li>讲讲Promise对象</li>
+<li>async&#x2F;await函数</li>
+</ol>
+<blockquote>
+<p>ES6之前的异步编程方法</p>
+</blockquote>
+<p>ES6之前实现异步编程的方法大概有四种：</p>
+<ul>
+<li>回调函数</li>
+<li>事件监听</li>
+<li>发布订阅</li>
+<li>构造函数实现Promise</li>
+</ul>
+<blockquote>
+<p>ES6之后的异步编程方法</p>
+</blockquote>
+<ul>
+<li>Generator函数</li>
+<li>Promise对象</li>
+<li>async&#x2F;await</li>
+</ul>
+<h3 id="script标签中的属性"><a href="#script标签中的属性" class="headerlink" title="script标签中的属性"></a>script标签中的属性</h3><h4 id="script标签"><a href="#script标签" class="headerlink" title="script标签"></a>script标签</h4><p>默认的script标签执行脚本，会根据顺序来执行，如果遇到js，就会阻塞DOM渲染</p>
+<h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><p>设置了defer的属性，支持异步下载并且不会影响到DOM的渲染，script是顺序执行</p>
+<h4 id="async"><a href="#async" class="headerlink" title="async"></a>async</h4><p>async和defer的区别，async不会按照顺序执行，是谁先加载完谁执行</p>
+<h2 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h2><h3 id="浏览器输入URL到页面展示发生了什么"><a href="#浏览器输入URL到页面展示发生了什么" class="headerlink" title="浏览器输入URL到页面展示发生了什么"></a>浏览器输入URL到页面展示发生了什么</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9e3b40358e9d4fdea8d2fd6a715cd488~tplv-k3u1fbpfcp-watermark.image" alt="show.webp"></p>
+<ul>
+<li>浏览器进程：用户交互、子进程管理、文件存储</li>
+<li>网络进程：为渲染进程和浏览器进程提供网络下载</li>
+<li>渲染进程：网络下载的HTML、JavaScript、CSS、图片等资源解析为可以显示和交互的页面</li>
+</ul>
+<p>网络进程：</p>
+<ol>
+<li>查找缓存</li>
+<li>DNS解析</li>
+<li>建立TSL连接（请求协议HTTPS）</li>
+<li>建立TCP连接（建立成功后浏览器会将构建请求行、请求头等信息，并把该域名相关的Cookie等数据附加到请求头中，然后项服务器发送构建请求信息）</li>
+<li>重定向（检查状态码，如果是301&#x2F;302，则需要重定向，从Location自动中读取地址）</li>
+<li>响应数据类型处理（Content-Type）</li>
+</ol>
+<p>浏览器进程：</p>
+<ol>
+<li>检查url是否一致，不一致打开新的进程</li>
+<li>解析html构建DOM树</li>
+<li>解析CSS构建CSS树</li>
+<li>将DOM树和CSS树生成布局树（DOM）</li>
+</ol>
+<h3 id="HTTP请求、处理流程"><a href="#HTTP请求、处理流程" class="headerlink" title="HTTP请求、处理流程"></a>HTTP请求、处理流程</h3><h4 id="浏览器端发起HTTP请求流程"><a href="#浏览器端发起HTTP请求流程" class="headerlink" title="浏览器端发起HTTP请求流程"></a>浏览器端发起HTTP请求流程</h4><ol>
+<li><p>构建请求</p>
+</li>
+<li><p>查找缓存<br>   浏览器缓存：保存本地资源副本，供下次请求时（拦截请求）直接使用的技术</p>
+</li>
+<li><p>准备IP地址和端口<br>    HTTP: 应用层协议、 TCP&#x2F;IP传输层协议<br>    IP地址获取：访问域名 -&gt; 域名和IP是映射关系 采用DNS(域名系统) 将域名地址转换为IP地址<br>    端口：URL上面携带的端口号、HTTP默认端口是80</p>
+</li>
+<li><p>等待TCP队列<br>    涉及知识点：<br>     http&#x2F;1.1和http2在Chrome的运行机制<br>     http&#x2F;1.1：1个TCP同时只能处理一个请求，浏览器为每个域名维护6个tcp连接<br>     http2：可以并行请求资源，浏览器只会为每个域名维护1个tcp连接</p>
+</li>
+<li><p>建立TCP连接<br>     三次握手</p>
+</li>
+<li><p>发送HTTP请求<br>     请求行：请求方法、请求URL、HTTP版本协议；请求头；请求体</p>
+</li>
+</ol>
+<h4 id="服务器处理HTTP请求流程"><a href="#服务器处理HTTP请求流程" class="headerlink" title="服务器处理HTTP请求流程"></a>服务器处理HTTP请求流程</h4><ol>
+<li>返回请求<br> 响应行、响应头、响应体</li>
+<li>断开连接<br>    Connection:Keep-Alive</li>
+<li>重定向<br>    响应头中Location字段：重定向地址</li>
+</ol>
+<p>许多网站第二次打开速度快</p>
+<blockquote>
+<p>DNS缓存、页面资源缓存<br>DNS缓存：浏览器本地的IP和域名映射<br>页面资源缓存：响应头Cache-Control:Max-age&#x3D;2000</p>
+</blockquote>
+<h3 id="HTTP版本区别"><a href="#HTTP版本区别" class="headerlink" title="HTTP版本区别"></a>HTTP版本区别</h3><h4 id="http1-1"><a href="#http1-1" class="headerlink" title="http1.1"></a>http1.1</h4><p>http1.1是目前主流的http协议版本</p>
+<ul>
+<li>持久化链接 通过keep-alive来设置</li>
+<li>管道机制，同一个tpc连接客户端可以发多个请求</li>
+<li>支持断点续传，通过请求头的Range</li>
+<li>支持chunked 数据分块，body里面分块 利于大文件传输 Transfer-Encoding: chunked</li>
+</ul>
+<h4 id="http2-0"><a href="#http2-0" class="headerlink" title="http2.0"></a>http2.0</h4><ul>
+<li>二进制分帧</li>
+<li>头部压缩 HPACK算法 哈夫曼编码</li>
+<li>多路复用 解决队头阻塞</li>
+<li>服务器推送</li>
+<li>请求优先级</li>
+</ul>
+<p>tip： <code>队头阻塞</code>: HTTP开启长连接，公用一个TCP连接，当某个请求时间过长，其它请求只能处于阻塞状态<br>解决方案： 1. 并发连接 2.域名分片</p>
+<h3 id="HTTP和HTTPS的区别"><a href="#HTTP和HTTPS的区别" class="headerlink" title="HTTP和HTTPS的区别"></a>HTTP和HTTPS的区别</h3><ol>
+<li>端口号不同，http是80 https是443</li>
+<li>https需要CA证书</li>
+<li>http信息是明文传输的，https是由ssl+http协议构建可进行加密传输、身份认证的网络协议</li>
+</ol>
+<h4 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h4><p>1.构建DOM树：浏览器无法直接识别HTML语言，讲HTML转为浏览器可以识别的DOM树，document<br>2.样式计算： 同上。document.styleSheets<br>    1.解析为<code>styleSheets</code><br>    2.转换样式表中的属性值 -&gt; 标准化 （color: #ffffff -&gt; color: rgb(255,255,255)）<br>    3.计算每个节点具体样式（CSS继承、层叠）<br>        继承：子节点继承父节点样式<br>        层叠：样式叠加、样式属性相同根据优先级<br>        盒子的最终样式：例如Chrome：F12-&gt;Elements-&gt;Computed<br>3.布局阶段：<br>    1.创建布局树：遍历DOM树的可见节点，例如head标签、display:none、visibility: hidden等就会被排除<br>4.分层：3D、滚动、z-index、fixed等：渲染引擎为特定的节点生成专用图层，生成一颗对应的图层树（LayerTree）<br>    例如Chrome: F12-&gt; … -&gt;More tools -&gt;Layers<br>    1.拥有层叠上下文属性的元素会单独一层<br>    2.需要剪裁的地方也会被创建为图层<br>5.栅格化<br>    合成线程会将图层划分为图块（256<em>256、512</em>512)<br>    合成线程会按照视口附近的图块优先生成位图，实际生成的位图操作实际是由栅格化来执行的<br>    栅格化：将图块转换为位图，使用GPU生成的位图的过程称为快速栅格化、成成的位图保存在GPU内存中、<br>6.合成和显示<br>    所有图块都被光栅化，合成线程-&gt;DrawQuad命令-&gt;浏览器进程（将页面内容绘制到内存中，再显示到页面上）</p>
+<h4 id="重绘、重排、合成"><a href="#重绘、重排、合成" class="headerlink" title="重绘、重排、合成"></a>重绘、重排、合成</h4><p>知识点： <code>重绘</code>、<code>重排</code>、<code>合成</code><br>重绘：比如样式修改：背景色修改 -&gt; 不会影响布局阶段和分层阶段<br>重排：比如样式修改：高度 -&gt; 影响布局  新增BFC -&gt; 影响布局、分层<br>对比：重绘比重排快-&gt;重绘相比重排 没有layout、layer阶段</p>
+<p>合成：浏览器渲染跳过layout、layer阶段的操作<br>举例：transform属性 -&gt; 所以transform来实现动画效果要好一些</p>
+<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p>浏览器缓存的方式可以减少网络带宽、降低服务器的压力、减少网络延迟、加快页面打开速度<br>常见的缓存有<code>强缓存</code>和<code>协商缓存</code></p>
+<h4 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h4><p>强缓存：第一次读取到服务器数据后，在设置的过期时间内都不会去重复请求，而是从本地缓存去读取。<br>本地缓存有<code>memory cache</code>、<code>disk cache</code><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cb1327b93985435484e1b3ca6da9f2ce~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>如上图所示：</p>
+<ul>
+<li>memory cache一般缓存图片、样式、字体，退出进程数据就清除了</li>
+<li>disk cache一般缓存脚本，存储在硬盘上，需要手动清除</li>
+</ul>
+<p>强缓存优先级高于协商缓存，通过设置响应头控制资源强缓存，使用强缓存，不需要请求服务器。</p>
+<p>Cache-Control: max-age&#x3D;3600 相对时间，单位秒<br>Expires: Mon, 14 Mar 2023 08:00:00 GMT 具体的时间，单位秒</p>
+<p>同时使用，Cache-Control的优先级高</p>
+<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>协商缓存和强缓存不同就是每次都会跟服务器通信，并带上缓存标识（<code>if-Modified-Since</code> &#x2F; <code>if-None-Match</code>）<br>流程：</p>
+<ol>
+<li>浏览器发送一个请求到服务器，请求包含一个资源的URL和一些缓存相关的头部信息，例如<code>if-None-Match</code> 或者<code>if-Modified-Since</code></li>
+<li>服务器接收到请求后，会检查头部信息，确定浏览器是否有资源的最新版本</li>
+<li>如果是最新版本，返回304状态码和空的响应体，告诉浏览器使用缓存资源</li>
+<li>不是最新版本，返回200状态码和新的响应体，告诉浏览器更新缓存资源</li>
+</ol>
+<blockquote>
+<p>浏览器请求协商缓存命中，则状态码为 <code>304</code></p>
+</blockquote>
+<p>Last-Modified和Etag的区别：</p>
+<ol>
+<li>Last-Modified不能对1s之内的资源变动进行判断</li>
+<li>Etag每一次都是一个新的Hash值</li>
+</ol>
+<h4 id="启发式缓存"><a href="#启发式缓存" class="headerlink" title="启发式缓存"></a>启发式缓存</h4><p>启发式缓存：浏览器自带的缓存策略，每个浏览器变现各不相同。</p>
+<blockquote>
+<p>如果请求头没设置Expires和Cache-control但是响应头返回了Last-Modified信息，这种浏览器会启用自带的缓存策略：<code>(当前时间 - Last-Modified)*0.1</code>;</p>
+</blockquote>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p><a target="_blank" rel="noopener" href="https://beta.reactjs.org/">React官方文档</a></p>
+<h4 id="React架构"><a href="#React架构" class="headerlink" title="React架构"></a>React架构</h4><h5 id="React-1"><a href="#React-1" class="headerlink" title="React"></a>React</h5><blockquote>
+<p>知识点<br>主流浏览器刷新频率60Hz，每（1000ms&#x2F;60Hz）<code>16.6ms</code>浏览器刷新一次<br>渲染线程和JS线程是互斥的，JS执行会中断渲染进程<br>在浏览器刷新一次的16.6ms时间中，它需要完成：JS脚本执行-&gt;样式布局-&gt;样式绘制<br>当JS执行时间超过16.6ms那么样式布局和样式绘制的处理就没有在此次刷新中执行</p>
+</blockquote>
+<p>react15：栈实现、同步更新、协调器同步、递归执行<br>Stack reconciler（协调器）：执行函数组件、class组件将JSX转为DOM树（diff算法、挂载、卸载、更新）<br>Renderer（渲染器）：负责将变化组件渲染到页面上</p>
+<p>react16: Fibe、扁平化的单链表的数据结构r、可中断的异步更新、循环迭代<br>Scheduler（调度器）、Reconciler（协调器）、Renderer（渲染器）</p>
+<p>调度器：浏览器是否有剩余时间，浏览器API（requestIdleCallback）<br>let yieldInterval &#x3D; 5; 源码为5毫秒</p>
+<p>双缓冲技术：类似计算机图形学 中的 双缓冲策略<br>画图呈现到屏幕的过程 -&gt; 创建位图对象，操作位图对象，最后再呈现位图对象</p>
+<ul>
+<li>WIP树（workInProgress tree）</li>
+<li>WIP节点不是全部新的。如果某颗子树不需要变动，直接复用</li>
+<li>异常处理，有异常继续使用旧树</li>
+<li>WIP从旧树fork出来，第二阶段commit</li>
+</ul>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/">Vue官方文档</a></p>
+<h4 id="Vue2和Vue3实现双向绑定的原理"><a href="#Vue2和Vue3实现双向绑定的原理" class="headerlink" title="Vue2和Vue3实现双向绑定的原理"></a>Vue2和Vue3实现双向绑定的原理</h4><p>Vue2使用Object.definePropty、Vue3使用Proxy</p>
+<h4 id="Vue的Api风格"><a href="#Vue的Api风格" class="headerlink" title="Vue的Api风格"></a>Vue的Api风格</h4><p>Options API和Composition API。</p>
+<ul>
+<li>选项式API是在组合式API基础上实现的。Options API以组件实例的概念为中心。</li>
+<li>Composition API 常配合 <code>&lt;script setup&gt;</code>,使用组合函数可以很好的组织和重用逻辑。</li>
+</ul>
+<p>Composition API 可以重用逻辑，Vue2就不可以重用逻辑吗？</p>
+<p>Vue2逻辑复用机制是mixins（接收一个数组），用于扩充父组件的对象和方法。</p>
+<p>mixins的缺点：覆盖性会导致不稳定性，操作不当会造成全局污染</p>
+<h4 id="Vue的computed和watch"><a href="#Vue的computed和watch" class="headerlink" title="Vue的computed和watch"></a>Vue的computed和watch</h4><ul>
+<li>computed 只有在依赖的响应式数据发生变化时才会重新计算，而 watch 则是在被监听的响应式数据发生变化时立即执行回调函数。</li>
+<li>computed 一般用于计算和处理数据，而 watch 一般用于监听数据的变化并执行一些副作用，如异步操作、界面更新等。</li>
+</ul>
+<h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><h3 id="babel相关"><a href="#babel相关" class="headerlink" title="babel相关"></a>babel相关</h3><h4 id="babel的编译流程"><a href="#babel的编译流程" class="headerlink" title="babel的编译流程"></a>babel的编译流程</h4><p>babel的编译流程可以分别：解析、转换、生成</p>
+<ul>
+<li>解析：使用@babel&#x2F;parser，词法分析和语法分析，词法分析为标记化转为tokenization，语法分析为转换为AST树</li>
+<li>转换：使用@babel&#x2F;traverse, AST进行深度遍历并进行各种增删改</li>
+<li>生成：使用@babel&#x2F;generator, AST -&gt; code</li>
+</ul>
+<h4 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h4><p>Babel默认只是转换箭头函数，而let Promise、includes这些没有转换</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//转换前：</span>
+<span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+array<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> item <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//转转换后：</span>
+<span class="token keyword">var</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+array<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> item <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<blockquote>
+<p>Babel把JavaScript语法分为<code>语法</code>和<code>api</code>,语法在JavaScript中运行时是无法重写的。而api就可以支持方法重写</p>
+</blockquote>
+<p>Babel只对语法进行处理，对于api就使用polyfill模块进行处理的，由于polyfill体积太大，使用babel7提供的useBuiltIns:(false, entry, usage: 按需添加)<br>@babel&#x2F;runtime, @babel&#x2F;plugin-transform-runtime 把 helpers 和 polyfill 功能拆分了。默认只提供 helpers</p>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><h4 id="webpack自动编译的三种方式"><a href="#webpack自动编译的三种方式" class="headerlink" title="webpack自动编译的三种方式"></a>webpack自动编译的三种方式</h4><ol>
+<li>watch mode 观察模式</li>
+<li>webpack-dev-server web服务器</li>
+<li>webpack-dev-middleware webpack中间件 + express</li>
+</ol>
+<h4 id="webpack的热更新"><a href="#webpack的热更新" class="headerlink" title="webpack的热更新"></a>webpack的热更新</h4><p><strong>什么是runtime？</strong><br>runtime 包含：在模块交互时，连接模块所需的加载和解析逻辑。包括浏览器中的已加载模块的连接，以及懒加载模块的执行逻辑</p>
+<p><strong>什么是manifest？</strong><br>当 <code>compiler</code> 开始执行、解析和映射应用程序时，它会保留所有模块的详细要点。这个数据集合称为 “<code>manifest</code>“<br>当完成打包并发送到浏览器时，会在运行时（Runtime）通过 Manifest 来解析和加载模块。<br>无论你选择哪种模块语法，那些import或require语句现在都已经转换为__webpack_require__方法，此方法指向模块标识符<br><strong>通过使用 <code>manifest</code> 中的数据，<code>runtime</code> 将能够查询模块标识符，检索出背后对应的模块。</strong></p>
+<p>总结： </p>
+<ol>
+<li>webpack-dev-server会创建两个服务-&gt;express的http服务和web socket服务 （sockjs建立webSocket长连接）</li>
+<li>webpack监听到文件或模块变化时会重新编译打包，生成的hash值</li>
+<li>通过HMR runtime中的check方法拿到hash值向server端发送ajax请求和jsonp请求，服务器端会返回一个json文件(manifest)和js文件(update chunk)<br> ajax请求json文件  jsonp请求js模块文件</li>
+<li>通过返回的json文件包含的hash值来获取最新模块代码，再利用runtime机制进行热更新</li>
+</ol>
+<p>如果未配置热更新会在第二步后走以下操作<br>通过webSocket发送的type为ok时，直接执行reload操作，刷新浏览器</p>
+<p>webpack的热更新的原文链接： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30669007">https://zhuanlan.zhihu.com/p/30669007</a></p>
+<h3 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h3><p><a target="_blank" rel="noopener" href="https://cn.vitejs.dev/">https://cn.vitejs.dev/</a><br>使用原生ESM文件，无需打包<br>超快的热重载</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/424842555">https://zhuanlan.zhihu.com/p/424842555</a></p>
+<h4 id="webpack优化方案"><a href="#webpack优化方案" class="headerlink" title="webpack优化方案"></a>webpack优化方案</h4><ol>
+<li><code>SplitChunksPlugin</code>代码块分割</li>
+<li>模块懒加载<code>import()</code> -&gt; 比如router文件<br> why：如果模块不懒加载，最终代码会被打包到一个js文件中。</li>
+<li>使用import() 时，使用<code>/* webpackPrefetch: ture*/</code></li>
+<li><code>css-minimizer-webpack-plugin</code> ：使用<a target="_blank" rel="noopener" href="https://www.cssnano.cn/">cssnano</a> 优化压缩CSS</li>
+<li><code>terser-webpack-plugin</code>：压缩JS，webpack5默认自带，自定义配置需安装</li>
+<li><code>devServer.compress: true</code> <a target="_blank" rel="noopener" href="https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/">gzip compression</a></li>
+</ol>
+<h3 id="CI-x2F-CD"><a href="#CI-x2F-CD" class="headerlink" title="CI&#x2F;CD"></a><strong>CI&#x2F;CD</strong></h3><p>持续集成（Continuous Integration，CI）和 持续交付（Continuous Delivery，CD），是软件生产领域提升迭代效率的一种工作方式：开发人员提交代码后由 CI&#x2F;CD 系统自动化地执行合并、构建、测试和部署等一系列管道化（Pipeline）的流程，从而尽早发现和反馈代码问题，以小步快跑的方式加速软件的版本迭代过程。</p>
+<h2 id="Hybrid-App"><a href="#Hybrid-App" class="headerlink" title="Hybrid App"></a>Hybrid App</h2><p>目前项目中使用的是基于<a target="_blank" rel="noopener" href="https://github.com/marcuswestin/WebViewJavascriptBridge">WebViewJavaScriptBridge</a></p>
+<h3 id="Hybrid-App的优缺点"><a href="#Hybrid-App的优缺点" class="headerlink" title="Hybrid App的优缺点"></a>Hybrid App的优缺点</h3><p><strong>优点：</strong></p>
+<ol>
+<li>不受限应用商店审核，直接部署到线上环境。</li>
+<li>页面有变动，不需要重新下载APP</li>
+<li>部分页面由H5做，减少APP打包体积</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>每次需求需花时间理清哪部分为APP页面，哪部分为H5页面</li>
+<li>H5在移动端上很多IOS和Android的UI兼容性问题</li>
+</ol>
+<h3 id="JSBrige"><a href="#JSBrige" class="headerlink" title="JSBrige"></a>JSBrige</h3><p>H5 -&gt; IOS： 请求拦截 <strong>URL scheme</strong></p>
+<p>在H5中发起请求方式一般有location.href和iframe，使用iframe方式</p>
+<blockquote>
+<p>连续多次修改window.location.href的值，Native层只能接受到最后一次请求。</p>
+</blockquote>
+<pre class="language-none"><code class="language-none">var WVJBIframe &#x3D; document.createElement(&#39;iframe&#39;);
+WVJBIframe.style.display &#x3D; &#39;none&#39;;
+WVJBIframe.src &#x3D; &#39;wvjbscheme:&#x2F;&#x2F;__BRIDGE_LOADED__&#39;;
+document.documentElement.appendChild(WVJBIframe);
+setTimeout(function () &#123;
+    document.documentElement.removeChild(WVJBIframe);
+&#125;, 0);</code></pre>
+
+<p>IOS端拦截请求，解析、执行原生方法</p>
+<p>客户端和H5通信： <strong>window注入</strong></p>
+<p>H5需要先注册监听事件，原生在某个时刻调用js的window.WebViewJavascriptBridge对象里方法。</p>
+<h3 id="响应式设计"><a href="#响应式设计" class="headerlink" title="响应式设计"></a>响应式设计</h3><p>响应式网页设计是让WEB页面适应不同屏幕的宽度。</p>
+<p>媒介查询 → <code>@media screen</code></p>
+<p>灵活网格 → 百分比(%)</p>
+<p>现代布局技术 → 多栏布局（<code>column-count</code>）、<code>flex</code>、 <code>grid</code></p>
+<p>响应式排版 → rem、vh、vw</p>
+<p>视口元标签 → <code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;</code></p>
+<p>rem实现</p>
+<ul>
+<li>插件 <strong>postcss-pxtorem</strong> + <strong><strong>amfe-flexible</strong></strong></li>
+<li>手动修改</li>
+</ul>
+<pre class="language-jsx" data-language="jsx"><code class="language-jsx">function convert() &#123;
+  const documentElement &#x3D; document.documentElement;
+  &#x2F;&#x2F; 设计图默认字体16, 屏宽375. 开发时按设计图大小编码即可.
+  documentElement.style.fontSize &#x3D;
+    (16 * documentElement.clientWidth) &#x2F; 375 + &#39;px&#39;;
+&#125;
+
+export function pxToRem(px: number) &#123;
+  return px &#x2F; 16 + &#39;rem&#39;;
+&#125;
+
+export default function() &#123;
+  window.addEventListener(&#39;resize&#39;, convert, false);
+  convert();
+&#125;</code></pre>
+
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>JavaScript中的单例模式：单例模式核心 -&gt; 确保只有一个实例，提供全局访问</p>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>观察者模式：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖它的对象都得到通知。<br>在js开发中，我们一般用<code>事件模型</code>来代替传统的发布-订阅模式</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">echo_sixi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2022/12/27/2023/">http://example.com/2022/12/27/2023/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">echo_sixi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/js/">
+                                    <span class="chip bg-color">js</span>
+                                </a>
+                            
+                                <a href="/tags/react/">
+                                    <span class="chip bg-color">react</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">网络</span>
+                                </a>
+                            
+                                <a href="/tags/css/">
+                                    <span class="chip bg-color">css</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/pay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/pay.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/01/06/JavaScript%E5%AE%9E%E7%8E%B0%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E3%80%81%E7%BB%A7%E6%89%BF/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="JavaScript实现封装、继承、多态">
+                        
+                        <span class="card-title">JavaScript实现封装、继承、多态</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-06
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            echo_sixi
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/js/">
+                        <span class="chip bg-color">js</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/11/06/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="深浅拷贝方法总结">
+                        
+                        <span class="card-title">深浅拷贝方法总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            echo_sixi
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/js/">
+                        <span class="chip bg-color">js</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">echo_sixi</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Jie-echo" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1609790272@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1609790272" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1609790272" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>
